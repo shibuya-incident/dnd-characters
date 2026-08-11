@@ -1,3 +1,6 @@
 <Solution>
   <Project Path="DndCharacters.API/DndCharacters.API.csproj" />
+  <Project Path="DndCharacters.Application/DndCharacters.Application.csproj" />
+  <Project Path="DndCharacters.Domain/DndCharacters.Domain.csproj" />
+  <Project Path="DndCharacters.Infrastructure/DndCharacters.Infrastructure.csproj" />
 </Solution>
