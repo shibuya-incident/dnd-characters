@@ -16,4 +16,8 @@
     <ProjectReference Include="..\DndCharacters.Application\DndCharacters.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
