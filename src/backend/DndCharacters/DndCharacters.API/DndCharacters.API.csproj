@@ -14,10 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DndCharacters.Application\DndCharacters.Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\DndCharacters.Infrastructure\DndCharacters.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
