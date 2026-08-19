@@ -33,10 +33,20 @@ namespace DndCharacters.Infrastructure.Persistence.Shops
                 }
             ];
 
+        public Shop Add(Shop shop)
+        {
+            return shop;
+        }
+
         public IEnumerable<Shop> Get(GetShopsRequest request)
         {
             return _shops;
         }
 
+        public Shop? GetById(int id)
+        {
+            return _shops.FirstOrDefault(s => s.Id == id);
+        }
     }
 }
+

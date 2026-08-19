@@ -10,5 +10,19 @@ namespace DndCharacters.Domain.Entities
         public required string OwnerName { get; set; }
         public ICollection<Item> Items { get; set; } = [];
 
+        public static Shop Create(
+            string name,
+            string? profileImage,
+            ShopType shopType,
+            string ownerName)
+        {
+            return new Shop
+            {
+                Name = name,
+                ProfileImage = profileImage,
+                ShopType = shopType,
+                OwnerName = ownerName
+            };
+        }
     }
 }

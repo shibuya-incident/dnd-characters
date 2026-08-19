@@ -1,4 +1,6 @@
-﻿using DndCharacters.Application.Dtos.Shops.GetShops;
+﻿using DndCharacters.Application.Dtos.Shops.CreateShop;
+using DndCharacters.Application.Dtos.Shops.GetShopById;
+using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,14 +17,31 @@ namespace DndCharacters.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetShops([FromQuery] GetShopsRequest request)
         {
-            GetShopsResponse response = shopService.GetShops(request);
+            GetShopsResponse response = shopService.GetFiltered(request);
             return Ok(response);
 
         }
 
-
         // GET /shops/{id}
+        [HttpGet("{id}")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult GetById([FromRoute] int id)
+        {
+            GetShopByIdResponse response = shopService.GetById(new GetShopByIdRequest(id));
+            return Ok(response);
+        }
+
         // POST /shops
+        [HttpPost]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(typeof(CreateShopResponse), StatusCodes.Status201Created)]
+        public IActionResult CreateShop([FromBody] CreateShopRequest request)
+        {
+            CreateShopResponse response = shopService.Create(request);
+            return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
+        }
+
         // PUT /shops/{id}
         // DELETE/shops/{id}
 
