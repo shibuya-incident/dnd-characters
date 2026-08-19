@@ -12,7 +12,7 @@ namespace DndCharacters.Infrastructure.Extensions
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IShopRepository, ShopMockRepository>();
+            services.AddScoped<IShopRepository, ShopRepository>();
 
             services.AddPersistence(configuration);
             return services;

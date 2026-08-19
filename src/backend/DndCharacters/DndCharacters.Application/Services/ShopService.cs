@@ -8,7 +8,7 @@ namespace DndCharacters.Application.Services
 {
     public class ShopService(IShopRepository shopRepository) : IShopService
     {
-        public CreateShopResponse Create(CreateShopRequest request)
+        public async Task<CreateShopResponse> CreateAsync(CreateShopRequest request)
         {
             Shop shop = Shop.Create(
                 request.Name,
@@ -16,14 +16,14 @@ namespace DndCharacters.Application.Services
                 request.ShopType,
                 request.OwnerName);
 
-            Shop newShop = shopRepository.Add(shop);
+            await shopRepository.AddAsync(shop);
 
-            return new CreateShopResponse(newShop.Id, newShop.Name, newShop.ProfileImage, newShop.ShopType, newShop.OwnerName);
+            return new CreateShopResponse(shop.Id, shop.Name, shop.ProfileImage, shop.ShopType, shop.OwnerName);
         }
 
-        public GetShopByIdResponse GetById(GetShopByIdRequest request)
+        public async Task<GetShopByIdResponse> GetByIdAsync(GetShopByIdRequest request)
         {
-            Shop? shop = shopRepository.GetById(request.Id)
+            Shop? shop = await shopRepository.GetByIdAsync(request.Id)
                 ?? throw new Exception($"Shop with id {request.Id} not found.");
 
             return new GetShopByIdResponse(
@@ -34,11 +34,10 @@ namespace DndCharacters.Application.Services
                 shop.OwnerName);
         }
 
-        public GetShopsResponse GetFiltered(GetShopsRequest request)
+        public async Task<GetShopsResponse> GetFilteredAsync(GetShopsRequest request)
         {
-            IEnumerable<Shop> shops = shopRepository.Get(request);
+            IEnumerable<Shop> shops = await shopRepository.GetAsync(request);
 
-            //Map the shops (Domain model) to the response DTO
             return new GetShopsResponse
             {
                 Shops = [.. shops.Select(shop => new GetShopsItemResponse(shop.Id, shop.Name, shop.ProfileImage, shop.Items.Count))]

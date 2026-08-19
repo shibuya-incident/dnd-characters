@@ -6,8 +6,8 @@ namespace DndCharacters.Application.Interfaces
 {
     public interface IShopService
     {
-        public GetShopsResponse GetFiltered(GetShopsRequest request);
-        public CreateShopResponse Create(CreateShopRequest request);
-        public GetShopByIdResponse GetById(GetShopByIdRequest request);
+        public Task<GetShopsResponse> GetFilteredAsync(GetShopsRequest request);
+        public Task<CreateShopResponse> CreateAsync(CreateShopRequest request);
+        public Task<GetShopByIdResponse> GetByIdAsync(GetShopByIdRequest request);
     }
 }

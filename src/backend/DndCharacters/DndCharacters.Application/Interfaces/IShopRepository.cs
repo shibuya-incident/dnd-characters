@@ -5,8 +5,8 @@ namespace DndCharacters.Application.Interfaces
 {
     public interface IShopRepository
     {
-        Shop Add(Shop shop);
-        public IEnumerable<Shop> Get(GetShopsRequest request);
-        Shop? GetById(int id);
+        Task AddAsync(Shop shop);
+        public Task<ICollection<Shop>> GetAsync(GetShopsRequest request);
+        Task<Shop?> GetByIdAsync(int id);
     }
 }

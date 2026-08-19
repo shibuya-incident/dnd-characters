@@ -15,9 +15,9 @@ namespace DndCharacters.API.Controllers
         [HttpGet]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetShops([FromQuery] GetShopsRequest request)
+        public async Task<IActionResult> GetShops([FromQuery] GetShopsRequest request)
         {
-            GetShopsResponse response = shopService.GetFiltered(request);
+            GetShopsResponse response = await shopService.GetFilteredAsync(request);
             return Ok(response);
 
         }
@@ -26,9 +26,9 @@ namespace DndCharacters.API.Controllers
         [HttpGet("{id}")]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            GetShopByIdResponse response = shopService.GetById(new GetShopByIdRequest(id));
+            GetShopByIdResponse response = await shopService.GetByIdAsync(new GetShopByIdRequest(id));
             return Ok(response);
         }
 
@@ -36,9 +36,9 @@ namespace DndCharacters.API.Controllers
         [HttpPost]
         [ProducesDefaultResponseType]
         [ProducesResponseType(typeof(CreateShopResponse), StatusCodes.Status201Created)]
-        public IActionResult CreateShop([FromBody] CreateShopRequest request)
+        public async Task<IActionResult> CreateShop([FromBody] CreateShopRequest request)
         {
-            CreateShopResponse response = shopService.Create(request);
+            CreateShopResponse response = await shopService.CreateAsync(request);
             return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
         }
 

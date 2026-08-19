@@ -1,24 +1,26 @@
 ﻿using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Interfaces;
 using DndCharacters.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DndCharacters.Infrastructure.Persistence.Shops
 {
-    internal sealed class ShopRepository : IShopRepository
+    internal sealed class ShopRepository(AppDbContext dbContext) : IShopRepository
     {
-        public Shop Add(Shop shop)
+        public async Task AddAsync(Shop shop)
         {
-            throw new NotImplementedException();
+            await dbContext.Shops.AddAsync(shop);
+            await dbContext.SaveChangesAsync();
         }
 
-        public IEnumerable<Shop> Get(GetShopsRequest request)
+        public async Task<ICollection<Shop>> GetAsync(GetShopsRequest request)
         {
-            throw new NotImplementedException();
+            return await dbContext.Shops.ToListAsync();
         }
 
-        public Shop? GetById(int id)
+        public async Task<Shop?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await dbContext.Shops.FirstOrDefaultAsync(s => s.Id == id);
         }
     }
 }
