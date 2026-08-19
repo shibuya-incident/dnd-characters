@@ -2,12 +2,15 @@ services:
   db:
     image: postgres:18
     container_name: dnd-characters-dev
+
     environment:
-      POSRTGRES_DB: dnd_characters
-      POSTGRE_USER: admin
+      POSTGRES_DB: dnd_characters
+      POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
+
     ports:
       - "5432:5432"
+
     volumes:
       - postgres_data:/var/lib/postgresql
 
