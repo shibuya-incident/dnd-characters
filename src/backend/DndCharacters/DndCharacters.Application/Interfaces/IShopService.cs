@@ -1,4 +1,5 @@
 ﻿using DndCharacters.Application.Dtos.Shops.CreateShop;
+using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShops;
 
@@ -9,5 +10,6 @@ namespace DndCharacters.Application.Interfaces
         public Task<GetShopsResponse> GetFilteredAsync(GetShopsRequest request);
         public Task<CreateShopResponse> CreateAsync(CreateShopRequest request);
         public Task<GetShopByIdResponse> GetByIdAsync(GetShopByIdRequest request);
+        public Task DeleteAsync(DeleteShopRequest request);
     }
 }

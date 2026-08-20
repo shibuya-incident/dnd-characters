@@ -9,7 +9,6 @@ namespace DndCharacters.Domain.Entities
         public int Age { get; set; }
         public required string Personality { get; set; }
         public required string ProfileImage { get; set; }
-
         public CharacterRace CharacterRace { get; set; }
         public CharacterClass CharacterClass { get; set; }
         public ICollection<Weapon> Weapons { get; set; } = [];

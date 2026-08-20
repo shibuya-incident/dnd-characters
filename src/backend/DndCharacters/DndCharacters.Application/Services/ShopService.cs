@@ -1,4 +1,5 @@
 ﻿using DndCharacters.Application.Dtos.Shops.CreateShop;
+using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Interfaces;
@@ -21,9 +22,17 @@ namespace DndCharacters.Application.Services
             return new CreateShopResponse(shop.Id, shop.Name, shop.ProfileImage, shop.ShopType, shop.OwnerName);
         }
 
+        public async Task DeleteAsync(DeleteShopRequest request)
+        {
+            Shop shop = await shopRepository.GetByIdAsync(request.Id)
+                ?? throw new Exception($"Shop with id {request.Id} not found.");
+
+            await shopRepository.Remove(shop);
+        }
+
         public async Task<GetShopByIdResponse> GetByIdAsync(GetShopByIdRequest request)
         {
-            Shop? shop = await shopRepository.GetByIdAsync(request.Id)
+            Shop shop = await shopRepository.GetByIdAsync(request.Id)
                 ?? throw new Exception($"Shop with id {request.Id} not found.");
 
             return new GetShopByIdResponse(
