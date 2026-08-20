@@ -9,5 +9,6 @@ namespace DndCharacters.Application.Interfaces
         Task<ICollection<Shop>> GetAsync(GetShopsRequest request);
         Task<Shop?> GetByIdAsync(int id);
         Task Remove(Shop shop);
+        Task UpdateAsync(Shop shop);
     }
 }

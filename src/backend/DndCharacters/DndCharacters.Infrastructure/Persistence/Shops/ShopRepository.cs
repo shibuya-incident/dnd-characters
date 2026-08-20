@@ -28,5 +28,11 @@ namespace DndCharacters.Infrastructure.Persistence.Shops
             dbContext.Shops.Remove(shop);
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task UpdateAsync(Shop shop)
+        {
+            dbContext.Shops.Update(shop);
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

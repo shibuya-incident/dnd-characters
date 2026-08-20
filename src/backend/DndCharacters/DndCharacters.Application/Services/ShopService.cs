@@ -2,6 +2,7 @@
 using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShops;
+using DndCharacters.Application.Dtos.Shops.UpdateShop;
 using DndCharacters.Application.Interfaces;
 using DndCharacters.Domain.Entities;
 
@@ -51,6 +52,27 @@ namespace DndCharacters.Application.Services
             {
                 Shops = [.. shops.Select(shop => new GetShopsItemResponse(shop.Id, shop.Name, shop.ProfileImage, shop.Items.Count))]
             };
+        }
+
+        public async Task<UpdateShopResponse> UpdateAsync(int id, UpdateShopRequest request)
+        {
+            Shop shop = await shopRepository.GetByIdAsync(id)
+                ?? throw new Exception($"Shop with id {id} not found.");
+
+            shop.Name = request.Name;
+            shop.ProfileImage = request.ProfileImage;
+            shop.ShopType = request.ShopType;
+            shop.OwnerName = request.OwnerName;
+
+            await shopRepository.UpdateAsync(shop);
+
+            return new UpdateShopResponse(
+                shop.Id,
+                shop.Name,
+                shop.ProfileImage,
+                shop.ShopType,
+                shop.OwnerName);
+
         }
     }
 }

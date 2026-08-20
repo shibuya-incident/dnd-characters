@@ -2,6 +2,7 @@
 using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShops;
+using DndCharacters.Application.Dtos.Shops.UpdateShop;
 using DndCharacters.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,7 +45,14 @@ namespace DndCharacters.API.Controllers
         }
 
         // PUT /shops/{id}
-
+        [HttpPut("{id}")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateShop([FromRoute] int id, [FromBody] UpdateShopRequest request)
+        {
+            UpdateShopResponse response = await shopService.UpdateAsync(id, request);
+            return Ok(response);
+        }
 
         // DELETE/shops/{id}
         [HttpDelete("{id}")]
