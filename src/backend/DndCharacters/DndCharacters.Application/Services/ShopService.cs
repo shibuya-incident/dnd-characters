@@ -5,6 +5,7 @@ using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Dtos.Shops.UpdateShop;
 using DndCharacters.Application.Interfaces;
 using DndCharacters.Domain.Entities;
+using FluentValidation;
 
 namespace DndCharacters.Application.Services
 {
@@ -12,6 +13,8 @@ namespace DndCharacters.Application.Services
     {
         public async Task<CreateShopResponse> CreateAsync(CreateShopRequest request)
         {
+            await new CreateShopRequestValidator().ValidateAndThrowAsync(request);
+
             Shop shop = Shop.Create(
                 request.Name,
                 request.ProfileImage,
@@ -20,7 +23,12 @@ namespace DndCharacters.Application.Services
 
             await shopRepository.AddAsync(shop);
 
-            return new CreateShopResponse(shop.Id, shop.Name, shop.ProfileImage, shop.ShopType, shop.OwnerName);
+            return new CreateShopResponse(
+                shop.Id,
+                shop.Name,
+                shop.ProfileImage,
+                shop.ShopType,
+                shop.OwnerName);
         }
 
         public async Task DeleteAsync(DeleteShopRequest request)
