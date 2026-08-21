@@ -15,7 +15,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-
 builder.Services
     .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration);
