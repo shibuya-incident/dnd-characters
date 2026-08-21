@@ -1,6 +1,7 @@
 ﻿using DndCharacters.Application.Dtos.Shops.CreateShop;
 using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.GetShopById;
+using DndCharacters.Application.Dtos.Shops.GetShopItemById;
 using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Dtos.Shops.UpdateShop;
 using DndCharacters.Application.Interfaces;
@@ -26,7 +27,7 @@ namespace DndCharacters.Application.Services
             return new CreateShopResponse(
                 shop.Id,
                 shop.Name,
-                shop.ProfileImage,
+                shop.DisplayImage,
                 shop.ShopType,
                 shop.OwnerName);
         }
@@ -47,9 +48,20 @@ namespace DndCharacters.Application.Services
             return new GetShopByIdResponse(
                 shop.Id,
                 shop.Name,
-                shop.ProfileImage,
+                shop.DisplayImage,
                 shop.ShopType,
-                shop.OwnerName);
+                shop.OwnerName,
+                shop.ShopItems.Select(shopItem => new GetShopListItemByIdResponse(
+                    shopItem.Item.Id,
+                    shopItem.Item.Name,
+                    shopItem.Item.DisplayImageUrl,
+                    shopItem.Item.ItemType,
+                    shopItem.Description ?? shopItem.Item.Description,
+                    shopItem.Price,
+                    shopItem.Stock,
+                    shopItem.IsOutOfStock
+                )).ToList()
+            );
         }
 
         public async Task<GetShopsResponse> GetFilteredAsync(GetShopsRequest request)
@@ -58,8 +70,26 @@ namespace DndCharacters.Application.Services
 
             return new GetShopsResponse
             {
-                Shops = [.. shops.Select(shop => new GetShopsItemResponse(shop.Id, shop.Name, shop.ProfileImage, shop.Items.Count))]
+                Shops = [.. shops.Select(shop => new GetShopsListItemResponse(shop.Id, shop.Name, shop.DisplayImage, shop.ShopItems.Count))]
             };
+        }
+
+        public async Task<GetShopItemByIdResponse> GetShopItemByIdAsync(GetShopItemByIdRequest request)
+        {
+            ShopItem shopItem = await shopRepository.GetShopItemAsync(request.ShopId, request.ItemId)
+                ?? throw new KeyNotFoundException($"Shop item with id {request.ItemId} not found in shop with id {request.ShopId}.");
+
+            return new GetShopItemByIdResponse(
+                shopItem.Id,
+                shopItem.Shop.Id,
+                shopItem.Item.Id,
+                shopItem.Item.Name,
+                shopItem.Item.ItemType,
+                shopItem.Description,
+                shopItem.Price,
+                shopItem.Stock,
+                shopItem.IsOutOfStock,
+                shopItem.Item.DisplayImageUrl);
         }
 
         public async Task<UpdateShopResponse> UpdateAsync(int id, UpdateShopRequest request)
@@ -68,7 +98,7 @@ namespace DndCharacters.Application.Services
                 ?? throw new Exception($"Shop with id {id} not found.");
 
             shop.Name = request.Name;
-            shop.ProfileImage = request.ProfileImage;
+            shop.DisplayImage = request.ProfileImage;
             shop.ShopType = request.ShopType;
             shop.OwnerName = request.OwnerName;
 
@@ -77,7 +107,7 @@ namespace DndCharacters.Application.Services
             return new UpdateShopResponse(
                 shop.Id,
                 shop.Name,
-                shop.ProfileImage,
+                shop.DisplayImage,
                 shop.ShopType,
                 shop.OwnerName);
 

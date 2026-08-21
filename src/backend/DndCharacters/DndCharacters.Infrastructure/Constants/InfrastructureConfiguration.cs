@@ -4,6 +4,7 @@
     {
         public static readonly string ShopTableName = "shops";
         public static readonly string ItemTableName = "items";
+        public static readonly string ShopItemTableName = "shop_items";
         public static readonly string DefaultConnectionStringName = "DefaultConnectionString";
 
     }

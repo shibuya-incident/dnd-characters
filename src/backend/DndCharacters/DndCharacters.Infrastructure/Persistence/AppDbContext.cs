@@ -7,6 +7,7 @@ namespace DndCharacters.Infrastructure.Persistence
     {
         public DbSet<Shop> Shops { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<ShopItem> ShopItems { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

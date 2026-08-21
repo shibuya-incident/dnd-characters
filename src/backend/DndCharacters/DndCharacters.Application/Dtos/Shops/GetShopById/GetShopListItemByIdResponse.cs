@@ -2,14 +2,15 @@
 
 namespace DndCharacters.Application.Dtos.Shops.GetShopById
 {
-    public record GetShopByIdResponse(
+    public record GetShopListItemByIdResponse(
         int Id,
         string Name,
         string? DisplayImageUrl,
-        ShopType ShopType,
-        string OwnerName,
-         ICollection<GetShopListItemByIdResponse> Items);
-
+        ItemType ItemType,
+        string? Description,
+        decimal Price,
+        int Stock,
+        bool IsOutOfStock);
 
 
 }

@@ -4,7 +4,7 @@ using DndCharacters.Infrastructure.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DndCharacters.Infrastructure.Persistence.Shops
+namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
 {
     internal class ShopEntityTypeConfiguration : IEntityTypeConfiguration<Shop>
     {
@@ -18,7 +18,7 @@ namespace DndCharacters.Infrastructure.Persistence.Shops
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(s => s.ProfileImage)
+            builder.Property(s => s.DisplayImage)
                 .HasMaxLength(500);
 
             builder.Property(s => s.ShopType)
@@ -28,11 +28,6 @@ namespace DndCharacters.Infrastructure.Persistence.Shops
 
             builder.Property(s => s.OwnerName)
                 .HasMaxLength(100);
-
-            builder.HasMany(s => s.Items)
-                .WithOne()
-                .HasForeignKey(s => s.ShopId)
-                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasData(
          new

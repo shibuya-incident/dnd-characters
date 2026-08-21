@@ -15,4 +15,8 @@
     <ProjectReference Include="..\DndCharacters.Domain\DndCharacters.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\Items\" />
+  </ItemGroup>
+
 </Project>

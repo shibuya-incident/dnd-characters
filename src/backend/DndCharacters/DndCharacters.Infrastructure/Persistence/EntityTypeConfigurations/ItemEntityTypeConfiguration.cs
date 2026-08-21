@@ -4,7 +4,7 @@ using DndCharacters.Infrastructure.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DndCharacters.Infrastructure.Persistence.Shops
+namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
 {
     internal class ItemEntityTypeConfiguration : IEntityTypeConfiguration<Item>
     {
@@ -27,18 +27,6 @@ namespace DndCharacters.Infrastructure.Persistence.Shops
                 .HasConversion<string>()
                 .IsRequired();
 
-            builder.Property(x => x.Price)
-                .HasPrecision(10, 2)
-                .IsRequired();
-
-            builder.Property(x => x.Stock)
-                .IsRequired();
-
-            builder.Property(x => x.ShopId)
-                .IsRequired();
-
-            builder.Ignore(x => x.IsOutOfStock);
-
             builder.HasData(
                 new
                 {
@@ -48,7 +36,6 @@ namespace DndCharacters.Infrastructure.Persistence.Shops
                     ItemType = ItemType.Potion,
                     Price = 50m,
                     Stock = 10,
-                    ShopId = 1
                 },
                 new
                 {

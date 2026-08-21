@@ -1,7 +1,7 @@
 ﻿using DndCharacters.Application.Interfaces;
 using DndCharacters.Infrastructure.Constants;
 using DndCharacters.Infrastructure.Persistence;
-using DndCharacters.Infrastructure.Persistence.Shops;
+using DndCharacters.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
