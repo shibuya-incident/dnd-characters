@@ -34,7 +34,7 @@ namespace DndCharacters.Application.Services
         public async Task DeleteAsync(DeleteShopRequest request)
         {
             Shop shop = await shopRepository.GetByIdAsync(request.Id)
-                ?? throw new Exception($"Shop with id {request.Id} not found.");
+                ?? throw new KeyNotFoundException($"Shop with id {request.Id} not found.");
 
             await shopRepository.Remove(shop);
         }
@@ -42,7 +42,7 @@ namespace DndCharacters.Application.Services
         public async Task<GetShopByIdResponse> GetByIdAsync(GetShopByIdRequest request)
         {
             Shop shop = await shopRepository.GetByIdAsync(request.Id)
-                ?? throw new Exception($"Shop with id {request.Id} not found.");
+                ?? throw new KeyNotFoundException($"Shop with id {request.Id} not found.");
 
             return new GetShopByIdResponse(
                 shop.Id,

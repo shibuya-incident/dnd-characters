@@ -7,7 +7,7 @@ namespace DndCharacters.Application.Dtos.Shops.CreateShop
         public CreateShopRequestValidator()
         {
             RuleFor(x => x.Name)
-                .NotEmpty()
+                .NotEmpty().WithMessage("Pinche pluto, meteme el nombre, carajo")
                 .MaximumLength(100);
 
             RuleFor(x => x.ShopType)

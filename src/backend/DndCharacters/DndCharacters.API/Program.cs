@@ -1,3 +1,4 @@
+using DndCharacters.API.Handler;
 using DndCharacters.Application.Extensions;
 using DndCharacters.Infrastructure.Extensions;
 using Scalar.AspNetCore;
@@ -12,6 +13,10 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 });
+
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -28,6 +33,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
