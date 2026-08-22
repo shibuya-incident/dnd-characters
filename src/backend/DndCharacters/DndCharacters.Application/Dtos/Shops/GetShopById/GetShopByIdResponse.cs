@@ -7,10 +7,6 @@ namespace DndCharacters.Application.Dtos.Shops.GetShopById
         string Name,
         string? DisplayImageUrl,
         ShopType ShopType,
-        string OwnerName,
-         ICollection<GetShopListItemByIdResponse> Items);
-
-
-
+        string OwnerName);
 }
 

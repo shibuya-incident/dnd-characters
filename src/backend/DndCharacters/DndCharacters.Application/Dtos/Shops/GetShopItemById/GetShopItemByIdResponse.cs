@@ -8,9 +8,10 @@ namespace DndCharacters.Application.Dtos.Shops.GetShopItemById
         int ItemId,
         string ItemName,
         ItemType ItemType,
-        string? Description,
+        string ItemDescription,
+        string? ShopItemDescription,
         decimal Price,
         int Stock,
         bool IsOutOfStock,
-        string? DisplayImageUrl);
+        string? ItemDisplayImageUrl);
 }

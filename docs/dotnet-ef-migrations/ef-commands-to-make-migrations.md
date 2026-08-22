@@ -52,10 +52,7 @@ dotnet ef migrations remove `
   --startup-project .\DndCharacters.API\
 
 # 14. Run migration command with verbose logs
-dotnet ef migrations add MigrationName `
-  --project .\DndCharacters.Infrastructure\ `
-  --startup-project .\DndCharacters.API\ `
-  --verbose
+dotnet ef migrations add MigrationName   --project .\DndCharacters.Infrastructure\   --startup-project .\DndCharacters.API\   --verbose
 
 # 15. Check packages
 dotnet list .\DndCharacters.API\ package

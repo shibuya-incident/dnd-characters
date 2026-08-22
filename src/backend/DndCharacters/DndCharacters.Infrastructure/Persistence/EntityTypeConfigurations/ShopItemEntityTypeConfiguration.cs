@@ -10,6 +10,9 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<ShopItem> builder)
         {
             builder.ToTable(InfrastructureConfiguration.ShopItemTableName);
+
+            builder.HasKey(x => x.Id);
+
             builder.Property(x => x.Price)
               .HasPrecision(10, 2)
               .IsRequired();
@@ -19,13 +22,14 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
 
             builder.Ignore(x => x.IsOutOfStock);
 
-            builder.HasOne(x => x.Shop)
+            builder.HasOne<Shop>()
                 .WithMany(x => x.ShopItems)
+                .HasForeignKey(x => x.ShopId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-
-            builder.HasOne(x => x.Item)
-                .WithMany(x => x.ShopItems)
+            builder.HasOne<Item>()
+                .WithMany()
+                .HasForeignKey(x => x.ItemId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasData(

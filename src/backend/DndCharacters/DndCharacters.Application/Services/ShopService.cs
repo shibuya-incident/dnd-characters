@@ -50,18 +50,7 @@ namespace DndCharacters.Application.Services
                 shop.Name,
                 shop.DisplayImage,
                 shop.ShopType,
-                shop.OwnerName,
-                shop.ShopItems.Select(shopItem => new GetShopListItemByIdResponse(
-                    shopItem.Item.Id,
-                    shopItem.Item.Name,
-                    shopItem.Item.DisplayImageUrl,
-                    shopItem.Item.ItemType,
-                    shopItem.Description ?? shopItem.Item.Description,
-                    shopItem.Price,
-                    shopItem.Stock,
-                    shopItem.IsOutOfStock
-                )).ToList()
-            );
+                shop.OwnerName);
         }
 
         public async Task<GetShopsResponse> GetFilteredAsync(GetShopsRequest request)
@@ -76,20 +65,10 @@ namespace DndCharacters.Application.Services
 
         public async Task<GetShopItemByIdResponse> GetShopItemByIdAsync(GetShopItemByIdRequest request)
         {
-            ShopItem shopItem = await shopRepository.GetShopItemAsync(request.ShopId, request.ItemId)
+            GetShopItemByIdResponse shopItem = await shopRepository.GetShopItemAsync(request)
                 ?? throw new KeyNotFoundException($"Shop item with id {request.ItemId} not found in shop with id {request.ShopId}.");
 
-            return new GetShopItemByIdResponse(
-                shopItem.Id,
-                shopItem.Shop.Id,
-                shopItem.Item.Id,
-                shopItem.Item.Name,
-                shopItem.Item.ItemType,
-                shopItem.Description,
-                shopItem.Price,
-                shopItem.Stock,
-                shopItem.IsOutOfStock,
-                shopItem.Item.DisplayImageUrl);
+            return shopItem;
         }
 
         public async Task<UpdateShopResponse> UpdateAsync(int id, UpdateShopRequest request)

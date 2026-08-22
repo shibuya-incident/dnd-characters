@@ -8,6 +8,5 @@ namespace DndCharacters.Domain.Entities
         public required string Description { get; set; }
         public ItemType ItemType { get; set; }
         public string? DisplayImageUrl { get; set; }
-        public ICollection<ShopItem> ShopItems { get; set; } = [];
     }
 }

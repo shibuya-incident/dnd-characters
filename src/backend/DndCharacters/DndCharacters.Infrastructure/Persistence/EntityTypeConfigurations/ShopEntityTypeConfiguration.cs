@@ -12,21 +12,22 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
         {
             builder.ToTable(InfrastructureConfiguration.ShopTableName);
 
-            builder.HasKey(s => s.Id);
+            builder.HasKey(x => x.Id);
 
-            builder.Property(s => s.Name)
+            builder.Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(s => s.DisplayImage)
+            builder.Property(x => x.DisplayImage)
                 .HasMaxLength(500);
 
-            builder.Property(s => s.ShopType)
+            builder.Property(x => x.ShopType)
                 .HasConversion<string>()
                 .IsRequired()
-                .HasMaxLength(500);
+                .HasMaxLength(100);
 
-            builder.Property(s => s.OwnerName)
+            builder.Property(x => x.OwnerName)
+                .IsRequired()
                 .HasMaxLength(100);
 
             builder.HasData(
@@ -34,7 +35,7 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
          {
              Id = 1,
              Name = "The Arcane",
-             ProfileImage = (string?)null,
+             DisplayImage = "https://m.media-amazon.com/images/S/pv-target-images/211525360489f7df87f8debc7eb8c9deb14a8e3a4d57e7b532ddb8371737a12f.jpg",
              ShopType = ShopType.Bookstore,
              OwnerName = "Garrick"
          },
@@ -42,7 +43,7 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
          {
              Id = 2,
              Name = "Iron & Steel",
-             ProfileImage = (string?)null,
+             DisplayImage = "https://static.wikia.nocookie.net/pokemonfanon/images/1/1f/Mkmdslcndsklcndsklfsn.png/revision/latest?cb=20130530003636",
              ShopType = ShopType.Blacksmith,
              OwnerName = "Brom"
          });

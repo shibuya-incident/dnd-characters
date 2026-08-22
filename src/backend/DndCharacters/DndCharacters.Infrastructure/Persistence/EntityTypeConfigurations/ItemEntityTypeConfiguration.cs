@@ -27,25 +27,23 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
                 .HasConversion<string>()
                 .IsRequired();
 
+            builder.Property(x => x.DisplayImageUrl)
+                .HasMaxLength(500);
+
             builder.HasData(
                 new
                 {
                     Id = 1,
                     Name = "Potion of Healing",
                     Description = "A red potion that restores health.",
-                    ItemType = ItemType.Potion,
-                    Price = 50m,
-                    Stock = 10,
+                    ItemType = ItemType.Potion
                 },
                 new
                 {
                     Id = 2,
                     Name = "Longsword",
                     Description = "A reliable steel longsword.",
-                    ItemType = ItemType.Weapon,
-                    Price = 75m,
-                    Stock = 5,
-                    ShopId = 2
+                    ItemType = ItemType.Weapon
                 });
         }
     }

@@ -1,4 +1,5 @@
-﻿using DndCharacters.Application.Dtos.Shops.GetShops;
+﻿using DndCharacters.Application.Dtos.Shops.GetShopItemById;
+using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Interfaces;
 using DndCharacters.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -7,12 +8,30 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
 {
     internal sealed class ShopRepository(AppDbContext dbContext) : IShopRepository
     {
-        public async Task<ShopItem?> GetShopItemAsync(int shopId, int itemId)
+        public async Task<GetShopItemByIdResponse?> GetShopItemAsync(GetShopItemByIdRequest request)
         {
             return await dbContext.ShopItems
-                .Include(shopItem => shopItem.Shop)
-                .Include(shopItem => shopItem.Item)
-                .FirstOrDefaultAsync(shopItem => shopItem.Shop.Id == shopId && shopItem.Item.Id == itemId);
+                .Where(shopItem =>
+                    shopItem.ShopId == request.ShopId &&
+                    shopItem.ItemId == request.ItemId)
+                .Join(
+                dbContext.Items,
+                shopItem => shopItem.ItemId,
+                item => item.Id,
+                (shopItem, item) => new GetShopItemByIdResponse(
+                    shopItem.Id,
+                    shopItem.ShopId,
+                    shopItem.ItemId,
+                    item.Name,
+                    item.ItemType,
+                    item.Description,
+                    shopItem.Description,
+                    shopItem.Price,
+                    shopItem.Stock,
+                    shopItem.Stock == 0,
+                    item.DisplayImageUrl
+                ))
+                .FirstOrDefaultAsync();
         }
 
         public async Task<ICollection<Shop>> GetAsync(GetShopsRequest request)
@@ -26,7 +45,6 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
         {
             return await dbContext.Shops
                 .Include(s => s.ShopItems)
-                .ThenInclude(i => i.Item)
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
 

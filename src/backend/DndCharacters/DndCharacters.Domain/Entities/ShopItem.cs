@@ -6,8 +6,8 @@
         public int Stock { get; private set; }
         public bool IsOutOfStock => this.Stock == 0;
         public string? Description { get; set; }
-        public required Shop Shop { get; set; }
-        public required Item Item { get; set; }
+        public int ShopId { get; set; }
+        public int ItemId { get; set; }
 
     }
 }
