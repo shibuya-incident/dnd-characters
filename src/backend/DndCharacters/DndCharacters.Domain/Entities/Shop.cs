@@ -5,7 +5,7 @@ namespace DndCharacters.Domain.Entities
     public class Shop : Entity
     {
         public required string Name { get; set; }
-        public string? DisplayImage { get; set; }
+        public string? DisplayImageUrl { get; set; }
         public ShopType ShopType { get; set; }
         public required string OwnerName { get; set; }
         public ICollection<ShopItem> ShopItems { get; set; } = [];
@@ -19,7 +19,7 @@ namespace DndCharacters.Domain.Entities
             return new Shop
             {
                 Name = name,
-                DisplayImage = profileImage,
+                DisplayImageUrl = profileImage,
                 ShopType = shopType,
                 OwnerName = ownerName
             };

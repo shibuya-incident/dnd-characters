@@ -27,7 +27,7 @@ namespace DndCharacters.Application.Services
             return new CreateShopResponse(
                 shop.Id,
                 shop.Name,
-                shop.DisplayImage,
+                shop.DisplayImageUrl,
                 shop.ShopType,
                 shop.OwnerName);
         }
@@ -48,19 +48,14 @@ namespace DndCharacters.Application.Services
             return new GetShopByIdResponse(
                 shop.Id,
                 shop.Name,
-                shop.DisplayImage,
+                shop.DisplayImageUrl,
                 shop.ShopType,
                 shop.OwnerName);
         }
 
         public async Task<GetShopsResponse> GetFilteredAsync(GetShopsRequest request)
         {
-            IEnumerable<Shop> shops = await shopRepository.GetAsync(request);
-
-            return new GetShopsResponse
-            {
-                Shops = [.. shops.Select(shop => new GetShopsListItemResponse(shop.Id, shop.Name, shop.DisplayImage, shop.ShopItems.Count))]
-            };
+            return await shopRepository.GetAsync(request);
         }
 
         public async Task<GetShopItemByIdResponse> GetShopItemByIdAsync(GetShopItemByIdRequest request)
@@ -77,7 +72,7 @@ namespace DndCharacters.Application.Services
                 ?? throw new Exception($"Shop with id {id} not found.");
 
             shop.Name = request.Name;
-            shop.DisplayImage = request.ProfileImage;
+            shop.DisplayImageUrl = request.ProfileImage;
             shop.ShopType = request.ShopType;
             shop.OwnerName = request.OwnerName;
 
@@ -86,7 +81,7 @@ namespace DndCharacters.Application.Services
             return new UpdateShopResponse(
                 shop.Id,
                 shop.Name,
-                shop.DisplayImage,
+                shop.DisplayImageUrl,
                 shop.ShopType,
                 shop.OwnerName);
 

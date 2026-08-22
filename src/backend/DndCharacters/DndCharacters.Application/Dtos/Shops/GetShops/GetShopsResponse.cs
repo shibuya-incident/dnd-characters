@@ -2,6 +2,6 @@
 {
     public record GetShopsResponse
     {
-        public IEnumerable<GetShopsListItemResponse> Shops { get; set; } = [];
+        public IReadOnlyCollection<GetShopsListItemResponse> Shops { get; set; } = [];
     }
 }

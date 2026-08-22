@@ -31,20 +31,38 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                     shopItem.Stock == 0,
                     item.DisplayImageUrl
                 ))
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<ICollection<Shop>> GetAsync(GetShopsRequest request)
+        public async Task<GetShopsResponse> GetAsync(GetShopsRequest request)
         {
-            return await dbContext.Shops
-                .Include(s => s.ShopItems)
+            IQueryable<Shop> query = dbContext.Shops.AsNoTracking();
+
+            if (request.ItemCount is not null)
+            {
+                query = query.Where(shop => shop.ShopItems.Count >= request.ItemCount);
+            }
+
+            List<GetShopsListItemResponse> shops = await query
+                .Select(shop => new GetShopsListItemResponse(
+                    shop.Id,
+                    shop.Name,
+                    shop.ShopType,
+                    shop.DisplayImageUrl,
+                    shop.ShopItems.Count
+                ))
                 .ToListAsync();
+
+            return new GetShopsResponse()
+            {
+                Shops = shops
+            };
         }
 
         public async Task<Shop?> GetByIdAsync(int id)
         {
             return await dbContext.Shops
-                .Include(s => s.ShopItems)
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
 

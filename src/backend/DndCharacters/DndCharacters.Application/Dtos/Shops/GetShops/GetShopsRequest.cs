@@ -3,5 +3,6 @@
     public record GetShopsRequest(
         string? OrderBy,
         int Page,
-        int PageSize);
+        int PageSize,
+        int? ItemCount);
 }

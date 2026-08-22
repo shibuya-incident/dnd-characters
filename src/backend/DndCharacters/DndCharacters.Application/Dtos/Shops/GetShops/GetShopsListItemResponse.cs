@@ -1,8 +1,11 @@
-﻿namespace DndCharacters.Application.Dtos.Shops.GetShops
+﻿using DndCharacters.Domain.Enum;
+
+namespace DndCharacters.Application.Dtos.Shops.GetShops
 {
     public record GetShopsListItemResponse(
         int Id,
         string Name,
-        string? ProfileImage,
+        ShopType ShopType,
+        string? DisplayImageUrl,
         int ItemsCount);
 }

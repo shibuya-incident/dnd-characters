@@ -18,7 +18,7 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(x => x.DisplayImage)
+            builder.Property(x => x.DisplayImageUrl)
                 .HasMaxLength(500);
 
             builder.Property(x => x.ShopType)
@@ -35,7 +35,7 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
          {
              Id = 1,
              Name = "The Arcane",
-             DisplayImage = "https://m.media-amazon.com/images/S/pv-target-images/211525360489f7df87f8debc7eb8c9deb14a8e3a4d57e7b532ddb8371737a12f.jpg",
+             DisplayImageUrl = "https://m.media-amazon.com/images/S/pv-target-images/211525360489f7df87f8debc7eb8c9deb14a8e3a4d57e7b532ddb8371737a12f.jpg",
              ShopType = ShopType.Bookstore,
              OwnerName = "Garrick"
          },
@@ -43,7 +43,7 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
          {
              Id = 2,
              Name = "Iron & Steel",
-             DisplayImage = "https://static.wikia.nocookie.net/pokemonfanon/images/1/1f/Mkmdslcndsklcndsklfsn.png/revision/latest?cb=20130530003636",
+             DisplayImageUrl = "https://static.wikia.nocookie.net/pokemonfanon/images/1/1f/Mkmdslcndsklcndsklfsn.png/revision/latest?cb=20130530003636",
              ShopType = ShopType.Blacksmith,
              OwnerName = "Brom"
          });

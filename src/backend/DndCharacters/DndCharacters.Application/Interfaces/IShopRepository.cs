@@ -7,7 +7,7 @@ namespace DndCharacters.Application.Interfaces
     public interface IShopRepository
     {
         Task AddAsync(Shop shop);
-        Task<ICollection<Shop>> GetAsync(GetShopsRequest request);
+        Task<GetShopsResponse> GetAsync(GetShopsRequest request);
         Task<Shop?> GetByIdAsync(int id);
         Task<GetShopItemByIdResponse?> GetShopItemAsync(GetShopItemByIdRequest request);
         Task Remove(Shop shop);
