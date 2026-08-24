@@ -2,6 +2,7 @@
 using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShopItemById;
+using DndCharacters.Application.Dtos.Shops.GetShopItems;
 using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Dtos.Shops.UpdateShop;
 
@@ -15,5 +16,6 @@ namespace DndCharacters.Application.Interfaces
         Task DeleteAsync(DeleteShopRequest request);
         Task<UpdateShopResponse> UpdateAsync(int Id, UpdateShopRequest request);
         Task<GetShopItemByIdResponse> GetShopItemByIdAsync(GetShopItemByIdRequest request);
+        Task<GetShopItemsResponse> GetShopItemsAsync(GetShopItemsRequest request);
     }
 }

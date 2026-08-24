@@ -9,7 +9,9 @@ namespace DndCharacters.Application.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IShopService, ShopService>();
+            services.AddScoped<IItemService, ItemService>();
             return services;
+
         }
     }
 }

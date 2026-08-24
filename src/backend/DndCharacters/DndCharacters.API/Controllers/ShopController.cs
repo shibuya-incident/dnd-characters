@@ -2,6 +2,7 @@
 using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShopItemById;
+using DndCharacters.Application.Dtos.Shops.GetShopItems;
 using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Dtos.Shops.UpdateShop;
 using DndCharacters.Application.Interfaces;
@@ -17,19 +18,18 @@ namespace DndCharacters.API.Controllers
         // GET /shops
         [HttpGet]
         [ProducesDefaultResponseType]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(GetShopsResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetShops([FromQuery] GetShopsRequest request)
         {
             GetShopsResponse response = await shopService.GetFilteredAsync(request);
             return Ok(response);
-
         }
 
         // GET /shops/{id}
         [HttpGet("{id}")]
         [ProducesDefaultResponseType]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetById([FromRoute] int id)
+        [ProducesResponseType(typeof(GetShopByIdResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetShopById([FromRoute] int id)
         {
             GetShopByIdResponse response = await shopService.GetByIdAsync(new GetShopByIdRequest(id));
             return Ok(response);
@@ -42,13 +42,13 @@ namespace DndCharacters.API.Controllers
         public async Task<IActionResult> CreateShop([FromBody] CreateShopRequest request)
         {
             CreateShopResponse response = await shopService.CreateAsync(request);
-            return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
+            return CreatedAtAction(nameof(GetShopById), new { id = response.Id }, response);
         }
 
         // PUT /shops/{id}
         [HttpPut("{id}")]
         [ProducesDefaultResponseType]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UpdateShopResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdateShop([FromRoute] int id, [FromBody] UpdateShopRequest request)
         {
             UpdateShopResponse response = await shopService.UpdateAsync(id, request);
@@ -66,6 +66,15 @@ namespace DndCharacters.API.Controllers
         }
 
         // GET /shops/{id}/items
+        [HttpGet("{shopId}/items")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(typeof(GetShopItemsResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetShopItems([FromRoute] int shopId)
+        {
+            GetShopItemsResponse response = await shopService.GetShopItemsAsync(new GetShopItemsRequest(shopId));
+            return Ok(response);
+        }
+
         // GET /shops/{id}/items/{itemId}
         [HttpGet("{shopId}/items/{itemId}")]
         [ProducesDefaultResponseType]
@@ -74,9 +83,11 @@ namespace DndCharacters.API.Controllers
         {
             GetShopItemByIdResponse response = await shopService.GetShopItemByIdAsync(new GetShopItemByIdRequest(shopId, itemId));
             return Ok(response);
-
         }
+
         // POST /shops/{id}/items
+
+
         // PUT /shops/{id}/items
         // DELETE /shops/{id}/items
     }

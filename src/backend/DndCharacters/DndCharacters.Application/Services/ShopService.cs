@@ -2,6 +2,7 @@
 using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShopItemById;
+using DndCharacters.Application.Dtos.Shops.GetShopItems;
 using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Dtos.Shops.UpdateShop;
 using DndCharacters.Application.Interfaces;
@@ -64,6 +65,11 @@ namespace DndCharacters.Application.Services
                 ?? throw new KeyNotFoundException($"Shop item with id {request.ItemId} not found in shop with id {request.ShopId}.");
 
             return shopItem;
+        }
+
+        public async Task<GetShopItemsResponse> GetShopItemsAsync(GetShopItemsRequest request)
+        {
+            return await shopRepository.GetShopItemsAsync(request);
         }
 
         public async Task<UpdateShopResponse> UpdateAsync(int id, UpdateShopRequest request)

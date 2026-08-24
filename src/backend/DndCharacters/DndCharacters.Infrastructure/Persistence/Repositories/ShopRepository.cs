@@ -1,4 +1,5 @@
 ﻿using DndCharacters.Application.Dtos.Shops.GetShopItemById;
+using DndCharacters.Application.Dtos.Shops.GetShopItems;
 using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Interfaces;
 using DndCharacters.Domain.Entities;
@@ -33,6 +34,31 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                 ))
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<GetShopItemsResponse> GetShopItemsAsync(GetShopItemsRequest request)
+        {
+            List<GetShopItemsListItemResponse> items = await dbContext.ShopItems
+                .Where(shopItem =>
+                    shopItem.ShopId == request.ShopId)
+                .Join(
+                dbContext.Items,
+                shopItem => shopItem.ItemId,
+                item => item.Id,
+                (shopItem, item) => new GetShopItemsListItemResponse(
+                    item.Id,
+                    item.Name,
+                    item.DisplayImageUrl,
+                    item.ItemType,
+                    shopItem.Price
+                ))
+                .AsNoTracking()
+                .ToListAsync();
+
+            return new GetShopItemsResponse()
+            {
+                Items = items
+            };
         }
 
         public async Task<GetShopsResponse> GetAsync(GetShopsRequest request)

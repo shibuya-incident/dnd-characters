@@ -13,6 +13,7 @@ namespace DndCharacters.Infrastructure.Extensions
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IShopRepository, ShopRepository>();
+            services.AddScoped<IItemRepository, ItemRepository>();
 
             services.AddPersistence(configuration);
             return services;
