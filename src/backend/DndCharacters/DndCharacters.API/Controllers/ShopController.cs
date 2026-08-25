@@ -1,4 +1,5 @@
-﻿using DndCharacters.Application.Dtos.Shops.CreateShop;
+﻿using DndCharacters.Application.Dtos.Shops.AddShopItem;
+using DndCharacters.Application.Dtos.Shops.CreateShop;
 using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShopItemById;
@@ -85,10 +86,21 @@ namespace DndCharacters.API.Controllers
             return Ok(response);
         }
 
-        // POST /shops/{id}/items
-
+        // POST /shops/{id}/items/{itemId}
+        [HttpPost("{shopId}/items/{itemId}")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(typeof(AddShopItemResponse), StatusCodes.Status201Created)]
+        public async Task<IActionResult> AddShopItem([FromRoute] int shopId, [FromRoute] int itemId, [FromBody] AddShopItemRequest request)
+        {
+            AddShopItemResponse response = await shopService.AddShopItemAsync(shopId, itemId, request);
+            return CreatedAtAction(nameof(GetShopItemById), new { shopId = response.ShopId, itemId = response.ItemId }, response);
+        }
 
         // PUT /shops/{id}/items
+
+
         // DELETE /shops/{id}/items
+
+
     }
 }

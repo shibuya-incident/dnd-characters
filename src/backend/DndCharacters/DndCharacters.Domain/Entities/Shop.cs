@@ -10,19 +10,33 @@ namespace DndCharacters.Domain.Entities
         public required string OwnerName { get; set; }
         public ICollection<ShopItem> ShopItems { get; set; } = [];
 
+        private Shop() { }
+
         public static Shop Create(
             string name,
-            string? profileImage,
+            string? displayImageUrl,
             ShopType shopType,
             string ownerName)
         {
             return new Shop
             {
                 Name = name,
-                DisplayImageUrl = profileImage,
+                DisplayImageUrl = displayImageUrl,
                 ShopType = shopType,
                 OwnerName = ownerName
             };
+        }
+
+        public void AddShopItem(ShopItem shopItem)
+        {
+            ShopItem? existingShopItem = ShopItems.FirstOrDefault(x => x.ItemId == shopItem.ItemId);
+
+            if (existingShopItem is null)
+            {
+                throw new InvalidOperationException($"The item {shopItem.ItemId} already exists in shop {shopItem.ShopId}");
+            }
+
+            existingShopItem.AddStock();
         }
     }
 }

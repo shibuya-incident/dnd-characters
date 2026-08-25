@@ -14,5 +14,6 @@ namespace DndCharacters.Application.Interfaces
         Task<GetShopItemsResponse> GetShopItemsAsync(GetShopItemsRequest request);
         Task Remove(Shop shop);
         Task UpdateAsync(Shop shop);
+        Task<bool> ExistAsync(int id, int itemId);
     }
 }

@@ -9,5 +9,28 @@
         public int ShopId { get; set; }
         public int ItemId { get; set; }
 
+        private ShopItem() { }
+
+        public static ShopItem Create(
+            decimal price,
+            int stock,
+            string? description,
+            int shopId,
+            int itemId)
+        {
+            return new ShopItem
+            {
+                Price = price,
+                Stock = stock,
+                Description = description,
+                ShopId = shopId,
+                ItemId = itemId
+            };
+        }
+
+        public void AddStock()
+        {
+            this.Stock += 1;
+        }
     }
 }

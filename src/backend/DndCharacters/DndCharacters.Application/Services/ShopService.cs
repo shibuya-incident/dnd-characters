@@ -1,4 +1,5 @@
-﻿using DndCharacters.Application.Dtos.Shops.CreateShop;
+﻿using DndCharacters.Application.Dtos.Shops.AddShopItem;
+using DndCharacters.Application.Dtos.Shops.CreateShop;
 using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShopItemById;
@@ -11,8 +12,44 @@ using FluentValidation;
 
 namespace DndCharacters.Application.Services
 {
-    public class ShopService(IShopRepository shopRepository) : IShopService
+    public class ShopService(IShopRepository shopRepository, IItemRepository itemRepository) : IShopService
     {
+        public async Task<AddShopItemResponse> AddShopItemAsync(int shopId, int itemId, AddShopItemRequest request)
+        {
+            Shop shop = await shopRepository.GetByIdAsync(shopId)
+                ?? throw new Exception($"Shop with id {shopId} not found.");
+
+            Item item = await itemRepository.GetByIdAsync(itemId)
+                ?? throw new Exception($"Item with id {itemId} not found.");
+
+            bool shopItemExist = await shopRepository.ExistAsync(shopId, itemId);
+
+            if (shopItemExist)
+            {
+                throw new InvalidOperationException($"The item {itemId} already exists in shop {shopId}");
+            }
+
+            ShopItem shopItem = ShopItem.Create(
+                request.Price,
+                request.Stock,
+                request.Description,
+                shopId,
+                itemId);
+
+            shop.AddShopItem(shopItem);
+
+            await shopRepository.UpdateAsync(shop);
+
+            return new AddShopItemResponse(
+                shopItem.Id,
+                shopItem.ShopId,
+                shopItem.ItemId,
+                shopItem.Description,
+                shopItem.Price,
+                shopItem.Stock,
+                shopItem.IsOutOfStock);
+        }
+
         public async Task<CreateShopResponse> CreateAsync(CreateShopRequest request)
         {
             await new CreateShopRequestValidator().ValidateAndThrowAsync(request);

@@ -46,10 +46,12 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                 shopItem => shopItem.ItemId,
                 item => item.Id,
                 (shopItem, item) => new GetShopItemsListItemResponse(
+                    shopItem.Id,
                     item.Id,
                     item.Name,
                     item.DisplayImageUrl,
                     item.ItemType,
+                    shopItem.Stock,
                     shopItem.Price
                 ))
                 .AsNoTracking()
@@ -88,7 +90,9 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
 
         public async Task<Shop?> GetByIdAsync(int id)
         {
+
             return await dbContext.Shops
+                .Include(shop => shop.ShopItems)
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
 
@@ -108,6 +112,11 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
         {
             dbContext.Shops.Update(shop);
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> ExistAsync(int id, int itemId)
+        {
+            return await dbContext.ShopItems.AnyAsync(shopItem => shopItem.ShopId == id && shopItem.ItemId == itemId);
         }
     }
 }
