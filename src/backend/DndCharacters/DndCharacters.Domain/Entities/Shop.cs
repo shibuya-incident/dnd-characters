@@ -31,12 +31,13 @@ namespace DndCharacters.Domain.Entities
         {
             ShopItem? existingShopItem = ShopItems.FirstOrDefault(x => x.ItemId == shopItem.ItemId);
 
-            if (existingShopItem is null)
+            if (existingShopItem is not null)
             {
                 throw new InvalidOperationException($"The item {shopItem.ItemId} already exists in shop {shopItem.ShopId}");
             }
 
-            existingShopItem.AddStock();
+            ShopItems.Add(shopItem);
         }
+
     }
 }

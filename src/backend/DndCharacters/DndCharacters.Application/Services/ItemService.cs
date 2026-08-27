@@ -59,6 +59,9 @@ namespace DndCharacters.Application.Services
 
         public async Task<UpdateItemResponse> UpdateAsync(int id, UpdateItemRequest request)
         {
+
+            await new UpdateItemRequestValidator().ValidateAndThrowAsync(request);
+
             Item item = await itemRepository.GetByIdAsync(id)
                 ?? throw new Exception($"Item with id {id} not found.");
 

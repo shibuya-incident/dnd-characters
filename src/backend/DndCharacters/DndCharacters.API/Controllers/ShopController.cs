@@ -6,6 +6,7 @@ using DndCharacters.Application.Dtos.Shops.GetShopItemById;
 using DndCharacters.Application.Dtos.Shops.GetShopItems;
 using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Dtos.Shops.UpdateShop;
+using DndCharacters.Application.Dtos.Shops.UpdateShopItem;
 using DndCharacters.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -96,8 +97,15 @@ namespace DndCharacters.API.Controllers
             return CreatedAtAction(nameof(GetShopItemById), new { shopId = response.ShopId, itemId = response.ItemId }, response);
         }
 
-        // PUT /shops/{id}/items
-
+        // PUT /shops/{id}/items/{itemId}
+        [HttpPut("{shopId}/items/{itemId}")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(typeof(UpdateShopItemResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateShopItem([FromRoute] int shopId, [FromRoute] int itemId, [FromBody] UpdateShopItemRequest request)
+        {
+            UpdateShopItemResponse response = await shopService.UpdateShopItemAsync(shopId, itemId, request);
+            return Ok(response);
+        }
 
         // DELETE /shops/{id}/items
 
