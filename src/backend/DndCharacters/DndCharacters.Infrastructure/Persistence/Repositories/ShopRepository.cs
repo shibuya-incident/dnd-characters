@@ -118,5 +118,11 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
         {
             return await dbContext.ShopItems.AnyAsync(shopItem => shopItem.ShopId == id && shopItem.ItemId == itemId);
         }
+
+        public async Task RemoveShopItem(ShopItem shopItem)
+        {
+            dbContext.ShopItems.Remove(shopItem);
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

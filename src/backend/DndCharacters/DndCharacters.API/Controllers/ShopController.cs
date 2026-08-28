@@ -1,6 +1,7 @@
 ﻿using DndCharacters.Application.Dtos.Shops.AddShopItem;
 using DndCharacters.Application.Dtos.Shops.CreateShop;
 using DndCharacters.Application.Dtos.Shops.DeleteShop;
+using DndCharacters.Application.Dtos.Shops.DeleteShopItem;
 using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShopItemById;
 using DndCharacters.Application.Dtos.Shops.GetShopItems;
@@ -107,8 +108,14 @@ namespace DndCharacters.API.Controllers
             return Ok(response);
         }
 
-        // DELETE /shops/{id}/items
-
-
+        // DELETE /shops/{id}/items/{itemId}
+        [HttpDelete("{shopId}/items/{itemId}")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> DeleteShopItem([FromRoute] int shopId, [FromRoute] int itemId)
+        {
+            await shopService.DeleteShopItemAsync(new DeleteShopItemRequest(shopId, itemId));
+            return NoContent();
+        }
     }
 }
