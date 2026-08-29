@@ -1,0 +1,18 @@
+img {
+    width: 25px;
+    height: 25px;
+    clip-path: circle();
+    box-sizing: content-box;
+    object-fit: cover;
+}
+
+.sidebar-option {
+    margin: 8px;
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+
+}
