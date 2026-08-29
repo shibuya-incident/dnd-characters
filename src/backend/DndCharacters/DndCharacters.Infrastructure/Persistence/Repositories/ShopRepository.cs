@@ -7,8 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DndCharacters.Infrastructure.Persistence.Repositories
 {
-    internal sealed class ShopRepository(AppDbContext dbContext) : IShopRepository
+    internal sealed class ShopRepository(AppDbContext dbContext) : Repository<Shop>(dbContext), IShopRepository
     {
+        private readonly AppDbContext dbContext = dbContext;
+
         public async Task<GetShopItemByIdResponse?> GetShopItemAsync(GetShopItemByIdRequest request)
         {
             return await dbContext.ShopItems
@@ -86,32 +88,6 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
             {
                 Shops = shops
             };
-        }
-
-        public async Task<Shop?> GetByIdAsync(int id)
-        {
-
-            return await dbContext.Shops
-                .Include(shop => shop.ShopItems)
-                .FirstOrDefaultAsync(s => s.Id == id);
-        }
-
-        public async Task AddAsync(Shop shop)
-        {
-            await dbContext.Shops.AddAsync(shop);
-            await dbContext.SaveChangesAsync();
-        }
-
-        public async Task Remove(Shop shop)
-        {
-            dbContext.Shops.Remove(shop);
-            await dbContext.SaveChangesAsync();
-        }
-
-        public async Task UpdateAsync(Shop shop)
-        {
-            dbContext.Shops.Update(shop);
-            await dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> ExistAsync(int id, int itemId)

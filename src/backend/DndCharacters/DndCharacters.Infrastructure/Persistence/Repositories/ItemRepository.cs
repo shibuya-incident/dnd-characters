@@ -5,13 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DndCharacters.Infrastructure.Persistence.Repositories
 {
-    internal sealed class ItemRepository(AppDbContext dbContext) : IItemRepository
+    internal sealed class ItemRepository(AppDbContext dbContext) : Repository<Item>(dbContext), IItemRepository
     {
-        public async Task AddAsync(Item item)
-        {
-            await dbContext.Items.AddAsync(item);
-            await dbContext.SaveChangesAsync();
-        }
+        private readonly AppDbContext dbContext = dbContext;
 
         public async Task<GetItemsResponse> GetAsync(GetItemsRequest request)
         {
@@ -30,23 +26,6 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
             {
                 Items = items
             };
-        }
-
-        public async Task<Item?> GetByIdAsync(int id)
-        {
-            return await dbContext.Items.FirstOrDefaultAsync(i => i.Id == id);
-        }
-
-        public async Task Remove(Item item)
-        {
-            dbContext.Items.Remove(item);
-            await dbContext.SaveChangesAsync();
-        }
-
-        public async Task UpdateAsync(Item item)
-        {
-            dbContext.Items.Update(item);
-            await dbContext.SaveChangesAsync();
         }
     }
 }

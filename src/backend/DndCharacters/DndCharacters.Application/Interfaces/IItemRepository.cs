@@ -3,12 +3,8 @@ using DndCharacters.Domain.Entities;
 
 namespace DndCharacters.Application.Interfaces
 {
-    public interface IItemRepository
+    public interface IItemRepository : IRepository<Item>
     {
-        Task AddAsync(Item item);
-        Task<Item?> GetByIdAsync(int id);
         Task<GetItemsResponse> GetAsync(GetItemsRequest request);
-        Task UpdateAsync(Item item);
-        Task Remove(Item item);
     }
 }

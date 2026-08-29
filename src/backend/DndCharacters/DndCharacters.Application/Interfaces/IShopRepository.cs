@@ -5,15 +5,11 @@ using DndCharacters.Domain.Entities;
 
 namespace DndCharacters.Application.Interfaces
 {
-    public interface IShopRepository
+    public interface IShopRepository : IRepository<Shop>
     {
-        Task AddAsync(Shop shop);
         Task<GetShopsResponse> GetAsync(GetShopsRequest request);
-        Task<Shop?> GetByIdAsync(int id);
         Task<GetShopItemByIdResponse?> GetShopItemAsync(GetShopItemByIdRequest request);
         Task<GetShopItemsResponse> GetShopItemsAsync(GetShopItemsRequest request);
-        Task Remove(Shop shop);
-        Task UpdateAsync(Shop shop);
         Task<bool> ExistAsync(int id, int itemId);
         Task RemoveShopItem(ShopItem shopItem);
     }

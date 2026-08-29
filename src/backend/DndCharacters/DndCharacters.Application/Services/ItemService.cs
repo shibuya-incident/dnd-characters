@@ -36,7 +36,7 @@ namespace DndCharacters.Application.Services
             Item item = await itemRepository.GetByIdAsync(request.Id)
                 ?? throw new KeyNotFoundException($"Item with id {request.Id} not found.");
 
-            await itemRepository.Remove(item);
+            await itemRepository.RemoveAsync(item);
         }
 
         public async Task<GetItemByIdResponse> GetByIdAsync(GetItemByIdRequest request)
