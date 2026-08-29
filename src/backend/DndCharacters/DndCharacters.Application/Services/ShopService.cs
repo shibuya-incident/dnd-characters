@@ -79,7 +79,7 @@ namespace DndCharacters.Application.Services
             Shop shop = await shopRepository.GetByIdAsync(request.Id)
                 ?? throw new KeyNotFoundException($"Shop with id {request.Id} not found.");
 
-            await shopRepository.Remove(shop);
+            await shopRepository.RemoveAsync(shop);
         }
 
         public async Task DeleteShopItemAsync(DeleteShopItemRequest request)
