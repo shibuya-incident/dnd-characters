@@ -36,14 +36,16 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
                     Id = 1,
                     Name = "Potion of Healing",
                     Description = "A red potion that restores health.",
-                    ItemType = ItemType.Potion
+                    ItemType = ItemType.Potion,
+                    CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
                 new
                 {
                     Id = 2,
                     Name = "Longsword",
                     Description = "A reliable steel longsword.",
-                    ItemType = ItemType.Weapon
+                    ItemType = ItemType.Weapon,
+                    CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 });
         }
     }

@@ -37,7 +37,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
              Name = "The Arcane",
              DisplayImageUrl = "https://m.media-amazon.com/images/S/pv-target-images/211525360489f7df87f8debc7eb8c9deb14a8e3a4d57e7b532ddb8371737a12f.jpg",
              ShopType = ShopType.Bookstore,
-             OwnerName = "Garrick"
+             OwnerName = "Garrick",
+             CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
          },
          new
          {
@@ -45,7 +46,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
              Name = "Iron & Steel",
              DisplayImageUrl = "https://static.wikia.nocookie.net/pokemonfanon/images/1/1f/Mkmdslcndsklcndsklfsn.png/revision/latest?cb=20130530003636",
              ShopType = ShopType.Blacksmith,
-             OwnerName = "Brom"
+             OwnerName = "Brom",
+             CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
          });
         }
     }

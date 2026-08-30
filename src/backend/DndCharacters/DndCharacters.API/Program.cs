@@ -1,5 +1,6 @@
 using DndCharacters.API.Handler;
 using DndCharacters.API.Middlewares;
+using DndCharacters.API.Transformers;
 using DndCharacters.Application.Extensions;
 using DndCharacters.Infrastructure.Extensions;
 using Scalar.AspNetCore;
@@ -22,7 +23,10 @@ builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi(options =>
+{
+    options.AddSchemaTransformer<EnumSchemaTransformer>();
+});
 
 builder.Services
     .AddApplicationServices()

@@ -1,9 +1,11 @@
-﻿using DndCharacters.Application.Dtos.Shops.GetShopItemById;
+﻿using DndCharacters.Application.Commons.Sorting;
+using DndCharacters.Application.Dtos.Shops.GetShopItemById;
 using DndCharacters.Application.Dtos.Shops.GetShopItems;
 using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Interfaces;
 using DndCharacters.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace DndCharacters.Infrastructure.Persistence.Repositories
 {
@@ -31,7 +33,7 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                     shopItem.Description,
                     shopItem.Price,
                     shopItem.Stock,
-                    shopItem.Stock == 0,
+                    shopItem.IsOutOfStock,
                     item.DisplayImageUrl
                 ))
                 .AsNoTracking()
@@ -69,11 +71,20 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
         {
             IQueryable<Shop> query = dbContext.Shops.AsNoTracking();
 
-            if (request.ItemCount is not null)
-            {
-                query = query.Where(shop => shop.ShopItems.Count >= request.ItemCount);
-            }
+            //Filters
 
+            //Count
+            int totalCount = await query.CountAsync();
+
+            //Sorting
+            Expression<Func<Shop, object>> sortByExpression = GetSortByExpression(request.SortBy);
+
+            query = request.SortDirection == SortDirection.Asc
+                ? query.OrderBy(sortByExpression)
+                : query.OrderByDescending(sortByExpression);
+
+
+            //Projection & Pagination 
             List<GetShopsListItemResponse> shops = await query
                 .Select(shop => new GetShopsListItemResponse(
                     shop.Id,
@@ -82,13 +93,28 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                     shop.DisplayImageUrl,
                     shop.ShopItems.Count
                 ))
+                .Skip((request.Page - 1) * request.PageSize)
+                .Take(request.PageSize)
                 .ToListAsync();
 
             return new GetShopsResponse()
             {
-                Shops = shops
+                Shops = shops,
+                Page = request.Page,
+                PageSize = request.PageSize,
+                TotalCount = totalCount
             };
         }
+
+        private static Expression<Func<Shop, object>> GetSortByExpression(GetShopsSortByRequest sortBy) => sortBy switch
+        {
+            GetShopsSortByRequest.Id => shop => shop.Id,
+            GetShopsSortByRequest.Name => shop => shop.Name,
+            GetShopsSortByRequest.ShopType => shop => shop.ShopType,
+            GetShopsSortByRequest.CreatedAt => shop => shop.CreatedAt,
+            GetShopsSortByRequest.OwnerName => shop => shop.OwnerName,
+            _ => shop => shop.CreatedAt,
+        };
 
         public async Task<bool> ExistAsync(int id, int itemId)
         {

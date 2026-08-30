@@ -39,7 +39,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
               ShopId = 1,
               ItemId = 1,
               Price = 50m,
-              Stock = 10
+              Stock = 10,
+              CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
           },
            new
            {
@@ -47,7 +48,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
                ShopId = 1,
                ItemId = 2,
                Price = 65m,
-               Stock = 999
+               Stock = 999,
+               CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
            },
           new
           {
@@ -55,7 +57,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
               ShopId = 2,
               ItemId = 2,
               Price = 3m,
-              Stock = 5
+              Stock = 5,
+              CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
           });
         }
     }
