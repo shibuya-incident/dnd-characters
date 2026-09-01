@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
 {
-    internal class ShopItemEntityTypeConfiguration : IEntityTypeConfiguration<ShopItem>
+    internal class ShopItemEntityTypeConfiguration : EntityTypeConfiguration<ShopItem>
     {
-        public void Configure(EntityTypeBuilder<ShopItem> builder)
+        public override void Configure(EntityTypeBuilder<ShopItem> builder)
         {
+            base.Configure(builder);
+
             builder.ToTable(InfrastructureConfiguration.ShopItemTableName);
 
             builder.HasKey(x => x.Id);
@@ -40,7 +42,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
               ItemId = 1,
               Price = 50m,
               Stock = 10,
-              CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+              CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+              UpdatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
           },
            new
            {
@@ -49,7 +52,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
                ItemId = 2,
                Price = 65m,
                Stock = 999,
-               CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+               CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+               UpdatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
            },
           new
           {
@@ -58,7 +62,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
               ItemId = 2,
               Price = 3m,
               Stock = 5,
-              CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+              CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+              UpdatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
           });
         }
     }

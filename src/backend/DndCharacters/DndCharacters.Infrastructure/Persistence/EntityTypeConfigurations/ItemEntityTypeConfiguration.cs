@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
 {
-    internal class ItemEntityTypeConfiguration : IEntityTypeConfiguration<Item>
+    internal class ItemEntityTypeConfiguration : EntityTypeConfiguration<Item>
     {
-        public void Configure(EntityTypeBuilder<Item> builder)
+        public override void Configure(EntityTypeBuilder<Item> builder)
         {
-            builder.ToTable(InfrastructureConfiguration.ItemTableName);
+            base.Configure(builder);
 
-            builder.HasKey(x => x.Id);
+            builder.ToTable(InfrastructureConfiguration.ItemTableName);
 
             builder.Property(x => x.Name)
                 .IsRequired()
@@ -37,7 +37,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
                     Name = "Potion of Healing",
                     Description = "A red potion that restores health.",
                     ItemType = ItemType.Potion,
-                    CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                    CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    UpdatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 },
                 new
                 {
@@ -45,7 +46,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
                     Name = "Longsword",
                     Description = "A reliable steel longsword.",
                     ItemType = ItemType.Weapon,
-                    CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                    CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    UpdatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 });
         }
     }

@@ -6,10 +6,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
 {
-    internal class ShopEntityTypeConfiguration : IEntityTypeConfiguration<Shop>
+    internal class ShopEntityTypeConfiguration : EntityTypeConfiguration<Shop>
     {
-        public void Configure(EntityTypeBuilder<Shop> builder)
+        public override void Configure(EntityTypeBuilder<Shop> builder)
         {
+            base.Configure(builder);
+
             builder.ToTable(InfrastructureConfiguration.ShopTableName);
 
             builder.HasKey(x => x.Id);
@@ -38,7 +40,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
              DisplayImageUrl = "https://m.media-amazon.com/images/S/pv-target-images/211525360489f7df87f8debc7eb8c9deb14a8e3a4d57e7b532ddb8371737a12f.jpg",
              ShopType = ShopType.Bookstore,
              OwnerName = "Garrick",
-             CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+             CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+             UpdatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
          },
          new
          {
@@ -47,7 +50,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
              DisplayImageUrl = "https://static.wikia.nocookie.net/pokemonfanon/images/1/1f/Mkmdslcndsklcndsklfsn.png/revision/latest?cb=20130530003636",
              ShopType = ShopType.Blacksmith,
              OwnerName = "Brom",
-             CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+             CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+             UpdatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
          });
         }
     }

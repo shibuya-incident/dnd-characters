@@ -4,14 +4,17 @@
     {
         public int Id { get; set; }
 
-        public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; private set; }
 
-        public DateTime? UpdatedAt { get; private set; }
+        public DateTime UpdatedAt { get; private set; }
 
-        protected void MarkAsUpdated()
+        public uint RowVersion { get; private set; }
+
+        public Entity()
         {
-            UpdatedAt = DateTime.UtcNow;
+            var utcNow = DateTime.UtcNow;
+            CreatedAt = utcNow;
+            UpdatedAt = utcNow;
         }
-
     }
 }
