@@ -73,6 +73,22 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
 
             //Filters
 
+            if (!string.IsNullOrWhiteSpace(request.Name))
+            {
+                //query = query.Where(shop => shop.ToLower().Contains(request.Name.ToLower())));
+                query = query.Where(shop => EF.Functions.ILike(shop.Name, $"%{request.Name}%"));
+            }
+
+            if (request.ShopType is not null)
+            {
+                query = query.Where(shop => shop.ShopType == request.ShopType);
+            }
+
+            if (request.ItemsCount is not null)
+            {
+                query = query.Where(shop => shop.ShopItems.Count >= request.ItemsCount);
+            }
+
             //Count
             int totalCount = await query.CountAsync();
 
