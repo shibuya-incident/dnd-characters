@@ -1,9 +1,10 @@
-﻿using DndCharacters.Application.Commons.Sorting;
+﻿using DndCharacters.Application.Commons.Pagination;
 using DndCharacters.Application.Dtos.Shops.GetShopItemById;
 using DndCharacters.Application.Dtos.Shops.GetShopItems;
 using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Interfaces;
 using DndCharacters.Domain.Entities;
+using DndCharacters.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -67,7 +68,7 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
             };
         }
 
-        public async Task<GetShopsResponse> GetAsync(GetShopsRequest request)
+        public async Task<PagedListResponse<GetShopsListItemResponse>> GetAsync(GetShopsRequest request)
         {
             IQueryable<Shop> query = dbContext.Shops.AsNoTracking();
 
@@ -94,11 +95,7 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
 
             //Sorting
             Expression<Func<Shop, object>> sortByExpression = GetSortByExpression(request.SortBy);
-
-            query = request.SortDirection == SortDirection.Asc
-                ? query.OrderBy(sortByExpression)
-                : query.OrderByDescending(sortByExpression);
-
+            query = query.ApplySortDirection(request.SortDirection, sortByExpression);
 
             //Projection & Pagination 
             List<GetShopsListItemResponse> shops = await query
@@ -109,13 +106,12 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                     shop.DisplayImageUrl,
                     shop.ShopItems.Count
                 ))
-                .Skip((request.Page - 1) * request.PageSize)
-                .Take(request.PageSize)
+                .ApplyPagination(request.Page, request.PageSize)
                 .ToListAsync();
 
-            return new GetShopsResponse()
+            return new PagedListResponse<GetShopsListItemResponse>()
             {
-                Shops = shops,
+                Items = shops,
                 Page = request.Page,
                 PageSize = request.PageSize,
                 TotalCount = totalCount

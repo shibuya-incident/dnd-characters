@@ -1,4 +1,5 @@
-﻿using DndCharacters.Application.Dtos.Shops.AddShopItem;
+﻿using DndCharacters.Application.Commons.Pagination;
+using DndCharacters.Application.Dtos.Shops.AddShopItem;
 using DndCharacters.Application.Dtos.Shops.CreateShop;
 using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.DeleteShopItem;
@@ -109,7 +110,7 @@ namespace DndCharacters.Application.Services
                 shop.OwnerName);
         }
 
-        public async Task<GetShopsResponse> GetFilteredAsync(GetShopsRequest request)
+        public async Task<PagedListResponse<GetShopsListItemResponse>> GetFilteredAsync(GetShopsRequest request)
         {
             return await shopRepository.GetAsync(request);
         }

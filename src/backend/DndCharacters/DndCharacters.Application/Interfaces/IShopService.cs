@@ -1,4 +1,5 @@
-﻿using DndCharacters.Application.Dtos.Shops.AddShopItem;
+﻿using DndCharacters.Application.Commons.Pagination;
+using DndCharacters.Application.Dtos.Shops.AddShopItem;
 using DndCharacters.Application.Dtos.Shops.CreateShop;
 using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.DeleteShopItem;
@@ -13,7 +14,7 @@ namespace DndCharacters.Application.Interfaces
 {
     public interface IShopService
     {
-        Task<GetShopsResponse> GetFilteredAsync(GetShopsRequest request);
+        Task<PagedListResponse<GetShopsListItemResponse>> GetFilteredAsync(GetShopsRequest request);
         Task<CreateShopResponse> CreateAsync(CreateShopRequest request);
         Task<GetShopByIdResponse> GetByIdAsync(GetShopByIdRequest request);
         Task DeleteAsync(DeleteShopRequest request);

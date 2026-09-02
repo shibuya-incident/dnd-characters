@@ -1,4 +1,5 @@
-﻿using DndCharacters.Application.Dtos.Shops.AddShopItem;
+﻿using DndCharacters.Application.Commons.Pagination;
+using DndCharacters.Application.Dtos.Shops.AddShopItem;
 using DndCharacters.Application.Dtos.Shops.CreateShop;
 using DndCharacters.Application.Dtos.Shops.DeleteShop;
 using DndCharacters.Application.Dtos.Shops.DeleteShopItem;
@@ -21,10 +22,10 @@ namespace DndCharacters.API.Controllers
         // GET /shops
         [HttpGet]
         [ProducesDefaultResponseType]
-        [ProducesResponseType(typeof(GetShopsResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PagedListResponse<GetShopsListItemResponse>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetShops([FromQuery] GetShopsRequest request)
         {
-            GetShopsResponse response = await shopService.GetFilteredAsync(request);
+            PagedListResponse<GetShopsListItemResponse> response = await shopService.GetFilteredAsync(request);
             return Ok(response);
         }
 
