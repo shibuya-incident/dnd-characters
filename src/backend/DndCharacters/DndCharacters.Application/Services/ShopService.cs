@@ -110,9 +110,9 @@ namespace DndCharacters.Application.Services
                 shop.OwnerName);
         }
 
-        public async Task<PagedListResponse<GetShopsListItemResponse>> GetFilteredAsync(GetShopsRequest request)
+        public async Task<PagedListResponse<GetShopsListItemResponse>> GetFilteredAsync(GetShopsRequest request, CancellationToken cancellationToken)
         {
-            return await shopRepository.GetAsync(request);
+            return await shopRepository.GetAsync(request, cancellationToken);
         }
 
         public async Task<GetShopItemByIdResponse> GetShopItemByIdAsync(GetShopItemByIdRequest request)

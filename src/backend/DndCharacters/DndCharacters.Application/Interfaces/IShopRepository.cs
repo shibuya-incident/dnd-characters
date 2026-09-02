@@ -8,7 +8,7 @@ namespace DndCharacters.Application.Interfaces
 {
     public interface IShopRepository : IRepository<Shop>
     {
-        Task<PagedListResponse<GetShopsListItemResponse>> GetAsync(GetShopsRequest request);
+        Task<PagedListResponse<GetShopsListItemResponse>> GetAsync(GetShopsRequest request, CancellationToken cancellationToken = default);
         Task<GetShopItemByIdResponse?> GetShopItemAsync(GetShopItemByIdRequest request);
         Task<GetShopItemsResponse> GetShopItemsAsync(GetShopItemsRequest request);
         Task<bool> ExistAsync(int id, int itemId);

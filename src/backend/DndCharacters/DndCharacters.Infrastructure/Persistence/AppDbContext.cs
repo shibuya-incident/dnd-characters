@@ -16,5 +16,10 @@ namespace DndCharacters.Infrastructure.Persistence
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
 
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.AddInterceptors(new Interceptors.UpdateAuditableInterceptor());
+        }
     }
 }

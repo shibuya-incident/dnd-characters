@@ -14,7 +14,7 @@ namespace DndCharacters.Application.Interfaces
 {
     public interface IShopService
     {
-        Task<PagedListResponse<GetShopsListItemResponse>> GetFilteredAsync(GetShopsRequest request);
+        Task<PagedListResponse<GetShopsListItemResponse>> GetFilteredAsync(GetShopsRequest request, CancellationToken cancellationToken = default);
         Task<CreateShopResponse> CreateAsync(CreateShopRequest request);
         Task<GetShopByIdResponse> GetByIdAsync(GetShopByIdRequest request);
         Task DeleteAsync(DeleteShopRequest request);

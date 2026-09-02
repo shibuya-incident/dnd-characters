@@ -68,7 +68,7 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
             };
         }
 
-        public async Task<PagedListResponse<GetShopsListItemResponse>> GetAsync(GetShopsRequest request)
+        public async Task<PagedListResponse<GetShopsListItemResponse>> GetAsync(GetShopsRequest request, CancellationToken cancellationToken = default)
         {
             IQueryable<Shop> query = dbContext.Shops.AsNoTracking();
 
@@ -107,7 +107,7 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                     shop.ShopItems.Count
                 ))
                 .ApplyPagination(request.Page, request.PageSize)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
             return new PagedListResponse<GetShopsListItemResponse>()
             {

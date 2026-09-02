@@ -23,9 +23,9 @@ namespace DndCharacters.API.Controllers
         [HttpGet]
         [ProducesDefaultResponseType]
         [ProducesResponseType(typeof(PagedListResponse<GetShopsListItemResponse>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetShops([FromQuery] GetShopsRequest request)
+        public async Task<IActionResult> GetShops([FromQuery] GetShopsRequest request, CancellationToken cancellationToken = default)
         {
-            PagedListResponse<GetShopsListItemResponse> response = await shopService.GetFilteredAsync(request);
+            PagedListResponse<GetShopsListItemResponse> response = await shopService.GetFilteredAsync(request, cancellationToken);
             return Ok(response);
         }
 
