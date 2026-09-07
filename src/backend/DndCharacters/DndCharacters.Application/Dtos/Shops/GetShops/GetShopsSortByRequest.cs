@@ -7,6 +7,5 @@
         ShopType = 2,
         CreatedAt = 3,
         OwnerName = 4,
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using DndCharacters.Application.Dtos.Items.CreateItem;
+﻿using DndCharacters.Application.Commons.Pagination;
+using DndCharacters.Application.Dtos.Items.CreateItem;
 using DndCharacters.Application.Dtos.Items.DeleteItem;
 using DndCharacters.Application.Dtos.Items.GetItemById;
 using DndCharacters.Application.Dtos.Items.GetItems;
@@ -35,10 +36,10 @@ namespace DndCharacters.API.Controllers
         // GET /items
         [HttpGet]
         [ProducesDefaultResponseType]
-        [ProducesResponseType(typeof(GetItemsResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PagedListResponse<GetItemsListItemResponse>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetItems([FromQuery] GetItemsRequest request)
         {
-            GetItemsResponse response = await itemService.GetFilteredAsync(request);
+            PagedListResponse<GetItemsListItemResponse> response = await itemService.GetFilteredAsync(request);
             return Ok(response);
         }
 

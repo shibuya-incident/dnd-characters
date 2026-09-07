@@ -1,4 +1,5 @@
-﻿using DndCharacters.Application.Dtos.Items.CreateItem;
+﻿using DndCharacters.Application.Commons.Pagination;
+using DndCharacters.Application.Dtos.Items.CreateItem;
 using DndCharacters.Application.Dtos.Items.DeleteItem;
 using DndCharacters.Application.Dtos.Items.GetItemById;
 using DndCharacters.Application.Dtos.Items.GetItems;
@@ -10,7 +11,7 @@ namespace DndCharacters.Application.Interfaces
     {
         Task<CreateItemResponse> CreateAsync(CreateItemRequest request);
         Task<GetItemByIdResponse> GetByIdAsync(GetItemByIdRequest request);
-        Task<GetItemsResponse> GetFilteredAsync(GetItemsRequest request);
+        Task<PagedListResponse<GetItemsListItemResponse>> GetFilteredAsync(GetItemsRequest request);
         Task<UpdateItemResponse> UpdateAsync(int Id, UpdateItemRequest request);
         Task DeleteAsync(DeleteItemRequest request);
     }

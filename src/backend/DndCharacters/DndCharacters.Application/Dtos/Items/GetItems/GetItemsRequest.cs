@@ -1,8 +1,13 @@
-﻿namespace DndCharacters.Application.Dtos.Items.GetItems
+﻿using DndCharacters.Application.Commons.Pagination;
+using DndCharacters.Domain.Enum;
+
+namespace DndCharacters.Application.Dtos.Items.GetItems
 {
-    public record GetItemsRequest(
-        string? OrderBy,
-        int Page,
-        int PageSize,
-        int? ItemCount);
+    public class GetItemsRequest : PageListRequest<GetItemsSortByRequest>
+    {
+        public string? Name { get; set; }
+        public ItemType? ItemType { get; set; }
+    }
+
+
 }

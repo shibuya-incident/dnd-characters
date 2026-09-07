@@ -1,4 +1,5 @@
-﻿using DndCharacters.Application.Dtos.Items.CreateItem;
+﻿using DndCharacters.Application.Commons.Pagination;
+using DndCharacters.Application.Dtos.Items.CreateItem;
 using DndCharacters.Application.Dtos.Items.DeleteItem;
 using DndCharacters.Application.Dtos.Items.GetItemById;
 using DndCharacters.Application.Dtos.Items.GetItems;
@@ -52,7 +53,7 @@ namespace DndCharacters.Application.Services
                 item.DisplayImageUrl);
         }
 
-        public async Task<GetItemsResponse> GetFilteredAsync(GetItemsRequest request)
+        public async Task<PagedListResponse<GetItemsListItemResponse>> GetFilteredAsync(GetItemsRequest request)
         {
             return await itemRepository.GetAsync(request);
         }
