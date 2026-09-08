@@ -6,77 +6,91 @@ using DndCharacters.Application.Dtos.Shops.GetShops;
 using DndCharacters.Application.Interfaces;
 using DndCharacters.Domain.Entities;
 using DndCharacters.Infrastructure.Extensions;
-using DndCharacters.Infrastructure.Persistence.DataModels;
+using DndCharacters.Infrastructure.Persistence.QueryModels;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace DndCharacters.Infrastructure.Persistence.Repositories
 {
-    internal sealed class ShopRepository(AppDbContext dbContext) : Repository<Shop>(dbContext), IShopRepository
+    internal sealed class ShopRepository(AppDbContext dbContext)
+        : Repository<Shop>(dbContext), IShopRepository
     {
         private readonly AppDbContext dbContext = dbContext;
 
-        public async Task<GetShopItemByIdResponse?> GetShopItemAsync(GetShopItemByIdRequest request)
+        public async Task<GetShopItemByIdResponse?> GetShopItemAsync(
+            GetShopItemByIdRequest request)
         {
             return await dbContext.ShopItems
                 .Where(shopItem =>
                     shopItem.ShopId == request.ShopId &&
                     shopItem.ItemId == request.ItemId)
                 .Join(
-                dbContext.Items,
-                shopItem => shopItem.ItemId,
-                item => item.Id,
-                (shopItem, item) => new GetShopItemByIdResponse(
-                    shopItem.Id,
-                    shopItem.ShopId,
-                    shopItem.ItemId,
-                    item.Name,
-                    item.ItemType,
-                    item.Description,
-                    shopItem.Description,
-                    shopItem.Price,
-                    shopItem.Stock,
-                    shopItem.IsOutOfStock,
-                    item.DisplayImageUrl
-                ))
+                    dbContext.Items,
+                    shopItem => shopItem.ItemId,
+                    item => item.Id,
+                    (shopItem, item) => new GetShopItemByIdResponse(
+                        shopItem.Id,
+                        shopItem.ShopId,
+                        shopItem.ItemId,
+                        item.Name,
+                        item.ItemType,
+                        item.Description,
+                        shopItem.Description,
+                        shopItem.Price,
+                        shopItem.Stock,
+                        shopItem.IsOutOfStock,
+                        item.DisplayImageUrl
+                    ))
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<PagedListResponse<GetShopItemsListItemResponse>> GetShopItemsAsync(int shopId, GetShopItemsRequest request)
+        public async Task<PagedListResponse<GetShopItemsListItemResponse>> GetShopItemsAsync(
+        int shopId,
+        GetShopItemsRequest request)
         {
-            var query = dbContext.ShopItems
-                .Where(shopItem =>
-                    shopItem.ShopId == shopId)
+            IQueryable<ShopItemQueryModel> query = dbContext.ShopItems
+                .Where(shopItem => shopItem.ShopId == shopId)
                 .Join(
-                dbContext.Items,
-                shopItem => shopItem.ItemId,
-                item => item.Id,
-                (shopItem, item) => new ShopItemQueryModel(shopItem, item))
+                    dbContext.Items,
+                    shopItem => shopItem.ItemId,
+                    item => item.Id,
+                    (shopItem, item) => new ShopItemQueryModel
+                    {
+                        Id = shopItem.Id,
+                        ItemId = item.Id,
+                        Name = item.Name,
+                        DisplayImageUrl = item.DisplayImageUrl,
+                        ItemType = item.ItemType,
+                        Stock = shopItem.Stock,
+                        Price = shopItem.Price
+                    })
                 .AsNoTracking();
 
             query = ApplyShopItemFilters(request, query);
 
             int totalCount = await query.CountAsync();
 
-            query = ApplySorting(
+            query = ApplyShopItemSorting(
                 query,
                 request.SortBy,
                 request.SortDirection);
 
             List<GetShopItemsListItemResponse> items = await query
+                .ApplyPagination(
+                    request.Page,
+                    request.PageSize)
                 .Select(x => new GetShopItemsListItemResponse(
-                    x.ShopItem.Id,
-                    x.Item.Id,
-                    x.Item.Name,
-                    x.Item.DisplayImageUrl,
-                    x.Item.ItemType,
-                    x.ShopItem.Stock,
-                    x.ShopItem.Price))
-                .ApplyPagination(request.Page, request.PageSize)
+                    x.Id,
+                    x.ItemId,
+                    x.Name,
+                    x.DisplayImageUrl,
+                    x.ItemType,
+                    x.Stock,
+                    x.Price))
                 .ToListAsync();
 
-            return new PagedListResponse<GetShopItemsListItemResponse>()
+            return new PagedListResponse<GetShopItemsListItemResponse>
             {
                 Items = items,
                 Page = request.Page,
@@ -84,61 +98,127 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                 TotalCount = totalCount
             };
         }
-
-        private static IQueryable<ShopItemQueryModel> ApplyShopItemFilters(GetShopItemsRequest request, IQueryable<ShopItemQueryModel> query)
+        private static IQueryable<ShopItemQueryModel> ApplyShopItemFilters(
+          GetShopItemsRequest request,
+          IQueryable<ShopItemQueryModel> query)
         {
             if (!string.IsNullOrWhiteSpace(request.Name))
             {
-                query = query.Where(queryModel => EF.Functions.ILike(queryModel.Item.Name, $"%{request.Name}%"));
+                query = query.Where(x =>
+                    EF.Functions.ILike(
+                        x.Name,
+                        $"%{request.Name}%"));
             }
 
             if (request.ItemType is not null)
             {
-                query = query.Where(queryModel => queryModel.Item.ItemType == request.ItemType);
+                query = query.Where(x =>
+                    x.ItemType == request.ItemType);
             }
 
             if (request.Stock is not null)
             {
-                query = query.Where(queryModel => queryModel.ShopItem.Stock == request.Stock);
+                query = query.Where(x =>
+                    x.Stock == request.Stock);
             }
+
             if (request.Price is not null)
             {
-                query = query.Where(queryModel => queryModel.ShopItem.Price == request.Price);
+                query = query.Where(x =>
+                    x.Price == request.Price);
             }
 
             return query;
         }
+        private static IQueryable<ShopItemQueryModel> ApplyShopItemSorting(
+        IQueryable<ShopItemQueryModel> query,
+        GetShopItemsSortByRequest sortBy,
+        SortDirection sortDirection)
+        {
+            return sortBy switch
+            {
+                GetShopItemsSortByRequest.Id =>
+                    ApplySortDirection(
+                        query,
+                        sortDirection,
+                        x => x.Id),
 
-        public async Task<PagedListResponse<GetShopsListItemResponse>> GetAsync(GetShopsRequest request, CancellationToken cancellationToken = default)
+                GetShopItemsSortByRequest.Name =>
+                    ApplySortDirection(
+                        query,
+                        sortDirection,
+                        x => x.Name),
+
+                GetShopItemsSortByRequest.ItemType =>
+                    ApplySortDirection(
+                        query,
+                        sortDirection,
+                        x => x.ItemType),
+
+                GetShopItemsSortByRequest.Stock =>
+                    ApplySortDirection(
+                        query,
+                        sortDirection,
+                        x => x.Stock),
+
+                GetShopItemsSortByRequest.Price =>
+                    ApplySortDirection(
+                        query,
+                        sortDirection,
+                        x => x.Price),
+
+                _ =>
+                    ApplySortDirection(
+                        query,
+                        sortDirection,
+                        x => x.Id)
+            };
+        }
+        private static IQueryable<T> ApplySortDirection<T, TKey>(
+            IQueryable<T> query,
+            SortDirection sortDirection,
+            Expression<Func<T, TKey>> sortExpression)
+        {
+            return sortDirection == SortDirection.Desc
+                ? query.OrderByDescending(sortExpression)
+                : query.OrderBy(sortExpression);
+        }
+
+        public async Task<PagedListResponse<GetShopsListItemResponse>> GetAsync(
+            GetShopsRequest request,
+            CancellationToken cancellationToken = default)
         {
             IQueryable<Shop> query = dbContext.Shops.AsNoTracking();
 
-            //Filters
-
             if (!string.IsNullOrWhiteSpace(request.Name))
             {
-                //query = query.Where(shop => shop.ToLower().Contains(request.Name.ToLower())));
-                query = query.Where(shop => EF.Functions.ILike(shop.Name, $"%{request.Name}%"));
+                query = query.Where(shop =>
+                    EF.Functions.ILike(
+                        shop.Name,
+                        $"%{request.Name}%"));
             }
 
             if (request.ShopType is not null)
             {
-                query = query.Where(shop => shop.ShopType == request.ShopType);
+                query = query.Where(shop =>
+                    shop.ShopType == request.ShopType);
             }
 
             if (request.ItemsCount is not null)
             {
-                query = query.Where(shop => shop.ShopItems.Count >= request.ItemsCount);
+                query = query.Where(shop =>
+                    shop.ShopItems.Count >= request.ItemsCount);
             }
 
-            //Count
             int totalCount = await query.CountAsync();
 
-            //Sorting
-            Expression<Func<Shop, object>> sortByExpression = GetSortByExpressionShops(request.SortBy);
-            query = query.ApplySortDirection(request.SortDirection, sortByExpression);
+            Expression<Func<Shop, object>> sortByExpression =
+                GetSortByExpressionShops(request.SortBy);
 
-            //Projection & Pagination 
+            query = query.ApplySortDirection(
+                request.SortDirection,
+                sortByExpression);
+
             List<GetShopsListItemResponse> shops = await query
                 .Select(shop => new GetShopsListItemResponse(
                     shop.Id,
@@ -147,10 +227,12 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                     shop.DisplayImageUrl,
                     shop.ShopItems.Count
                 ))
-                .ApplyPagination(request.Page, request.PageSize)
+                .ApplyPagination(
+                    request.Page,
+                    request.PageSize)
                 .ToListAsync(cancellationToken);
 
-            return new PagedListResponse<GetShopsListItemResponse>()
+            return new PagedListResponse<GetShopsListItemResponse>
             {
                 Items = shops,
                 Page = request.Page,
@@ -159,61 +241,47 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
             };
         }
 
-        private static Expression<Func<Shop, object>> GetSortByExpressionShops(GetShopsSortByRequest sortBy) => sortBy switch
-        {
-            GetShopsSortByRequest.Id => shop => shop.Id,
-            GetShopsSortByRequest.Name => shop => shop.Name,
-            GetShopsSortByRequest.ShopType => shop => shop.ShopType,
-            GetShopsSortByRequest.CreatedAt => shop => shop.CreatedAt,
-            GetShopsSortByRequest.OwnerName => shop => shop.OwnerName,
-            _ => shop => shop.CreatedAt
-        };
-
-        private static IQueryable<ShopItemQueryModel> ApplySorting(
-            IQueryable<ShopItemQueryModel> query,
-            GetShopItemsSortByRequest sortBy,
-            SortDirection sortDirection)
-        {
-            return sortBy switch
+        private static Expression<Func<Shop, object>>
+            GetSortByExpressionShops(
+                GetShopsSortByRequest sortBy) =>
+            sortBy switch
             {
-                GetShopItemsSortByRequest.Id =>
-                    sortDirection == SortDirection.Desc
-                        ? query.OrderByDescending(x => x.ShopItem.Id)
-                        : query.OrderBy(x => x.ShopItem.Id),
+                GetShopsSortByRequest.Id =>
+                    shop => shop.Id,
 
-                GetShopItemsSortByRequest.Name =>
-                    sortDirection == SortDirection.Desc
-                        ? query.OrderByDescending(x => x.Item.Name)
-                        : query.OrderBy(x => x.Item.Name),
+                GetShopsSortByRequest.Name =>
+                    shop => shop.Name,
 
-                GetShopItemsSortByRequest.ItemType =>
-                    sortDirection == SortDirection.Desc
-                        ? query.OrderByDescending(x => x.Item.ItemType)
-                        : query.OrderBy(x => x.Item.ItemType),
+                GetShopsSortByRequest.ShopType =>
+                    shop => shop.ShopType,
 
-                GetShopItemsSortByRequest.Stock =>
-                    sortDirection == SortDirection.Desc
-                        ? query.OrderByDescending(x => x.ShopItem.Stock)
-                        : query.OrderBy(x => x.ShopItem.Stock),
+                GetShopsSortByRequest.CreatedAt =>
+                    shop => shop.CreatedAt,
 
-                GetShopItemsSortByRequest.Price =>
-                    sortDirection == SortDirection.Desc
-                        ? query.OrderByDescending(x => x.ShopItem.Price)
-                        : query.OrderBy(x => x.ShopItem.Price),
+                GetShopsSortByRequest.OwnerName =>
+                    shop => shop.OwnerName,
 
-                _ => query.OrderBy(x => x.ShopItem.Id)
+                _ =>
+                    shop => shop.CreatedAt
             };
-        }
 
-        public async Task<bool> ExistAsync(int id, int itemId)
+        public async Task<bool> ExistAsync(
+            int id,
+            int itemId)
         {
-            return await dbContext.ShopItems.AnyAsync(shopItem => shopItem.ShopId == id && shopItem.ItemId == itemId);
+            return await dbContext.ShopItems.AnyAsync(
+                shopItem =>
+                    shopItem.ShopId == id &&
+                    shopItem.ItemId == itemId);
         }
 
-        public async Task RemoveShopItem(ShopItem shopItem)
+        public async Task RemoveShopItem(
+            ShopItem shopItem)
         {
             dbContext.ShopItems.Remove(shopItem);
+
             await dbContext.SaveChangesAsync();
         }
     }
 }
+

@@ -9,6 +9,7 @@
         public int ShopId { get; set; }
         public int ItemId { get; set; }
 
+
         private ShopItem() { }
 
         public static ShopItem Create(
