@@ -72,10 +72,10 @@ namespace DndCharacters.API.Controllers
         // GET /shops/{id}/items
         [HttpGet("{shopId}/items")]
         [ProducesDefaultResponseType]
-        [ProducesResponseType(typeof(GetShopItemsResponse), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetShopItems([FromRoute] int shopId)
+        [ProducesResponseType(typeof(PagedListResponse<GetShopItemsListItemResponse>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetShopItems([FromRoute] int shopId, [FromQuery] GetShopItemsRequest request)
         {
-            GetShopItemsResponse response = await shopService.GetShopItemsAsync(new GetShopItemsRequest(shopId));
+            PagedListResponse<GetShopItemsListItemResponse> response = await shopService.GetShopItemsAsync(shopId, request);
             return Ok(response);
         }
 

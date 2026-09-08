@@ -123,9 +123,9 @@ namespace DndCharacters.Application.Services
             return shopItem;
         }
 
-        public async Task<GetShopItemsResponse> GetShopItemsAsync(GetShopItemsRequest request)
+        public async Task<PagedListResponse<GetShopItemsListItemResponse>> GetShopItemsAsync(int id, GetShopItemsRequest request)
         {
-            return await shopRepository.GetShopItemsAsync(request);
+            return await shopRepository.GetShopItemsAsync(id, request);
         }
 
         public async Task<UpdateShopResponse> UpdateAsync(int id, UpdateShopRequest request)

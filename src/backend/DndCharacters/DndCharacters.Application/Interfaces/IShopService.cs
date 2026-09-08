@@ -20,7 +20,7 @@ namespace DndCharacters.Application.Interfaces
         Task DeleteAsync(DeleteShopRequest request);
         Task<UpdateShopResponse> UpdateAsync(int id, UpdateShopRequest request);
         Task<GetShopItemByIdResponse> GetShopItemByIdAsync(GetShopItemByIdRequest request);
-        Task<GetShopItemsResponse> GetShopItemsAsync(GetShopItemsRequest request);
+        Task<PagedListResponse<GetShopItemsListItemResponse>> GetShopItemsAsync(int id, GetShopItemsRequest request);
         Task<AddShopItemResponse> AddShopItemAsync(int shopId, int itemId, AddShopItemRequest request);
         Task<UpdateShopItemResponse> UpdateShopItemAsync(int shopId, int itemId, UpdateShopItemRequest request);
         Task DeleteShopItemAsync(DeleteShopItemRequest request);

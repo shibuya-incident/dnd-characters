@@ -10,7 +10,7 @@ namespace DndCharacters.Application.Interfaces
     {
         Task<PagedListResponse<GetShopsListItemResponse>> GetAsync(GetShopsRequest request, CancellationToken cancellationToken = default);
         Task<GetShopItemByIdResponse?> GetShopItemAsync(GetShopItemByIdRequest request);
-        Task<GetShopItemsResponse> GetShopItemsAsync(GetShopItemsRequest request);
+        Task<PagedListResponse<GetShopItemsListItemResponse>> GetShopItemsAsync(int id, GetShopItemsRequest request);
         Task<bool> ExistAsync(int id, int itemId);
         Task RemoveShopItem(ShopItem shopItem);
     }
