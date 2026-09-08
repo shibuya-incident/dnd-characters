@@ -16,6 +16,17 @@ namespace DndCharacters.Infrastructure.Extensions
 
         }
 
+
+        public static IQueryable<T> ApplySortDirection<T, TKey>(
+            this IQueryable<T> query,
+            SortDirection sortDirection,
+            Expression<Func<T, TKey>> sortExpression)
+        {
+            return sortDirection == SortDirection.Desc
+                ? query.OrderByDescending(sortExpression)
+                : query.OrderBy(sortExpression);
+        }
+
         public static IQueryable<T> ApplyPagination<T>(
             this IQueryable<T> query,
             int page,
@@ -25,5 +36,6 @@ namespace DndCharacters.Infrastructure.Extensions
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize);
         }
+
     }
 }

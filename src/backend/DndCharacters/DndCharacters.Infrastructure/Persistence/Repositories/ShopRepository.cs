@@ -131,57 +131,19 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
             return query;
         }
         private static IQueryable<ShopItemQueryModel> ApplyShopItemSorting(
-        IQueryable<ShopItemQueryModel> query,
-        GetShopItemsSortByRequest sortBy,
-        SortDirection sortDirection)
+            IQueryable<ShopItemQueryModel> query,
+            GetShopItemsSortByRequest sortBy,
+            SortDirection sortDirection)
         {
             return sortBy switch
             {
-                GetShopItemsSortByRequest.Id =>
-                    ApplySortDirection(
-                        query,
-                        sortDirection,
-                        x => x.Id),
-
-                GetShopItemsSortByRequest.Name =>
-                    ApplySortDirection(
-                        query,
-                        sortDirection,
-                        x => x.Name),
-
-                GetShopItemsSortByRequest.ItemType =>
-                    ApplySortDirection(
-                        query,
-                        sortDirection,
-                        x => x.ItemType),
-
-                GetShopItemsSortByRequest.Stock =>
-                    ApplySortDirection(
-                        query,
-                        sortDirection,
-                        x => x.Stock),
-
-                GetShopItemsSortByRequest.Price =>
-                    ApplySortDirection(
-                        query,
-                        sortDirection,
-                        x => x.Price),
-
-                _ =>
-                    ApplySortDirection(
-                        query,
-                        sortDirection,
-                        x => x.Id)
+                GetShopItemsSortByRequest.Id => query.ApplySortDirection(sortDirection, x => x.Id),
+                GetShopItemsSortByRequest.Name => query.ApplySortDirection(sortDirection, x => x.Name),
+                GetShopItemsSortByRequest.ItemType => query.ApplySortDirection(sortDirection, x => x.ItemType),
+                GetShopItemsSortByRequest.Stock => query.ApplySortDirection(sortDirection, x => x.Stock),
+                GetShopItemsSortByRequest.Price => query.ApplySortDirection(sortDirection, x => x.Price),
+                _ => query.ApplySortDirection(sortDirection, x => x.Id),
             };
-        }
-        private static IQueryable<T> ApplySortDirection<T, TKey>(
-            IQueryable<T> query,
-            SortDirection sortDirection,
-            Expression<Func<T, TKey>> sortExpression)
-        {
-            return sortDirection == SortDirection.Desc
-                ? query.OrderByDescending(sortExpression)
-                : query.OrderBy(sortExpression);
         }
 
         public async Task<PagedListResponse<GetShopsListItemResponse>> GetAsync(
