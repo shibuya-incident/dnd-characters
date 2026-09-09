@@ -3,6 +3,7 @@ using DndCharacters.Application.Dtos.Items.CreateItem;
 using DndCharacters.Application.Dtos.Items.DeleteItem;
 using DndCharacters.Application.Dtos.Items.GetItemById;
 using DndCharacters.Application.Dtos.Items.GetItems;
+using DndCharacters.Application.Dtos.Items.GetItemsCount;
 using DndCharacters.Application.Dtos.Items.UpdateItem;
 using DndCharacters.Application.Interfaces;
 using DndCharacters.Domain.Entities;
@@ -56,6 +57,12 @@ namespace DndCharacters.Application.Services
         public async Task<PagedListResponse<GetItemsListItemResponse>> GetFilteredAsync(GetItemsRequest request)
         {
             return await itemRepository.GetAsync(request);
+        }
+
+        public async Task<GetItemsCountResponse> GetItemsCountAsync()
+        {
+            int count = await itemRepository.CountAsync();
+            return new GetItemsCountResponse(count);
         }
 
         public async Task<UpdateItemResponse> UpdateAsync(int id, UpdateItemRequest request)

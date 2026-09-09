@@ -7,6 +7,7 @@ using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShopItemById;
 using DndCharacters.Application.Dtos.Shops.GetShopItems;
 using DndCharacters.Application.Dtos.Shops.GetShops;
+using DndCharacters.Application.Dtos.Shops.GetShopsCount;
 using DndCharacters.Application.Dtos.Shops.UpdateShop;
 using DndCharacters.Application.Dtos.Shops.UpdateShopItem;
 using DndCharacters.Application.Interfaces;
@@ -117,6 +118,16 @@ namespace DndCharacters.API.Controllers
         {
             await shopService.DeleteShopItemAsync(new DeleteShopItemRequest(shopId, itemId));
             return NoContent();
+        }
+
+        //GET /shops/count
+        [HttpGet("count")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(typeof(GetShopsCountResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetShopsCount()
+        {
+            GetShopsCountResponse response = await shopService.GetShopsCountAsync();
+            return Ok(response);
         }
     }
 }

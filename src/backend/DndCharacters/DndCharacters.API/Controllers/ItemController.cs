@@ -3,6 +3,7 @@ using DndCharacters.Application.Dtos.Items.CreateItem;
 using DndCharacters.Application.Dtos.Items.DeleteItem;
 using DndCharacters.Application.Dtos.Items.GetItemById;
 using DndCharacters.Application.Dtos.Items.GetItems;
+using DndCharacters.Application.Dtos.Items.GetItemsCount;
 using DndCharacters.Application.Dtos.Items.UpdateItem;
 using DndCharacters.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -61,6 +62,16 @@ namespace DndCharacters.API.Controllers
         {
             await itemService.DeleteAsync(new DeleteItemRequest(id));
             return NoContent();
+        }
+
+        //GET /items/count
+        [HttpGet("count")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(typeof(GetItemsCountResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetItemsCount()
+        {
+            GetItemsCountResponse response = await itemService.GetItemsCountAsync();
+            return Ok(response);
         }
 
     }

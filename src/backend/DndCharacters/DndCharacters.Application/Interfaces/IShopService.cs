@@ -7,6 +7,7 @@ using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShopItemById;
 using DndCharacters.Application.Dtos.Shops.GetShopItems;
 using DndCharacters.Application.Dtos.Shops.GetShops;
+using DndCharacters.Application.Dtos.Shops.GetShopsCount;
 using DndCharacters.Application.Dtos.Shops.UpdateShop;
 using DndCharacters.Application.Dtos.Shops.UpdateShopItem;
 
@@ -24,5 +25,6 @@ namespace DndCharacters.Application.Interfaces
         Task<AddShopItemResponse> AddShopItemAsync(int shopId, int itemId, AddShopItemRequest request);
         Task<UpdateShopItemResponse> UpdateShopItemAsync(int shopId, int itemId, UpdateShopItemRequest request);
         Task DeleteShopItemAsync(DeleteShopItemRequest request);
+        Task<GetShopsCountResponse> GetShopsCountAsync();
     }
 }

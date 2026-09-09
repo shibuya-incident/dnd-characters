@@ -7,6 +7,7 @@ using DndCharacters.Application.Dtos.Shops.GetShopById;
 using DndCharacters.Application.Dtos.Shops.GetShopItemById;
 using DndCharacters.Application.Dtos.Shops.GetShopItems;
 using DndCharacters.Application.Dtos.Shops.GetShops;
+using DndCharacters.Application.Dtos.Shops.GetShopsCount;
 using DndCharacters.Application.Dtos.Shops.UpdateShop;
 using DndCharacters.Application.Dtos.Shops.UpdateShopItem;
 using DndCharacters.Application.Interfaces;
@@ -126,6 +127,12 @@ namespace DndCharacters.Application.Services
         public async Task<PagedListResponse<GetShopItemsListItemResponse>> GetShopItemsAsync(int id, GetShopItemsRequest request)
         {
             return await shopRepository.GetShopItemsAsync(id, request);
+        }
+
+        public async Task<GetShopsCountResponse> GetShopsCountAsync()
+        {
+            int count = await shopRepository.CountAsync();
+            return new GetShopsCountResponse(count);
         }
 
         public async Task<UpdateShopResponse> UpdateAsync(int id, UpdateShopRequest request)
