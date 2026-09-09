@@ -98,6 +98,7 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                 TotalCount = totalCount
             };
         }
+
         private static IQueryable<ShopItemQueryModel> ApplyShopItemFilters(
           GetShopItemsRequest request,
           IQueryable<ShopItemQueryModel> query)
@@ -130,6 +131,7 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
 
             return query;
         }
+
         private static IQueryable<ShopItemQueryModel> ApplyShopItemSorting(
             IQueryable<ShopItemQueryModel> query,
             GetShopItemsSortByRequest sortBy,

@@ -15,10 +15,6 @@ namespace DndCharacters.Application.Dtos.Items.UpdateItem
                 .NotEmpty()
                 .MaximumLength(500);
 
-            RuleFor(x => x.ItemType)
-                .NotEmpty()
-                .IsInEnum();
-
             RuleFor(x => x.DisplayImageUrl)
                 .MaximumLength(500);
 

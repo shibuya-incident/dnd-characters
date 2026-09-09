@@ -75,7 +75,6 @@ namespace DndCharacters.Application.Services
 
             item.Name = request.Name;
             item.Description = request.Description;
-            item.ItemType = request.ItemType;
             item.DisplayImageUrl = request.DisplayImageUrl;
 
             await itemRepository.UpdateAsync(item);

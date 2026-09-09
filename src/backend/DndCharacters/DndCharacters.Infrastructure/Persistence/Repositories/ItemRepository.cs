@@ -12,12 +12,6 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
     {
         private readonly AppDbContext dbContext = dbContext;
 
-        public async Task AddAsync(Item item)
-        {
-            await dbContext.Items.AddAsync(item);
-            await dbContext.SaveChangesAsync();
-        }
-
         public async Task<PagedListResponse<GetItemsListItemResponse>> GetAsync(GetItemsRequest request)
         {
             IQueryable<Item> query = dbContext.Items.AsNoTracking();

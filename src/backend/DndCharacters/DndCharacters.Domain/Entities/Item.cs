@@ -6,7 +6,7 @@ namespace DndCharacters.Domain.Entities
     {
         public required string Name { get; set; }
         public required string Description { get; set; }
-        public ItemType ItemType { get; set; }
+        public ItemType ItemType { get; init; }
         public string? DisplayImageUrl { get; set; }
 
         public static Item Create(

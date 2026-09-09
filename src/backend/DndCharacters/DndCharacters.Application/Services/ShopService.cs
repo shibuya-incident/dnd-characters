@@ -16,7 +16,10 @@ using FluentValidation;
 
 namespace DndCharacters.Application.Services
 {
-    public class ShopService(IShopRepository shopRepository, IItemRepository itemRepository) : IShopService
+    public class ShopService(
+        IShopRepository shopRepository,
+        IItemRepository itemRepository,
+        IShopItemTypesValidator shopItemTypesValidator) : IShopService
     {
         public async Task<AddShopItemResponse> AddShopItemAsync(int shopId, int itemId, AddShopItemRequest request)
         {
@@ -33,6 +36,13 @@ namespace DndCharacters.Application.Services
             if (shopItemExist)
             {
                 throw new InvalidOperationException($"The item {itemId} already exists in shop {shopId}");
+            }
+
+            bool isItemTypeValid = shopItemTypesValidator.IsValid(shop.ShopType, item.ItemType);
+
+            if (!isItemTypeValid)
+            {
+                throw new InvalidOperationException($"The item type {item.ItemType} cannot be added to shop {shop.Id} because the shop type is {shop.ShopType}");
             }
 
             ShopItem shopItem = ShopItem.Create(

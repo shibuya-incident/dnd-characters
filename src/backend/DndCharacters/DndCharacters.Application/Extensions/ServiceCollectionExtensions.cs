@@ -10,6 +10,7 @@ namespace DndCharacters.Application.Extensions
         {
             services.AddScoped<IShopService, ShopService>();
             services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IShopItemTypesValidator, ShopItemTypesValidator>();
             return services;
 
         }
