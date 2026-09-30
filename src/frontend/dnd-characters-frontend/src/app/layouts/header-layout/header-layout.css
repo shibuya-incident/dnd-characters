@@ -1,0 +1,10 @@
+img {
+    background-color: var(--background-color);
+    border-radius: 8px 8px 8px 60px;
+    width: 100%;
+    align-items: center;
+    margin: 10px;
+    padding: 20px;
+    height: 100px;
+}
+
