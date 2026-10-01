@@ -1,10 +1,22 @@
-img {
-    background-color: var(--background-color);
-    border-radius: 8px 8px 8px 60px;
+header {
     width: 100%;
-    align-items: center;
-    margin: 10px;
-    padding: 20px;
-    height: 100px;
+    height: 100%;
 }
 
+header img {
+    background-color: var(--background-color);
+
+    border-radius: 8px 8px 8px 60px;
+
+    width: calc(100% - 20px);
+    height: 120px;
+
+    box-sizing: border-box;
+
+    margin: 10px;
+    padding: 12px 20px;
+
+    display: block;
+
+    object-fit: contain;
+}

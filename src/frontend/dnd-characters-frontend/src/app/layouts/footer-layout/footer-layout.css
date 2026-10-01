@@ -1,40 +1,84 @@
 footer {
     background-color: var(--background-color);
+
     font-family: var(--font-primary);
     color: var(--primary-text-color);
+
     border-radius: 60px 8px 8px 8px;
-    height: 100px;
-    padding: 20px;
+
+    height: calc(100% - 20px);
+
+    box-sizing: border-box;
+
+    padding: 25px;
+
     margin: 10px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+
+    width: calc(100% - 20px);
+
+    display: grid;
+
+    grid-template-columns: 1fr 10px 1fr;
+
+    align-items: center;
+
+    overflow: hidden;
 }
 
 .footer-left {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 0 10px;
     gap: 15px;
+    justify-self: start;
+    transform: translateY(-6px);
+}
+
+.footer-left a {
+    color: var(--primary-text-color);
+
+    text-decoration: none;
+
+    white-space: nowrap;
 }
 
 .separator {
-    margin-left: 505px;
     width: 10px;
-    height: 100px;
+    height: 80px;
     border-radius: 16px;
     background-color: var(--primary-color);
+    margin: 0;
+    transform: translateY(-8px);
 }
 
 .footer-right {
     margin-left: 50px;
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 0 10px;
+    gap: 8px;
+    min-width: 0;
+    justify-self: start;
+    transform: translateY(-5px);
 }
 
-img {
+.footer-right a {
+    width: fit-content;
+
+    display: block;
+}
+
+.footer-right img {
     width: 40px;
     height: 40px;
+
+    display: block;
+
+    object-fit: contain;
+}
+
+.footer-right p {
+    margin: 0;
+
+    white-space: nowrap;
 }

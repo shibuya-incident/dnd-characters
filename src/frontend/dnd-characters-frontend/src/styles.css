@@ -12,3 +12,22 @@ a {
     color: var(--primary-text-color);
     text-decoration: none;
 }
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+}
