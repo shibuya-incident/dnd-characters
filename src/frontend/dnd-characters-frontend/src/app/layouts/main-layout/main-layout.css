@@ -1,0 +1,40 @@
+.main-layout {
+    position:absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.header {
+    border: 5px red;
+    margin-left: 21%;
+    float: top;
+    top: 0;
+    position: fixed;
+    width: 75%;
+}
+
+.sidebar {
+    border: 5px blue;
+    float: left;
+    top: 0;
+    position: fixed;
+}
+
+.page-layout {
+    border: 5px yellow;
+    margin-left: 21.5%;
+    float: center;
+    height: 100%;
+    width: 74.5%;
+    position: fixed;
+    margin-top: 8%;
+}
+
+.footer {
+    border: 5px green;
+    margin-left: 21%;
+    float: bottom;
+    position: fixed;
+    bottom: 0;
+    width: 75%;
+}

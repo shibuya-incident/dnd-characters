@@ -1,0 +1,8 @@
+.content {
+    background-color: var(--background-color);
+    border-radius: 8px;
+    height: 59%;
+    padding: 20px;
+    margin: 10px;
+    width: 100%;
+}
