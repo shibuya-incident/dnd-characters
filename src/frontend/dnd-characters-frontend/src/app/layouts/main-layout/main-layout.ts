@@ -10,4 +10,10 @@ import { Sidebar } from '../sidebar/sidebar';
   styleUrl: './main-layout.css',
   templateUrl: './main-layout.html',
 })
-export class MainLayout {}
+export class MainLayout {
+    sidebarCollapsed = false;
+
+    toggleSidebar() {
+        this.sidebarCollapsed = !this.sidebarCollapsed;
+    }
+}

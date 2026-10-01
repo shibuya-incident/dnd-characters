@@ -19,16 +19,50 @@ nav {
     overflow: hidden;
 }
 
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    position: relative;
+
+    min-height: 140px;
+}
+
 .sidebar-logo {
     width: 140px;
     height: 140px;
 
     padding: 0;
-    margin: 0 auto;
+    margin: 0;
 
     display: block;
 
     object-fit: contain;
+}
+
+.sidebar-toggle {
+    position: absolute;
+
+    right: 5px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 40px;
+    height: 40px;
+
+    padding: 5px;
+    margin: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
 }
 
 .header-separator,
@@ -110,4 +144,30 @@ a {
     padding: 10px 10px 10px 30px;
 
     margin: 0;
+}
+
+nav.collapsed .sidebar-content a span {
+    display: none;
+}
+
+nav.collapsed .sidebar-content a {
+    justify-content: center;
+    padding: 6px;
+}
+
+nav.collapsed .sidebar-content img {
+    margin: 0;
+}
+
+nav.collapsed .sidebar-footer p {
+    justify-content: center;
+    padding: 10px;
+}
+
+nav.collapsed .sidebar-logo {
+    display: none;
+}
+
+nav.collapsed .sidebar-toggle {
+    right: 0px;
 }

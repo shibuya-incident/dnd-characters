@@ -1,31 +1,48 @@
-<nav>
+<nav [class.collapsed]="collapsed">
     <div class="sidebar-header">
         <img src="/logos/sidebar_logo.svg" class="sidebar-logo" alt="Sidebar Logo">
+
+        <button
+            class="sidebar-toggle"
+            type="button"
+            (click)="onToggleSidebar()">
+            <img
+                src="/logos/show_hide_sidebar_icon.svg"
+                alt="Show/Hide Sidebar">
+        </button>
     </div>
+
     <div class="header-separator"></div>
+
     <div class="sidebar-content">
-        <a href="/home"> 
+        <a href="/home">
             <img src="/logos/home_icon.svg" alt="Home Icon">
-            Home
+            <span>Home</span>
         </a>
-        <a href="/characters"> 
+
+        <a href="/characters">
             <img src="/logos/characters_icon.svg" alt="Character Icon">
-            Characters
+            <span>Characters</span>
         </a>
-        <a href="/weapons"> 
+
+        <a href="/weapons">
             <img src="/logos/weapons_icon.svg" alt="Weapon Icon">
-            Weapons
+            <span>Weapons</span>
         </a>
-        <a href="/shops"> 
+
+        <a href="/shops">
             <img src="/logos/shops_icon.svg" alt="Shop Icon">
-            Shops
+            <span>Shops</span>
         </a>
-        <a href="/items"> 
+
+        <a href="/items">
             <img src="/logos/items_icon.svg" alt="Item Icon">
-            Items
+            <span>Items</span>
         </a>
     </div>
+
     <div class="footer-separator"></div>
+
     <div class="sidebar-footer">
         <p>V1.0</p>
     </div>
