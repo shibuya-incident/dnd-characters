@@ -5,11 +5,12 @@
         Dragonborn = 0,
         Dwarf = 1,
         Elf = 2,
-        Gnome = 3,
-        HalfElf = 4,
-        Halfling = 5,
-        HalfOrc = 6,
-        Human = 7,
-        Tiefling = 8
+        HalfElf = 3,
+        Gnome = 4,
+        Goliath = 5,
+        Halfling = 6,
+        Orc = 7,
+        Human = 8,
+        Tiefling = 9
     }
 }

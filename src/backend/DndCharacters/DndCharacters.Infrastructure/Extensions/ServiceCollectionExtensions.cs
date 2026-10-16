@@ -14,6 +14,8 @@ namespace DndCharacters.Infrastructure.Extensions
         {
             services.AddScoped<IShopRepository, ShopRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<ICharacterRepository, CharacterRepository>();
+            services.AddScoped<IWeaponRepository, WeaponRepository>();
 
             services.AddPersistence(configuration);
             return services;

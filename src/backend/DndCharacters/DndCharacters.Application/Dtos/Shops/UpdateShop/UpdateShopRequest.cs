@@ -4,7 +4,7 @@ namespace DndCharacters.Application.Dtos.Shops.UpdateShop
 {
     public record UpdateShopRequest(
         string Name,
-        string? ProfileImage,
+        string? DisplayImageUrl,
         ShopType ShopType,
         string OwnerName);
 }

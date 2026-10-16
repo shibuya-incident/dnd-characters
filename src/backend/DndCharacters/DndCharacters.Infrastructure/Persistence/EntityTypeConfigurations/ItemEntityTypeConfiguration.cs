@@ -23,7 +23,6 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
                 .HasMaxLength(1000);
 
             builder.Property(x => x.ItemType)
-                .IsRequired()
                 .HasConversion<string>()
                 .IsRequired();
 

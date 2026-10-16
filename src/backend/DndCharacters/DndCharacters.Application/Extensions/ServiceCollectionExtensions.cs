@@ -11,6 +11,8 @@ namespace DndCharacters.Application.Extensions
             services.AddScoped<IShopService, ShopService>();
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IShopItemTypesValidator, ShopItemTypesValidator>();
+            services.AddScoped<ICharacterService, CharacterService>();
+            services.AddScoped<IWeaponService, WeaponService>();
             return services;
 
         }

@@ -5,7 +5,7 @@ namespace DndCharacters.Application.Dtos.Shops.CreateShop
     public record CreateShopResponse(
         int Id,
         string Name,
-        string? ProfileImage,
+        string? DisplayImageUrl,
         ShopType ShopType,
         string OwnerName);
 }

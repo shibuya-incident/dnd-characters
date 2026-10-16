@@ -72,7 +72,7 @@ namespace DndCharacters.Application.Services
 
             Shop shop = Shop.Create(
                 request.Name,
-                request.ProfileImage,
+                request.DisplayImageUrl,
                 request.ShopType,
                 request.OwnerName);
 
@@ -153,7 +153,7 @@ namespace DndCharacters.Application.Services
                 ?? throw new KeyNotFoundException($"Shop with id {id} not found.");
 
             shop.Name = request.Name;
-            shop.DisplayImageUrl = request.ProfileImage;
+            shop.DisplayImageUrl = request.DisplayImageUrl;
             shop.ShopType = request.ShopType;
             shop.OwnerName = request.OwnerName;
 

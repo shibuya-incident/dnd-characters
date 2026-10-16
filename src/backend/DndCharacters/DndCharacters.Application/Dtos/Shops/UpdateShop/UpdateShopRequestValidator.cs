@@ -20,7 +20,7 @@ namespace DndCharacters.Application.Dtos.Shops.UpdateShop
                 .NotEmpty()
                 .MaximumLength(100);
 
-            RuleFor(x => x.ProfileImage)
+            RuleFor(x => x.DisplayImageUrl)
                 .MaximumLength(500);
 
         }

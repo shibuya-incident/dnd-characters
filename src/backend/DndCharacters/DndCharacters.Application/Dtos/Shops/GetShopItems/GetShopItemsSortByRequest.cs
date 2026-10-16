@@ -6,6 +6,6 @@
         Name = 1,
         ItemType = 2,
         Stock = 3,
-        Price = 4,
+        Price = 4
     }
 }
