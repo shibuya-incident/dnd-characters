@@ -1,6 +1,5 @@
 ﻿using DndCharacters.Application.Commons.Pagination;
 using DndCharacters.Application.Dtos.Characters.GetCharacters;
-using DndCharacters.Application.Dtos.Characters.GetCharacterWeapons;
 using DndCharacters.Application.Interfaces;
 using DndCharacters.Domain.Entities;
 using DndCharacters.Infrastructure.Extensions;
@@ -93,15 +92,5 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                 _ =>
                     character => character.CreatedAt
             };
-
-        public Task<PagedListResponse<GetCharacterWeaponsListItemResponse>> GetCharacterWeaponsAsync(int id, GetCharacterWeaponsRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task RemoveCharacterWeapon(Weapon weapon)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

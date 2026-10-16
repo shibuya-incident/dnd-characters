@@ -26,6 +26,11 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                 query = query.Where(weapon => weapon.Type == request.Type);
             }
 
+            if (request.CharacterId is not null)
+            {
+                query = query.Where(weapon => weapon.CharacterId == request.CharacterId);
+            }
+
             int totalCount = await query.CountAsync();
 
             Expression<Func<Weapon, object>> sortByExpression = GetSortByExpression(request.SortBy);
@@ -37,7 +42,8 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                     weapon.Name,
                     weapon.Type,
                     weapon.ObtainedAt,
-                    weapon.DisplayImageUrl
+                    weapon.DisplayImageUrl,
+                    weapon.CharacterId
                 ))
                 .ApplyPagination(request.Page, request.PageSize)
                 .ToListAsync();

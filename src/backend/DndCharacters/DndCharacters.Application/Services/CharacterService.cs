@@ -18,14 +18,13 @@ namespace DndCharacters.Application.Services
     {
         public async Task<AddCharacterWeaponResponse> AddCharacterWeaponAsync(int characterId, int weaponId, AddCharacterWeaponRequest request)
         {
-
             Character character = await characterRepository.GetByIdAsync(characterId)
                 ?? throw new KeyNotFoundException($"Character with id {characterId} not found.");
 
             Weapon weapon = await weaponRepository.GetByIdAsync(weaponId)
                 ?? throw new KeyNotFoundException($"Weapon with id {weaponId} not found.");
 
-            character.Weapons.Add(weapon);
+            character.AddWeapon(weapon);
 
             await characterRepository.UpdateAsync(character);
 
@@ -88,7 +87,9 @@ namespace DndCharacters.Application.Services
             Weapon weapon = await weaponRepository.GetByIdAsync(request.WeaponId)
                 ?? throw new KeyNotFoundException($"Weapon with id {request.WeaponId} not found.");
 
-            await characterRepository.RemoveCharacterWeapon(weapon);
+            character.RemoveWeapon(weapon);
+
+            await characterRepository.UpdateAsync(character);
         }
 
         public async Task<GetCharacterByIdResponse> GetByIdAsync(GetCharacterByIdRequest request)
@@ -119,7 +120,7 @@ namespace DndCharacters.Application.Services
 
         public async Task<PagedListResponse<GetCharacterWeaponsListItemResponse>> GetCharacterWeaponsAsync(int id, GetCharacterWeaponsRequest request)
         {
-            return await characterRepository.GetCharacterWeaponsAsync(id, request);
+            throw new NotImplementedException();
         }
 
         public async Task<PagedListResponse<GetCharactersListItemResponse>> GetFilteredAsync(GetCharactersRequest request, CancellationToken cancellationToken = default)

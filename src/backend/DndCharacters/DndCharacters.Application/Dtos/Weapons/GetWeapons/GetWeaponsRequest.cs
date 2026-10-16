@@ -7,5 +7,6 @@ namespace DndCharacters.Application.Dtos.Weapons.GetWeapons
     {
         public string? Name { get; set; }
         public WeaponType? Type { get; set; }
+        public int? CharacterId { get; set; }
     }
 }

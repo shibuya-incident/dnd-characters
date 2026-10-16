@@ -24,7 +24,7 @@ namespace DndCharacters.Application.Dtos.Weapons.CreateWeapon
                 .NotEmpty()
                 .MaximumLength(100);
 
-            RuleFor(x => x.WeaponType)
+            RuleFor(x => x.Type)
                 .NotEmpty()
                 .IsInEnum();
 

@@ -47,5 +47,21 @@ namespace DndCharacters.Domain.Entities
                 Pet = pet
             };
         }
+
+
+        public void AddWeapon(Weapon weapon)
+        {
+            if (Weapons.Count >= Constants.WeaponConstants.MaxWeaponsAvailable)
+            {
+                throw new InvalidOperationException($"Character with id {Id} already has the maximum number of weapons ({Constants.WeaponConstants.MaxWeaponsAvailable}).");
+            }
+
+            Weapons.Add(weapon);
+        }
+
+        public void RemoveWeapon(Weapon weapon)
+        {
+            Weapons.Remove(weapon);
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace DndCharacters.Application.Services
                 request.Description,
                 request.Weight,
                 request.Properties,
-                request.WeaponType,
+                request.Type,
                 request.DisplayImageUrl,
                 request.CharacterId);
 

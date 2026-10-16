@@ -7,5 +7,6 @@ namespace DndCharacters.Application.Dtos.Weapons.GetWeapons
         string Name,
         WeaponType WeaponType,
         DateTime? ObtainedAt,
-        string? DisplayImageUrl);
+        string? DisplayImageUrl,
+        int? CharacterId);
 }
