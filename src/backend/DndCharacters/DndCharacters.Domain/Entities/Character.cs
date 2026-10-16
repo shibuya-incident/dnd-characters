@@ -12,8 +12,8 @@ namespace DndCharacters.Domain.Entities
         public DateTime Birthday { get; set; }
         public required string Lore { get; set; }
         public string? DisplayImageUrl { get; set; }
-        public CharacterRace CharacterRace { get; set; }
-        public CharacterClass CharacterClass { get; set; }
+        public CharacterRace Race { get; set; }
+        public CharacterClass Class { get; set; }
         public Pet? Pet { get; set; }
         public ICollection<Weapon> Weapons { get; set; } = [];
 
@@ -28,8 +28,8 @@ namespace DndCharacters.Domain.Entities
             DateTime birthday,
             string lore,
             string? displayImageUrl,
-            CharacterRace characterRace,
-            CharacterClass characterClass,
+            CharacterRace Race,
+            CharacterClass Class,
             Pet? pet)
         {
             return new Character
@@ -42,8 +42,8 @@ namespace DndCharacters.Domain.Entities
                 Birthday = birthday,
                 Lore = lore,
                 DisplayImageUrl = displayImageUrl,
-                CharacterRace = characterRace,
-                CharacterClass = characterClass,
+                Race = Race,
+                Class = Class,
                 Pet = pet
             };
         }

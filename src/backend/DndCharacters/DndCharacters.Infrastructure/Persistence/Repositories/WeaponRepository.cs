@@ -21,9 +21,9 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                 query = query.Where(weapon => EF.Functions.ILike(weapon.Name, $"%{request.Name}%"));
             }
 
-            if (request.WeaponType is not null)
+            if (request.Type is not null)
             {
-                query = query.Where(weapon => weapon.WeaponType == request.WeaponType);
+                query = query.Where(weapon => weapon.Type == request.Type);
             }
 
             int totalCount = await query.CountAsync();
@@ -35,7 +35,7 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                 .Select(weapon => new GetWeaponsListItemResponse(
                     weapon.Id,
                     weapon.Name,
-                    weapon.WeaponType,
+                    weapon.Type,
                     weapon.ObtainedAt,
                     weapon.DisplayImageUrl
                 ))
@@ -55,7 +55,7 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
         {
             GetWeaponsSortByRequest.Id => weapon => weapon.Id,
             GetWeaponsSortByRequest.Name => weapon => weapon.Name,
-            GetWeaponsSortByRequest.WeaponType => weapon => weapon.WeaponType,
+            GetWeaponsSortByRequest.WeaponType => weapon => weapon.Type,
             GetWeaponsSortByRequest.CreatedAt => item => item.CreatedAt,
             _ => weapon => weapon.CreatedAt,
         };

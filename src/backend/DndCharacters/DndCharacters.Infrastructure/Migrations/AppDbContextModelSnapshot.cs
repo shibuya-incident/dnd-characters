@@ -38,11 +38,7 @@ namespace DndCharacters.Infrastructure.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CharacterClass")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("CharacterRace")
+                    b.Property<string>("Class")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -71,6 +67,10 @@ namespace DndCharacters.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Race")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<uint>("RowVersion")
                         .IsConcurrencyToken()
@@ -118,13 +118,13 @@ namespace DndCharacters.Infrastructure.Migrations
                             Id = 1,
                             Age = 22,
                             Birthday = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            CharacterClass = "Rogue",
-                            CharacterRace = "Elf",
+                            Class = "Rogue",
                             CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Gender = "Male",
                             Height = 180m,
                             Lore = "A bisexual rogue with a lot of issues and a sssnake",
                             Name = "Obi",
+                            Race = "Elf",
                             UpdatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
@@ -377,12 +377,12 @@ namespace DndCharacters.Infrastructure.Migrations
                         .HasColumnType("xid")
                         .HasColumnName("xmin");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("WeaponType")
+                    b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<decimal>("Weight")
                         .HasMaxLength(100)
@@ -404,8 +404,8 @@ namespace DndCharacters.Infrastructure.Migrations
                             Name = "Stormbringer",
                             ObtainedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Properties = "Versatile",
+                            Type = "Longsword",
                             UpdatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            WeaponType = "Longsword",
                             Weight = 15m
                         });
                 });

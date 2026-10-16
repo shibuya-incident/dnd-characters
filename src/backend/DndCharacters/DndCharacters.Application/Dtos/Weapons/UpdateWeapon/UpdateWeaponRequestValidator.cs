@@ -24,7 +24,7 @@ namespace DndCharacters.Application.Dtos.Weapons.UpdateWeapon
                 .NotEmpty()
                 .MaximumLength(100);
 
-            RuleFor(x => x.WeaponType)
+            RuleFor(x => x.Type)
                 .NotEmpty()
                 .IsInEnum();
 

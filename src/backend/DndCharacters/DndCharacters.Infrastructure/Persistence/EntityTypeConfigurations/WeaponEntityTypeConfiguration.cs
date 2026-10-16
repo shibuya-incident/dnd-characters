@@ -30,7 +30,7 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(x => x.WeaponType)
+            builder.Property(x => x.Type)
                 .IsRequired()
                 .HasConversion<string>()
                 .IsRequired();
@@ -54,7 +54,7 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
                     Description = "Wouldn't you like to know",
                     Weight = 15m,
                     Properties = "Versatile",
-                    WeaponType = WeaponType.Longsword,
+                    Type = WeaponType.Longsword,
                     ObtainedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     UpdatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),

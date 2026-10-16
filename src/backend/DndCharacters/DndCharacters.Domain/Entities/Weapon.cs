@@ -8,7 +8,7 @@ namespace DndCharacters.Domain.Entities
         public required string Description { get; set; }
         public decimal Weight { get; set; }
         public required string Properties { get; set; }
-        public WeaponType WeaponType { get; set; }
+        public WeaponType Type { get; set; }
         public DateTime? ObtainedAt { get; set; }
         public string? DisplayImageUrl { get; set; }
         public int? CharacterId { get; set; }
@@ -20,7 +20,7 @@ namespace DndCharacters.Domain.Entities
             string description,
             decimal weight,
             string properties,
-            WeaponType weaponType,
+            WeaponType Type,
             string? displayImageUrl,
             int? characterId)
         {
@@ -30,7 +30,7 @@ namespace DndCharacters.Domain.Entities
                 Description = description,
                 Weight = weight,
                 Properties = properties,
-                WeaponType = weaponType,
+                Type = Type,
                 DisplayImageUrl = displayImageUrl,
                 CharacterId = characterId
             };

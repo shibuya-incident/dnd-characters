@@ -33,7 +33,7 @@ namespace DndCharacters.Application.Services
                 weapon.Id,
                 weapon.CharacterId,
                 weapon.Name,
-                weapon.WeaponType,
+                weapon.Type,
                 weapon.ObtainedAt,
                 weapon.DisplayImageUrl);
         }
@@ -51,8 +51,8 @@ namespace DndCharacters.Application.Services
                 request.Birthday,
                 request.Lore,
                 request.DisplayImageUrl,
-                request.CharacterRace,
-                request.CharacterClass,
+                request.Race,
+                request.Class,
                 request.Pet);
 
             await characterRepository.AddAsync(character);
@@ -67,8 +67,8 @@ namespace DndCharacters.Application.Services
                 character.Birthday,
                 character.Lore,
                 character.DisplayImageUrl,
-                character.CharacterRace,
-                character.CharacterClass,
+                character.Race,
+                character.Class,
                 character.Pet);
         }
 
@@ -106,8 +106,8 @@ namespace DndCharacters.Application.Services
                 character.Birthday,
                 character.Lore,
                 character.DisplayImageUrl,
-                character.CharacterRace,
-                character.CharacterClass,
+                character.Race,
+                character.Class,
                 character.Pet);
         }
 
@@ -142,8 +142,8 @@ namespace DndCharacters.Application.Services
             character.Birthday = request.Birthday;
             character.Lore = request.Lore;
             character.DisplayImageUrl = request.DisplayImageUrl;
-            character.CharacterRace = request.CharacterRace;
-            character.CharacterClass = request.CharacterClass;
+            character.Race = request.Race;
+            character.Class = request.Class;
             character.Pet = request.Pet;
 
             await characterRepository.UpdateAsync(character);
@@ -158,8 +158,8 @@ namespace DndCharacters.Application.Services
                 character.Birthday,
                 character.Lore,
                 character.DisplayImageUrl,
-                character.CharacterRace,
-                character.CharacterClass,
+                character.Race,
+                character.Class,
                 character.Pet);
         }
     }

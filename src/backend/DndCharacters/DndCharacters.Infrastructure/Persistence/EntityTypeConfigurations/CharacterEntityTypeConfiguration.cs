@@ -43,11 +43,11 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
             builder.Property(x => x.DisplayImageUrl)
                 .HasMaxLength(500);
 
-            builder.Property(x => x.CharacterRace)
+            builder.Property(x => x.Race)
                 .HasConversion<string>()
                 .IsRequired();
 
-            builder.Property(x => x.CharacterClass)
+            builder.Property(x => x.Class)
                 .HasConversion<string>()
                 .IsRequired();
 
@@ -86,8 +86,8 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
                     Age = 22,
                     Birthday = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     Lore = "A bisexual rogue with a lot of issues and a sssnake",
-                    CharacterRace = CharacterRace.Elf,
-                    CharacterClass = CharacterClass.Rogue,
+                    Race = CharacterRace.Elf,
+                    Class = CharacterClass.Rogue,
                     Pet = new Pet()
                     {
                         Name = "Thomasss",

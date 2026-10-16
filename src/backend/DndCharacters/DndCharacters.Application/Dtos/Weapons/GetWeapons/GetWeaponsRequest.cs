@@ -6,6 +6,6 @@ namespace DndCharacters.Application.Dtos.Weapons.GetWeapons
     public class GetWeaponsRequest : PageListRequest<GetWeaponsSortByRequest>
     {
         public string? Name { get; set; }
-        public WeaponType? WeaponType { get; set; }
+        public WeaponType? Type { get; set; }
     }
 }

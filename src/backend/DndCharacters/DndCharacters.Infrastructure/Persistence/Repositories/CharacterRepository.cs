@@ -27,16 +27,16 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                         $"%{request.Name}%"));
             }
 
-            if (request.CharacterRace is not null)
+            if (request.Race is not null)
             {
                 query = query.Where(character =>
-                    character.CharacterRace == request.CharacterRace);
+                    character.Race == request.Race);
             }
 
-            if (request.CharacterClass is not null)
+            if (request.Class is not null)
             {
                 query = query.Where(character =>
-                    character.CharacterClass == request.CharacterClass);
+                    character.Class == request.Class);
             }
 
             int totalCount = await query.CountAsync();
@@ -52,8 +52,8 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                 .Select(character => new GetCharactersListItemResponse(
                     character.Id,
                     character.Name,
-                    character.CharacterRace,
-                    character.CharacterClass,
+                    character.Race,
+                    character.Class,
                     character.DisplayImageUrl
                 ))
                 .ApplyPagination(
@@ -82,10 +82,10 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                     character => character.Name,
 
                 GetCharactersSortByRequest.CharacterRace =>
-                    character => character.CharacterRace,
+                    character => character.Race,
 
                 GetCharactersSortByRequest.CharacterClass =>
-                    character => character.CharacterClass,
+                    character => character.Class,
 
                 GetCharactersSortByRequest.UpdatedAt =>
                     character => character.UpdatedAt,

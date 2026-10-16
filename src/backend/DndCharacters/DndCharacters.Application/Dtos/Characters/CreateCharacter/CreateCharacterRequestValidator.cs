@@ -37,11 +37,11 @@ namespace DndCharacters.Application.Dtos.Characters.CreateCharacter
             RuleFor(x => x.DisplayImageUrl)
                 .MaximumLength(500);
 
-            RuleFor(x => x.CharacterRace)
+            RuleFor(x => x.Race)
                 .NotEmpty()
                 .IsInEnum();
 
-            RuleFor(x => x.CharacterClass)
+            RuleFor(x => x.Class)
                 .NotEmpty()
                 .IsInEnum();
 

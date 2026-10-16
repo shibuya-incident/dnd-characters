@@ -34,7 +34,7 @@ namespace DndCharacters.Application.Services
                 weapon.Description,
                 weapon.Weight,
                 weapon.Properties,
-                weapon.WeaponType,
+                weapon.Type,
                 weapon.DisplayImageUrl,
                 weapon.CharacterId);
         }
@@ -58,7 +58,7 @@ namespace DndCharacters.Application.Services
                 weapon.Description,
                 weapon.Weight,
                 weapon.Properties,
-                weapon.WeaponType,
+                weapon.Type,
                 weapon.ObtainedAt,
                 weapon.DisplayImageUrl,
                 weapon.CharacterId);
@@ -86,7 +86,7 @@ namespace DndCharacters.Application.Services
             weapon.Description = request.Description;
             weapon.Weight = request.Weight;
             weapon.Properties = request.Properties;
-            weapon.WeaponType = request.WeaponType;
+            weapon.Type = request.Type;
             weapon.DisplayImageUrl = request.DisplayImageUrl;
             weapon.CharacterId = request.CharacterId;
 
@@ -98,7 +98,7 @@ namespace DndCharacters.Application.Services
                 weapon.Description,
                 weapon.Weight,
                 weapon.Properties,
-                weapon.WeaponType,
+                weapon.Type,
                 weapon.ObtainedAt,
                 weapon.DisplayImageUrl,
                 weapon.CharacterId);

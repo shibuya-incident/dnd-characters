@@ -13,7 +13,7 @@ namespace DndCharacters.Application.Dtos.Characters.GetCharacterById
         DateTime Birthday,
         string Lore,
         string? DisplayImageUrl,
-        CharacterRace CharacterRace,
-        CharacterClass CharacterClass,
+        CharacterRace Race,
+        CharacterClass Class,
         Pet? Pet);
 }

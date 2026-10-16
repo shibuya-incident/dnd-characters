@@ -5,7 +5,7 @@ namespace DndCharacters.Application.Dtos.Characters.GetCharacters
     public record GetCharactersListItemResponse(
         int Id,
         string Name,
-        CharacterRace CharacterRace,
-        CharacterClass CharacterClass,
+        CharacterRace Race,
+        CharacterClass Class,
         string? DisplayImageUrl);
 }
