@@ -6,7 +6,6 @@ using DndCharacters.Application.Dtos.Characters.DeleteCharacterWeapon;
 using DndCharacters.Application.Dtos.Characters.GetCharacterById;
 using DndCharacters.Application.Dtos.Characters.GetCharacters;
 using DndCharacters.Application.Dtos.Characters.GetCharactersCount;
-using DndCharacters.Application.Dtos.Characters.GetCharacterWeapons;
 using DndCharacters.Application.Dtos.Characters.UpdateCharacter;
 
 namespace DndCharacters.Application.Interfaces
@@ -19,7 +18,6 @@ namespace DndCharacters.Application.Interfaces
         Task DeleteAsync(DeleteCharacterRequest request);
         Task<UpdateCharacterResponse> UpdateAsync(int id, UpdateCharacterRequest request);
         Task<GetCharactersCountResponse> GetCharactersCountAsync();
-        Task<PagedListResponse<GetCharacterWeaponsListItemResponse>> GetCharacterWeaponsAsync(int id, GetCharacterWeaponsRequest request);
         Task<AddCharacterWeaponResponse> AddCharacterWeaponAsync(int characterId, int weaponId, AddCharacterWeaponRequest request);
         Task DeleteCharacterWeaponAsync(DeleteCharacterWeaponRequest request);
     }

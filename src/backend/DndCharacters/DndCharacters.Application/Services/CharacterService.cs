@@ -6,7 +6,6 @@ using DndCharacters.Application.Dtos.Characters.DeleteCharacterWeapon;
 using DndCharacters.Application.Dtos.Characters.GetCharacterById;
 using DndCharacters.Application.Dtos.Characters.GetCharacters;
 using DndCharacters.Application.Dtos.Characters.GetCharactersCount;
-using DndCharacters.Application.Dtos.Characters.GetCharacterWeapons;
 using DndCharacters.Application.Dtos.Characters.UpdateCharacter;
 using DndCharacters.Application.Interfaces;
 using DndCharacters.Domain.Entities;
@@ -116,11 +115,6 @@ namespace DndCharacters.Application.Services
         {
             int count = await characterRepository.CountAsync();
             return new GetCharactersCountResponse(count);
-        }
-
-        public async Task<PagedListResponse<GetCharacterWeaponsListItemResponse>> GetCharacterWeaponsAsync(int id, GetCharacterWeaponsRequest request)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<PagedListResponse<GetCharactersListItemResponse>> GetFilteredAsync(GetCharactersRequest request, CancellationToken cancellationToken = default)

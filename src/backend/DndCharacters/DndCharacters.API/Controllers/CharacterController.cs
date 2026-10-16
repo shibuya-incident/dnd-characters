@@ -6,7 +6,6 @@ using DndCharacters.Application.Dtos.Characters.DeleteCharacterWeapon;
 using DndCharacters.Application.Dtos.Characters.GetCharacterById;
 using DndCharacters.Application.Dtos.Characters.GetCharacters;
 using DndCharacters.Application.Dtos.Characters.GetCharactersCount;
-using DndCharacters.Application.Dtos.Characters.GetCharacterWeapons;
 using DndCharacters.Application.Dtos.Characters.UpdateCharacter;
 using DndCharacters.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -74,16 +73,6 @@ namespace DndCharacters.API.Controllers
         public async Task<IActionResult> GetCharactersCount()
         {
             GetCharactersCountResponse response = await characterService.GetCharactersCountAsync();
-            return Ok(response);
-        }
-
-        //GET /characters/{id}/weapons
-        [HttpGet("{characterId}/weapons")]
-        [ProducesDefaultResponseType]
-        [ProducesResponseType(typeof(PagedListResponse<GetCharacterWeaponsListItemResponse>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetCharacterWeapons([FromRoute] int characterId, [FromQuery] GetCharacterWeaponsRequest request)
-        {
-            PagedListResponse<GetCharacterWeaponsListItemResponse> response = await characterService.GetCharacterWeaponsAsync(characterId, request);
             return Ok(response);
         }
 
