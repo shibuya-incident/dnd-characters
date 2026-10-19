@@ -2,40 +2,35 @@
     <div class="sidebar-header">
         <img src="/logos/sidebar_logo.svg" class="sidebar-logo" alt="Sidebar Logo">
 
-        <button
-            class="sidebar-toggle"
-            type="button"
-            (click)="onToggleSidebar()">
-            <img
-                src="/logos/show_hide_sidebar_icon.svg"
-                alt="Show/Hide Sidebar">
+        <button class="sidebar-toggle" type="button" (click)="onToggleSidebar()">
+            <img src="/logos/show_hide_sidebar_icon.svg" alt="Show/Hide Sidebar">
         </button>
     </div>
 
     <div class="header-separator"></div>
 
     <div class="sidebar-content">
-        <a href="/home">
+        <a routerLink="/home">
             <img src="/logos/home_icon.svg" alt="Home Icon">
             <span>Home</span>
         </a>
 
-        <a href="/characters">
+        <a routerLink="/characters">
             <img src="/logos/characters_icon.svg" alt="Character Icon">
             <span>Characters</span>
         </a>
 
-        <a href="/weapons">
+        <a routerLink="/weapons">
             <img src="/logos/weapons_icon.svg" alt="Weapon Icon">
             <span>Weapons</span>
         </a>
 
-        <a href="/shops">
+        <a routerLink="/shops">
             <img src="/logos/shops_icon.svg" alt="Shop Icon">
             <span>Shops</span>
         </a>
 
-        <a href="/items">
+        <a routerLink="/items">
             <img src="/logos/items_icon.svg" alt="Item Icon">
             <span>Items</span>
         </a>
