@@ -1,15 +1,23 @@
-.count-container{
+.count-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 20%;
     height: 20%;
     background-color: var(--background-color-secondary);
-    margin-top: 40%;
+
 }
-.count-label{
+
+.count-label {
     font-family: var(--font-primary);
     font-size: 72px;
     color: var(--primary-text-color);
 
+}
+
+.error {
+    font-family: var(--font-primary);
+    color: rgb(237, 139, 139);
+    font-size: 16px;
+    text-align: center;
 }

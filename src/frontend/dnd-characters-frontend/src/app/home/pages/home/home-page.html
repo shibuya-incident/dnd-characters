@@ -1,0 +1,9 @@
+<div class="count-container">
+  @if (isLoading()) {
+    <app-loader message="Gathering your characters…" />
+  } @else if (error(); as errorMessage) {
+    <p class="error" role="alert">{{ errorMessage }}</p>
+  } @else {
+    <p class="count-label">{{ counts().charactersCount }}</p>
+  }
+</div>
