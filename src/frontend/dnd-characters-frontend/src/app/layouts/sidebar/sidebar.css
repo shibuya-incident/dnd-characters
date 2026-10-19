@@ -1,5 +1,5 @@
 nav {
-    background-color: var(--background-color);
+    background-color: var(--background-color-primary);
 
     font-family: var(--font-primary);
     color: var(--primary-text-color);

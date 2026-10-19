@@ -4,7 +4,8 @@
     --primary-text-color: #000000;
     --primary-color: #F0B25B;
     --secondary-color: #DA8105;
-    --background-color: #FFECCC;
+    --background-color-primary: #FFECCC;
+    --background-color-secondary: #FFF8EC;
     --font-primary: 'Sedan SC', serif;
 }
 
