@@ -32,6 +32,16 @@ builder.Services
     .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration);
 
+//TODO: Add CORS policy for the frontend application via appsetings (Environment Resilient)
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DndFrontend", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -43,6 +53,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseSerilogRequestLogging(options => options.IncludeQueryInRequestPath = true);
+
+app.UseCors("DndFrontend");
 
 app.UseMiddleware<RequestLoggingMiddleware>();
 
