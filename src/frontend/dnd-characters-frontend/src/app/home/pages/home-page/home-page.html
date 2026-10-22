@@ -1,0 +1,53 @@
+<div class="home-page-container">    
+    <div class="left-section">
+      <h1 class="title">DnD Manager</h1>
+      
+      <div class="introduction">
+        <p class="start">W</p>
+        <p class="middle-up">elcome to Dnd Manager, a place where secrets are told like echoes</p>
+        <p class="middle-down">beneath the moon. Every weapon carries a story and every story must be told. Shape
+        your characters, bind your steel to fate and gather the pieces of the ones who refuse
+        fall before.</p>    
+        <p class="closure">For those who come after.
+        Gustave.</p>
+      </div>
+      <img src="/logos/home_image.svg" class="home-image" alt="Home Image">
+    </div>  
+
+    <div class="right-section">
+        <p class="section">Dashboard</p>
+        <div class="count-container">
+          @if (isLoading()) {
+            <app-loader message="Waiting for something to happen…" />
+          } @else if (error(); as errorMessage) {
+            <p class="error" role="alert">{{ errorMessage }}</p>
+          } @else {
+            <div class="left-counters">
+                <a routerLink="/characters">
+                    <p class="count-label">{{ counters().charactersCount | number : '2.0'}}</p>
+                    <img class="count-images" src="/logos/characters_count_logo.svg" alt="Character Count Icon">
+                    <span>Characters</span>
+                </a>
+                <a routerLink="/weapons">
+                    <p class="count-label">{{ counters().weaponsCount | number : '2.0'}}</p>
+                    <img class="count-images" src="/logos/weapons_count_logo.svg" alt="Weapon Count Icon">
+                    <span>Weapons</span>
+                </a>
+            </div>
+            <div class="right-counters">
+                <a routerLink="/shops">
+                    <p class="count-label">{{ counters().shopsCount | number : '2.0'}}</p>
+                    <img class="count-images" src="/logos/shops_count_logo.svg" alt="Shop Count Icon">
+                    <span>Shops</span>
+                </a>
+                <a routerLink="/items">
+                    <p class="count-label">{{ counters().itemsCount | number : '2.0'}}</p>
+                    <img class="count-images" src="/logos/items_count_logo.svg" alt="Item Count Icon">
+                    <span>Items</span>
+                </a>
+            </div>
+            <img src="/logos/sword_image.svg" class="sword-image" alt="Sword Image">
+          }
+        </div>
+    </div>
+</div>    
