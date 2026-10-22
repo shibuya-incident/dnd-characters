@@ -186,7 +186,7 @@ namespace DndCharacters.Infrastructure.Migrations
                             Id = 2,
                             CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "A reliable steel longsword.",
-                            ItemType = "Weapon",
+                            ItemType = "Throwable",
                             Name = "Longsword",
                             UpdatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         });

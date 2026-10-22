@@ -16,7 +16,6 @@ namespace DndCharacters.Application.Dtos.Items.CreateItem
                 .MaximumLength(500);
 
             RuleFor(x => x.ItemType)
-                .NotEmpty()
                 .IsInEnum();
 
             RuleFor(x => x.DisplayImageUrl)

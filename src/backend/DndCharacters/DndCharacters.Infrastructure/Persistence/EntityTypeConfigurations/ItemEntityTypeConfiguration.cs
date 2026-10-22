@@ -44,7 +44,7 @@ namespace DndCharacters.Infrastructure.Persistence.EntityTypeConfigurations
                     Id = 2,
                     Name = "Longsword",
                     Description = "A reliable steel longsword.",
-                    ItemType = ItemType.Weapon,
+                    ItemType = ItemType.Throwable,
                     CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     UpdatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 });

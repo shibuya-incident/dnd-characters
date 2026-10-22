@@ -13,7 +13,6 @@ namespace DndCharacters.Application.Dtos.Shops.UpdateShop
                 .MaximumLength(100);
 
             RuleFor(x => x.ShopType)
-                .NotEmpty()
                 .IsInEnum();
 
             RuleFor(x => x.OwnerName)
