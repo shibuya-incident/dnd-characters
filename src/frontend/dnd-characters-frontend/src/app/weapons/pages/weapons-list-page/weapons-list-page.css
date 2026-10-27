@@ -1,0 +1,103 @@
+.section{
+    font-family: var(--font-secondary);
+    color: var(--primary-text-color);
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.title{
+    display: flex;
+    flex-direction: row;
+}
+
+.create-button-icon {
+    width: auto;
+    height: auto;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.fields{
+    font-family: var(--font-secondary);
+    color: var(--primary-text-color);
+    font-weight: bold;
+    font-size: large;
+    background-color: var(--background-color-secondary);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 120px;
+    padding-right: 50px;
+}
+
+.id{
+    display: flex;
+    flex-direction: row;
+}
+
+.name{
+    display: flex;
+    flex-direction: row;
+}
+
+.type{
+    display: flex;
+    flex-direction: row;
+}
+
+.created-at{
+    display: flex;
+    flex-direction: row;
+}
+
+.sorting-icon{
+    width: 25px;
+    height: 15px;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.sort-arrow-icon{
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.weapons-list{
+    font-family: var(--font-secondary);
+    color: var(--primary-text-color);
+    font-weight: bold;
+    font-size: large;
+    background-color: var(--background-color-secondary);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 40px;
+    margin-top: 20px;
+}
+
+.weapon-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 60px;
+    margin-top: 5px;
+    margin-right: -150px;
+}
+
+.action-icons{
+    margin-top: 12px;
+}
+
+.edit-icon{
+    margin-right: 10px;
+}

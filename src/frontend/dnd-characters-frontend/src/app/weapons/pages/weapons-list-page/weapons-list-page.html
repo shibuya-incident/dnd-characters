@@ -1,0 +1,84 @@
+<div class="weapons-list-page-container">
+    <div class="upper-section">
+        <div class="title">
+            <p class="section">Weapons</p>
+            <a routerLink="/weapons/create" class="create-button">
+                <img class="create-button-icon" src="/logos/add_logo.svg" alt="Create Weapon Icon">
+            </a>
+        </div>
+        <div class="fields">
+            <div class="id">
+                <p>Id</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="name">
+                <p>Name</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="type">
+                <p>Type</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="created-at">
+                <p>Created At</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="actions">
+                <p>Actions</p>
+            </div>
+        </div>
+    </div>
+
+    <a routerLink="/weapons/:id" class="weapons-section">
+        <div class="weapons-list">
+            <img class="weapon-image" src="logos/sidebar_logo.svg" alt="Weapon Image">
+            <p class="id-value">1</p>
+            <p class="name-value">Stormbringer</p>
+            <p class="type-value">Sword</p>
+            <p class="created-at-value">22/10/2026</p>
+            <div class="action-icons">
+                <img class="edit-icon" src="logos/edit_icon.svg" alt="Edit Icon">
+                <img class="delete-icon" src="logos/delete_icon.svg" alt="Delete Icon">
+            </div>
+        </div>
+    </a>
+
+<!-- Weapons Section     
+    <div class="weapons-section">
+        @if (isLoading()) {
+            <app-loader message="Loading weapons…" />
+        } @else if (error(); as errorMessage) {
+            <p class="error" role="alert">{{ errorMessage }}</p>
+        } @else {
+            <div class="weapons-list">
+                @for (let weapon of weapons()) {
+                    <div class="weapon-card">
+                        <p>{{ weapon.name }}</p>
+                        <p>Type: {{ weapon.type }}</p>
+                        <p>Damage: {{ weapon.damage }}</p>
+                        <a routerLink="/weapons/{{ weapon.id }}" class="view-button">View Details</a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+-->    
+
+    <div class="pagination-section">
+        
+    </div>
+
+<!-- Pagination Section 
+    <div class="pagination-section">
+        @if (pagination().totalPages > 1) {
+            <button class="pagination-button" disabled={pagination().currentPage === 1} onClick={() => goToPage(pagination().currentPage - 1)}>Previous</button>
+            <span>Page {{ pagination().currentPage }} of {{ pagination().totalPages }}</span>
+            <button class="pagination-button" disabled={pagination().currentPage === pagination().totalPages} onClick={() => goToPage(pagination().currentPage + 1)}>Next</button>
+        }
+    </div> 
+-->       
+</div>    

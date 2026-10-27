@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
-    imports: [],
+    imports: [RouterLink],
     selector: 'app-sidebar',
     styleUrl: './sidebar.css',
     templateUrl: './sidebar.html',
