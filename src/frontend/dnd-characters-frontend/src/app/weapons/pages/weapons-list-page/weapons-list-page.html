@@ -65,13 +65,41 @@
         
     </div>
 
-<!-- Pagination Section 
-    <div class="pagination-section">
-        @if (pagination().totalPages > 1) {
-            <button class="pagination-button" disabled={pagination().currentPage === 1} onClick={() => goToPage(pagination().currentPage - 1)}>Previous</button>
-            <span>Page {{ pagination().currentPage }} of {{ pagination().totalPages }}</span>
-            <button class="pagination-button" disabled={pagination().currentPage === pagination().totalPages} onClick={() => goToPage(pagination().currentPage + 1)}>Next</button>
-        }
-    </div> 
--->       
+<div class="pagination-section">
+  @if (totalPages() > 0) {
+  <button
+      type="button"
+      [disabled]="isLoading() || request().page <= 1"
+      (click)="goToPage( 1)"
+    >
+    <<
+    </button>
+
+    <button
+      type="button"
+      [disabled]="isLoading() || request().page <= 1"
+      (click)="goToPage(request().page - 1)"
+    >
+      <
+    </button>
+
+    <span>Page {{ request().page }} of {{ totalPages() }}</span>
+
+    <button
+      type="button"
+      [disabled]="isLoading() || request().page >= totalPages()"
+      (click)="goToPage(request().page + 1)"
+    >
+      >
+    </button>
+       <button
+      type="button"
+      [disabled]="isLoading() || request().page >= totalPages()"
+      (click)="goToPage(totalPages())"
+    >
+      >>
+    </button>
+  }
+</div>
+       
 </div>    
