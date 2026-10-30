@@ -31,6 +31,7 @@
     padding-bottom: 17px;
     margin-left: 20px;
     margin-top: -15px;
+    filter: drop-shadow(5px 5px rgb(190, 129, 15));
 }
 
 .weapon-image{

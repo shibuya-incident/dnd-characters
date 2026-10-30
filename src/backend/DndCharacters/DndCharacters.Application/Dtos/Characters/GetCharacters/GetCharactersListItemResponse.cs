@@ -7,5 +7,6 @@ namespace DndCharacters.Application.Dtos.Characters.GetCharacters
         string Name,
         CharacterRace Race,
         CharacterClass Class,
-        string? DisplayImageUrl);
+        string? DisplayImageUrl,
+        DateTime UpdatedAt);
 }

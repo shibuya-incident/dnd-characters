@@ -69,23 +69,6 @@
     margin-top: 15px;
 }
 
-.weapons-list{
-    font-family: var(--font-secondary);
-    color: var(--primary-text-color);
-    font-weight: bold;
-    font-size: large;
-    background-color: var(--background-color-secondary);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-radius: 8px;
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-left: 10px;
-    padding-right: 40px;
-    margin-top: 20px;
-}
-
 .weapon-image{
     width: 50px;
     height: 50px;
@@ -100,4 +83,21 @@
 
 .edit-icon{
     margin-right: 10px;
+}
+
+.weapon-card{
+    font-family: var(--font-secondary);
+    color: var(--primary-text-color);
+    font-weight: bold;
+    font-size: large;
+    background-color: var(--background-color-secondary);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 40px;
+    margin-top: 20px;
 }

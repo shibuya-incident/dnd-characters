@@ -53,7 +53,8 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                     character.Name,
                     character.Race,
                     character.Class,
-                    character.DisplayImageUrl
+                    character.DisplayImageUrl,
+                    character.UpdatedAt
                 ))
                 .ApplyPagination(
                     request.Page,

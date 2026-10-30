@@ -42,6 +42,7 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                     weapon.Name,
                     weapon.Type,
                     weapon.ObtainedAt,
+                    weapon.CreatedAt,
                     weapon.DisplayImageUrl,
                     weapon.CharacterId
                 ))

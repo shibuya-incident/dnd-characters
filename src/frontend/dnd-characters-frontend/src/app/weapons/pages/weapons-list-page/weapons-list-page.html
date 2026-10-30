@@ -33,21 +33,6 @@
         </div>
     </div>
 
-    <a routerLink="/weapons/:id" class="weapons-section">
-        <div class="weapons-list">
-            <img class="weapon-image" src="logos/sidebar_logo.svg" alt="Weapon Image">
-            <p class="id-value">1</p>
-            <p class="name-value">Stormbringer</p>
-            <p class="type-value">Sword</p>
-            <p class="created-at-value">22/10/2026</p>
-            <div class="action-icons">
-                <img class="edit-icon" src="logos/edit_icon.svg" alt="Edit Icon">
-                <img class="delete-icon" src="logos/delete_icon.svg" alt="Delete Icon">
-            </div>
-        </div>
-    </a>
-
-<!-- Weapons Section     
     <div class="weapons-section">
         @if (isLoading()) {
             <app-loader message="Loading weapons…" />
@@ -55,18 +40,26 @@
             <p class="error" role="alert">{{ errorMessage }}</p>
         } @else {
             <div class="weapons-list">
-                @for (let weapon of weapons()) {
-                    <div class="weapon-card">
-                        <p>{{ weapon.name }}</p>
-                        <p>Type: {{ weapon.type }}</p>
-                        <p>Damage: {{ weapon.damage }}</p>
-                        <a routerLink="/weapons/{{ weapon.id }}" class="view-button">View Details</a>
-                    </div>
+                @for (weapon of weapons()?.items; track weapon.id) {
+                    <a routerLink='/weapons/{{ weapon.id }}' class="weapon-card">
+                        <img class="weapon-image" src="logos/placeholder_image.png" alt="Weapon Image">
+                        <p class="id-value">{{weapon.id}}</p>
+                        <p class="name-value">{{ weapon.name }}</p>
+                        <p class="type-value">{{ weapon.weaponType}}</p>
+                        <p class="created-at-value">{{ weapon.createdAt | date:'shortDate'}}</p>
+                        <div class="action-icons">
+                            <a routerLink="/weapons/put">
+                                <img class="edit-icon" src="logos/edit_icon.svg" alt="Edit Icon">
+                            </a>
+                            <a routerLink="/weapons/delete">    
+                                <img class="delete-icon" src="logos/delete_icon.svg" alt="Delete Icon">
+                            </a>
+                        </div>
+                    </a>
                 }
             </div>
-        }
+        }   
     </div>
--->    
 
     <div class="pagination-section">
         

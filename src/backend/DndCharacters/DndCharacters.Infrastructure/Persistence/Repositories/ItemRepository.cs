@@ -36,7 +36,8 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                     item.Id,
                     item.Name,
                     item.ItemType,
-                    item.DisplayImageUrl
+                    item.DisplayImageUrl,
+                    item.CreatedAt
                 ))
                 .ApplyPagination(request.Page, request.PageSize)
                 .ToListAsync();

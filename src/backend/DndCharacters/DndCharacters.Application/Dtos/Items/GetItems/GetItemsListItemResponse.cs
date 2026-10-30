@@ -6,5 +6,6 @@ namespace DndCharacters.Application.Dtos.Items.GetItems
         int Id,
         string Name,
         ItemType ItemType,
-        string? DisplayImageUrl);
+        string? DisplayImageUrl,
+        DateTime CreatedAt);
 }
