@@ -8,9 +8,25 @@
         </div>
         <div class="fields">
             <div class="id">
-                <p>Id</p>
-                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
-                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+                <button>
+                    <span>ID</span>
+                    <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                </button>
+                <button>
+                    <img [class.class1]="request().sortDirection === SortDirection.Ascending"
+                        [class.class]="request().sortDirection === SortDirection.Descending" class="sort-arrow-icon"
+                        src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+                </button>
+
+                <button>
+                    @if(request().sortDirection === SortDirection.Ascending) {
+                    <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                    }
+                    @else if (request().sortDirection === SortDirection.Descending) {
+                    <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_descending.svg" alt="Sorting Arrow">
+                    }
+                </button>
+
             </div>
             <div class="name">
                 <p>Name</p>
@@ -35,71 +51,56 @@
 
     <div class="weapons-section">
         @if (isLoading()) {
-            <app-loader message="Loading weapons…" />
+        <app-loader message="Loading weapons…" />
         } @else if (error(); as errorMessage) {
-            <p class="error" role="alert">{{ errorMessage }}</p>
+        <p class="error" role="alert">{{ errorMessage }}</p>
         } @else {
-            <div class="weapons-list">
-                @for (weapon of weapons()?.items; track weapon.id) {
-                    <a routerLink='/weapons/{{ weapon.id }}' class="weapon-card">
-                        <img class="weapon-image" src="logos/placeholder_image.png" alt="Weapon Image">
-                        <p class="id-value">{{weapon.id}}</p>
-                        <p class="name-value">{{ weapon.name }}</p>
-                        <p class="type-value">{{ weapon.weaponType}}</p>
-                        <p class="created-at-value">{{ weapon.createdAt | date:'shortDate'}}</p>
-                        <div class="action-icons">
-                            <a routerLink="/weapons/put">
-                                <img class="edit-icon" src="logos/edit_icon.svg" alt="Edit Icon">
-                            </a>
-                            <a routerLink="/weapons/delete">    
-                                <img class="delete-icon" src="logos/delete_icon.svg" alt="Delete Icon">
-                            </a>
-                        </div>
+        <div class="weapons-list">
+            @for (weapon of weapons()?.items; track weapon.id) {
+            <a routerLink='/weapons/{{ weapon.id }}' class="weapon-card">
+                <img class="weapon-image" src="logos/placeholder_image.png" alt="Weapon Image">
+                <p class="id-value">{{weapon.id}}</p>
+                <p class="name-value">{{ weapon.name }}</p>
+                <p class="type-value">{{ weapon.weaponType}}</p>
+                <p class="created-at-value">{{ weapon.createdAt | date:'shortDate'}}</p>
+                <div class="action-icons">
+                    <a routerLink="/weapons/put">
+                        <img class="edit-icon" src="logos/edit_icon.svg" alt="Edit Icon">
                     </a>
-                }
-            </div>
-        }   
+                    <a routerLink="/weapons/delete">
+                        <img class="delete-icon" src="logos/delete_icon.svg" alt="Delete Icon">
+                    </a>
+                </div>
+            </a>
+            }
+        </div>
+        }
     </div>
 
     <div class="pagination-section">
-        
+
     </div>
 
-<div class="pagination-section">
-  @if (totalPages() > 0) {
-  <button
-      type="button"
-      [disabled]="isLoading() || request().page <= 1"
-      (click)="goToPage( 1)"
-    >
-    <<
-    </button>
+    <div class="pagination-section">
+        @if (totalPages() > 0) {
+        <button type="button" [disabled]="isLoading() || request().page <= 1" (click)="goToPage( 1)">
+            << </button>
 
-    <button
-      type="button"
-      [disabled]="isLoading() || request().page <= 1"
-      (click)="goToPage(request().page - 1)"
-    >
-      <
-    </button>
+                <button type="button" [disabled]="isLoading() || request().page <= 1"
+                    (click)="goToPage(request().page - 1)">
+                    < </button>
 
-    <span>Page {{ request().page }} of {{ totalPages() }}</span>
+                        <span>Page {{ request().page }} of {{ totalPages() }}</span>
 
-    <button
-      type="button"
-      [disabled]="isLoading() || request().page >= totalPages()"
-      (click)="goToPage(request().page + 1)"
-    >
-      >
-    </button>
-       <button
-      type="button"
-      [disabled]="isLoading() || request().page >= totalPages()"
-      (click)="goToPage(totalPages())"
-    >
-      >>
-    </button>
-  }
+                        <button type="button" [disabled]="isLoading() || request().page >= totalPages()"
+                            (click)="goToPage(request().page + 1)">
+                            >
+                        </button>
+                        <button type="button" [disabled]="isLoading() || request().page >= totalPages()"
+                            (click)="goToPage(totalPages())">
+                            >>
+                        </button>
+                        }
+    </div>
+
 </div>
-       
-</div>    

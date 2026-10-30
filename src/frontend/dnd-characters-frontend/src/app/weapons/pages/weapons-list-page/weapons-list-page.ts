@@ -35,6 +35,9 @@ export class WeaponsListPage {
     return Math.ceil(totalCount / this.request().pageSize);
   });
 
+  readonly SortDirection = SortDirection;
+
+
   ngOnInit() {
     this.loadWeapons();
   }
@@ -76,5 +79,21 @@ export class WeaponsListPage {
 
 
 
+  changeSort(sortBy: GetWeaponsSortBy): void {
+    if (this.isLoading()) return;
+
+    this.request.update(current => ({
+      ...current,
+      sortBy,
+      sortDirection:
+        current.sortBy === sortBy && current.sortDirection === SortDirection.Ascending
+          ? SortDirection.Descending
+          : SortDirection.Ascending,
+      page: 1,
+    }));
+
+
+    this.loadWeapons();
+  }
 
 }
