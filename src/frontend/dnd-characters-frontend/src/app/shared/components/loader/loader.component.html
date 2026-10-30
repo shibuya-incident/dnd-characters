@@ -1,0 +1,17 @@
+<div class="loader-container" [class.full-screen]="fullScreen"
+     role="status" aria-live="polite">
+
+    <div class="loader-animation" aria-hidden="true">
+        <div class="magic-circle">
+            <span class="sparkle sparkle-one">✦</span>
+            <span class="sparkle sparkle-two">✦</span>
+            <span class="loader-symbol">⚔</span>
+        </div>
+    </div>
+
+    <div class="loader-bar" aria-hidden="true">
+        <div class="loader-progress"></div>
+    </div>
+
+    <p class="loader-message">{{ message }}</p>
+</div>

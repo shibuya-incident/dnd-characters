@@ -38,11 +38,9 @@ namespace DndCharacters.Application.Dtos.Characters.UpdateCharacter
                 .MaximumLength(500);
 
             RuleFor(x => x.Race)
-                .NotEmpty()
                 .IsInEnum();
 
             RuleFor(x => x.Class)
-                .NotEmpty()
                 .IsInEnum();
         }
     }

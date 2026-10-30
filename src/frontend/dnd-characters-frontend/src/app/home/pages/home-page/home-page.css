@@ -1,0 +1,153 @@
+.error {
+    font-family: var(--font-primary);
+    color: rgb(237, 139, 139);
+    font-size: 16px;
+    text-align: center;
+}
+
+.home-page-container {
+    position: relative;
+    width: 100%;
+}
+
+.left-section {
+    position: absolute;
+    left: 0;
+    width: 50%;
+}
+
+.right-section {
+    position: absolute;
+    right: 0;
+    width: 50%;
+}
+
+.title {
+    font-family: var(--font-secondary);
+    color: var(--primary-text-color);
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: 0px;
+    margin-left: 10px;
+}
+
+.introduction {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.start {
+    font-family: var(--font-decorative);
+    color: var(--primary-text-color);
+    font-size: 90px;
+    margin-top: -20px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+}
+
+.middle-up {
+    font-family: var(--font-decorative);
+    color: var(--primary-text-color);
+    font-size: 25px;
+    margin-top: -65px;
+    margin-left: 120px;
+}
+
+.middle-down {
+    font-family: var(--font-decorative);
+    color: var(--primary-text-color);
+    font-size: 25px;
+    margin-top: -30px;
+    margin-left: 20px;
+    width: 87%;
+}
+
+.closure {
+    font-family: var(--font-decorative);
+    color: var(--primary-text-color);
+    font-size: 25px;
+    margin-left: 60%;
+    margin-right: 30px;
+    margin-top: -30px;
+}
+
+.home-image {
+    width: auto;
+    height: auto;
+    margin-left: 100px;
+}
+
+.section {
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    color: var(--primary-text-color);
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+a {
+    background-color: var(--background-color-secondary);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    width: 230px;
+    height: 220px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.count-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-counters {
+    display: flex;
+    flex-direction: column;
+}
+
+.right-counters {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.sword-image {
+    width: 25%;
+    height: 25%;
+    margin-left: 50px;
+    margin-top: -12px;
+}
+
+.count-images {
+    opacity: 30%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    margin-left: 30px;
+    margin-bottom: 40px;
+}
+
+.count-label {
+    font-family: var(--font-primary);
+    color: var(--primary-text-color);
+    font-size: 70px;
+    position: absolute;
+    margin-left: 85px;
+    margin-bottom: 125px;
+}
+
+span {
+    font-family: var(--font-primary);
+    color: var(--primary-text-color);
+    font-size: 20px;
+    background-color: var(--primary-color);
+    border-radius: 16px;
+    padding: 5px 10px;
+    position: absolute;
+    margin-left: 40px;
+    margin-top: 160px;
+    width: 150px;
+    text-align: center;
+}

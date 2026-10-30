@@ -25,7 +25,6 @@ namespace DndCharacters.Application.Dtos.Weapons.UpdateWeapon
                 .MaximumLength(100);
 
             RuleFor(x => x.Type)
-                .NotEmpty()
                 .IsInEnum();
 
             RuleFor(x => x.DisplayImageUrl)

@@ -1,0 +1,85 @@
+<div class="shops-list-page-container">
+    <div class="upper-section">
+        <div class="title">
+            <p class="section">Shops</p>
+            <a routerLink="/shops/create" class="create-button">
+                <img class="create-button-icon" src="/logos/add_logo.svg" alt="Create Shop Icon">
+            </a>
+        </div>
+        <div class="fields">
+            <div class="id">
+                <p>Id</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="name">
+                <p>Name</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="type">
+                <p>Type</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="items">
+                <p>Items</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="updated-at">
+                <p>Updated At</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="actions">
+                <p>Actions</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="shops-section">
+        @if (isLoading()) {
+            <app-loader message="Loading shops…" />
+        } @else if (error(); as errorMessage) {
+            <p class="error" role="alert">{{ errorMessage }}</p>
+        } @else {
+            <div class="shops-list">
+                @for (shop of shops()?.items; track shop.id) {
+                    <a routerLink='/shops/{{ shop.id }}' class="shop-card">
+                        <img class="shop-image" src="logos/placeholder_image.png" alt="Shop Image">
+                        <p class="id-value">{{shop.id}}</p>
+                        <p class="name-value">{{ shop.name }}</p>
+                        <p class="race-value">{{ shop.shopType }}</p>
+                        <p class="class-value">{{ shop.itemsCount }}</p>
+                        <p class="updated-at-value">{{ shop.updatedAt | date:'shortDate'}}</p>
+                        <div class="action-icons">
+                            <a routerLink="/shops/put">
+                                <img class="edit-icon" src="logos/edit_icon.svg" alt="Edit Icon">
+                            </a>
+                            <a routerLink="/shops/delete">    
+                                <img class="delete-icon" src="logos/delete_icon.svg" alt="Delete Icon">
+                            </a>
+                        </div>
+                    </a>
+                }
+            </div>
+        }   
+    </div>
+
+    <div class="pagination-section">
+        
+    </div>
+
+<!-- Pagination Section 
+    <div class="pagination-section">
+        @if (pagination().totalPages > 1) {
+            <button class="pagination-button" disabled={pagination().currentPage === 1} onClick={() => goToPage(pagination().currentPage - 1)}>Previous</button>
+            <span>Page {{ pagination().currentPage }} of {{ pagination().totalPages }}</span>
+            <button class="pagination-button" disabled={pagination().currentPage === pagination().totalPages} onClick={() => goToPage(pagination().currentPage + 1)}>Next</button>
+        }
+    </div> 
+-->       
+</div>    
+
+

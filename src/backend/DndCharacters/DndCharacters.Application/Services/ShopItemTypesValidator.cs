@@ -12,7 +12,7 @@ namespace DndCharacters.Application.Services
                 ShopType.General => true,
                 ShopType.Bookstore => itemType is ItemType.Book or ItemType.Scroll,
                 ShopType.TailorShop => itemType is ItemType.Cloth or ItemType.Armor,
-                ShopType.Blacksmith => itemType is ItemType.Weapon or ItemType.Armor,
+                ShopType.Blacksmith => itemType is ItemType.Throwable or ItemType.Armor,
                 ShopType.Herbolary => itemType is ItemType.Potion or ItemType.Consumable,
                 ShopType.MusicShop => itemType is ItemType.Instrument,
                 _ => false,

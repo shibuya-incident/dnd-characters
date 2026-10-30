@@ -189,7 +189,8 @@ namespace DndCharacters.Infrastructure.Persistence.Repositories
                     shop.Name,
                     shop.ShopType,
                     shop.DisplayImageUrl,
-                    shop.ShopItems.Count
+                    shop.ShopItems.Count,
+                    shop.UpdatedAt
                 ))
                 .ApplyPagination(
                     request.Page,

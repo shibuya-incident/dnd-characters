@@ -7,5 +7,6 @@ namespace DndCharacters.Application.Dtos.Shops.GetShops
         string Name,
         ShopType ShopType,
         string? DisplayImageUrl,
-        int ItemsCount);
+        int ItemsCount,
+        DateTime UpdatedAt);
 }

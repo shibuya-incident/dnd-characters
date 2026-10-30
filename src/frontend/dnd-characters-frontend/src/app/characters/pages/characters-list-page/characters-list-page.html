@@ -1,0 +1,84 @@
+<div class="characters-list-page-container">
+    <div class="upper-section">
+        <div class="title">
+            <p class="section">Characters</p>
+            <a routerLink="/characters/create" class="create-button">
+                <img class="create-button-icon" src="/logos/add_logo.svg" alt="Create Character Icon">
+            </a>
+        </div>
+        <div class="fields">
+            <div class="id">
+                <p>Id</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="name">
+                <p>Name</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="race">
+                <p>Race</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="class">
+                <p>Class</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="updated-at">
+                <p>Updated At</p>
+                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+            </div>
+            <div class="actions">
+                <p>Actions</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="characters-section">
+        @if (isLoading()) {
+            <app-loader message="Loading characters…" />
+        } @else if (error(); as errorMessage) {
+            <p class="error" role="alert">{{ errorMessage }}</p>
+        } @else {
+            <div class="characters-list">
+                @for (character of characters()?.items; track character.id) {
+                    <a routerLink='/characters/{{ character.id }}' class="character-card">
+                        <img class="character-image" src="logos/placeholder_image.png" alt="Character Image">
+                        <p class="id-value">{{character.id}}</p>
+                        <p class="name-value">{{ character.name }}</p>
+                        <p class="race-value">{{ character.race }}</p>
+                        <p class="class-value">{{ character.class }}</p>
+                        <p class="updated-at-value">{{ character.updatedAt | date:'shortDate'}}</p>
+                        <div class="action-icons">
+                            <a routerLink="/characters/put">
+                                <img class="edit-icon" src="logos/edit_icon.svg" alt="Edit Icon">
+                            </a>
+                            <a routerLink="/characters/delete">    
+                                <img class="delete-icon" src="logos/delete_icon.svg" alt="Delete Icon">
+                            </a>
+                        </div>
+                    </a>
+                }
+            </div>
+        }   
+    </div>
+
+    <div class="pagination-section">
+        
+    </div>
+
+<!-- Pagination Section 
+    <div class="pagination-section">
+        @if (pagination().totalPages > 1) {
+            <button class="pagination-button" disabled={pagination().currentPage === 1} onClick={() => goToPage(pagination().currentPage - 1)}>Previous</button>
+            <span>Page {{ pagination().currentPage }} of {{ pagination().totalPages }}</span>
+            <button class="pagination-button" disabled={pagination().currentPage === pagination().totalPages} onClick={() => goToPage(pagination().currentPage + 1)}>Next</button>
+        }
+    </div> 
+-->       
+</div>    
+

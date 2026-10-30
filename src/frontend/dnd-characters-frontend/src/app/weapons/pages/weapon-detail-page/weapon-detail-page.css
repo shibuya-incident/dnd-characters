@@ -1,0 +1,102 @@
+.name{
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    font-size: 40px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+}
+
+.edit-weapon-icon{
+    padding-left: 20px;
+    height: 30px;
+    width: auto;
+    margin-top: 50px;
+}
+
+.background-image{
+    position: absolute;
+    margin-left: 1042px;
+    margin-top: -20px;
+    opacity: 35%;
+    border-radius: 8px;
+    width: auto;
+    height: 67.5%;
+}
+
+.weapon-card{
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    width: 70%;
+    padding-bottom: 17px;
+    margin-left: 20px;
+    margin-top: -15px;
+    filter: drop-shadow(5px 5px rgb(190, 129, 15));
+}
+
+.weapon-image{
+    width: auto;
+    height: 250px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    filter: drop-shadow(5px 5px rgb(190, 129, 15));
+}
+
+.section{
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.upper-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.lower-section{
+    display: flex;
+    flex-direction: row;
+}
+
+.property-value{
+    background-color: var(--background-color-secondary);
+    width: 150px;
+    height: 30px;
+    border-radius: 2px;
+    padding-left: 10px;
+    padding-top: 5px;
+    margin-top: 2px;
+    filter: drop-shadow(5px 5px rgb(190, 129, 15));
+}
+
+.description-value{
+    background-color: var(--background-color-secondary);
+    border-radius: 2px;
+    padding-left: 10px;
+    padding-top: 5px;
+    height: 105px;
+    width: 750px;
+    margin-top: 2px;
+    filter: drop-shadow(5px 5px rgb(190, 129, 15));
+}
+
+.weapon-info{
+    display: flex;
+    flex-direction: row;
+}
+
+.upload-image{
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    margin-left: 10px;
+    font-family: var(--font-secondary);
+    color: var(--secondary-text-color);
+    font-weight: bold;
+    padding: 7px;
+    filter: drop-shadow(3px 3px rgb(190, 129, 15));
+}

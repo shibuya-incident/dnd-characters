@@ -11,7 +11,6 @@ namespace DndCharacters.Application.Dtos.Shops.CreateShop
                 .MaximumLength(100);
 
             RuleFor(x => x.ShopType)
-                .NotEmpty()
                 .IsInEnum();
 
             RuleFor(x => x.OwnerName)
