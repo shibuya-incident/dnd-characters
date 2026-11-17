@@ -21,8 +21,7 @@ namespace DndCharacters.Domain.Entities
             decimal weight,
             string properties,
             WeaponType Type,
-            string? displayImageUrl,
-            int? characterId)
+            string? displayImageUrl)
         {
             return new Weapon
             {
@@ -31,8 +30,7 @@ namespace DndCharacters.Domain.Entities
                 Weight = weight,
                 Properties = properties,
                 Type = Type,
-                DisplayImageUrl = displayImageUrl,
-                CharacterId = characterId
+                DisplayImageUrl = displayImageUrl
             };
         }
     }

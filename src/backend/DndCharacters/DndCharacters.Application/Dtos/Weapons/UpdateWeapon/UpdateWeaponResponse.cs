@@ -8,7 +8,7 @@ namespace DndCharacters.Application.Dtos.Weapons.UpdateWeapon
         string Description,
         decimal Weight,
         string Properties,
-        WeaponType WeaponType,
+        WeaponType Type,
         DateTime? ObtainedAt,
         string? DisplayImageUrl,
         int? CharacterId);

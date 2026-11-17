@@ -8,24 +8,56 @@
         </div>
         <div class="fields">
             <div class="id">
-                <p>Id</p>
-                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
-                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+                <button>
+                    <span>Id</span>
+                    <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                </button>
+                <button (click)="changeSort(GetWeaponsSortBy.Id)">
+                    @if(request().sortDirection === SortDirection.Descending && request().sortBy === GetWeaponsSortBy.Id) {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_descending.svg" alt="Sorting Arrow">
+                    } @else {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                    }
+                </button>
             </div>
             <div class="name">
-                <p>Name</p>
-                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
-                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+                <button>
+                    <span>Name</span>
+                    <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                </button>
+                <button (click)="changeSort(GetWeaponsSortBy.Name)">
+                    @if(request().sortDirection === SortDirection.Descending && request().sortBy === GetWeaponsSortBy.Name) {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_descending.svg" alt="Sorting Arrow">
+                    } @else {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                    }
+                </button>
             </div>
             <div class="type">
-                <p>Type</p>
-                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
-                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+                <button>
+                    <span>Type</span>
+                    <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                </button>
+                <button (click)="changeSort(GetWeaponsSortBy.WeaponType)">
+                    @if(request().sortDirection === SortDirection.Descending && request().sortBy === GetWeaponsSortBy.WeaponType) {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_descending.svg" alt="Sorting Arrow">
+                    } @else {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                    }
+                </button>
             </div>
             <div class="created-at">
-                <p>Created At</p>
-                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
-                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo.svg" alt="Sorting Arrow">
+                <button>
+                    <span>Created At</span>
+                    <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                </button>
+                <button (click)="changeSort(GetWeaponsSortBy.CreatedAt)">
+                    @if(request().sortDirection === SortDirection.Descending && request().sortBy === GetWeaponsSortBy.CreatedAt) {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_descending.svg" alt="Sorting Arrow">
+                    } @else {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                    }
+                </button>
             </div>
             <div class="actions">
                 <p>Actions</p>
@@ -51,27 +83,38 @@
                             <a routerLink="/weapons/put">
                                 <img class="edit-icon" src="logos/edit_icon.svg" alt="Edit Icon">
                             </a>
-                            <a routerLink="/weapons/delete">    
+                            <button (click)="confirmDelete(weapon.id); $event.stopPropagation(); $event.preventDefault();">
                                 <img class="delete-icon" src="logos/delete_icon.svg" alt="Delete Icon">
-                            </a>
+                            </button>
                         </div>
                     </a>
+                }
+                @if (showDeleteModal()) {
+                    <app-confirm-modal
+                        title="Delete weapon?"
+                        message="Are you sure you want to delete this weapon? This action cannot be undone."
+                        confirmText="Delete"
+                        cancelText="Cancel"
+                        (confirmed)="executeDelete()"
+                        (cancelled)="cancelDelete()"
+                    />
                 }
             </div>
         }   
     </div>
 
     <div class="pagination-section">
-        
-    </div>
+        @if (totalPages() > 0) {
+            <button type="button" class="pagination-button" [disabled]="isLoading() || request().page <= 1" (click)="goToPage(1)"> << </button>
 
-<!-- Pagination Section 
-    <div class="pagination-section">
-        @if (pagination().totalPages > 1) {
-            <button class="pagination-button" disabled={pagination().currentPage === 1} onClick={() => goToPage(pagination().currentPage - 1)}>Previous</button>
-            <span>Page {{ pagination().currentPage }} of {{ pagination().totalPages }}</span>
-            <button class="pagination-button" disabled={pagination().currentPage === pagination().totalPages} onClick={() => goToPage(pagination().currentPage + 1)}>Next</button>
+            <button type="button" class="pagination-button" [disabled]="isLoading() || request().page <= 1" (click)="goToPage(request().page - 1)"> < </button>
+
+            <span>Page {{ request().page }} of {{ totalPages() }}</span>
+
+            <button type="button" class="pagination-button" [disabled]="isLoading() || request().page >= totalPages()" (click)="goToPage(request().page + 1)"> > </button>
+
+            <button type="button" class="pagination-button" [disabled]="isLoading() || request().page >= totalPages()" (click)="goToPage(totalPages())"> >> </button>
         }
-    </div> 
--->       
+    </div>
+    
 </div>    

@@ -23,8 +23,7 @@ namespace DndCharacters.Application.Services
                 request.Weight,
                 request.Properties,
                 request.Type,
-                request.DisplayImageUrl,
-                request.CharacterId);
+                request.DisplayImageUrl);
 
             await weaponRepository.AddAsync(weapon);
 
@@ -35,8 +34,7 @@ namespace DndCharacters.Application.Services
                 weapon.Weight,
                 weapon.Properties,
                 weapon.Type,
-                weapon.DisplayImageUrl,
-                weapon.CharacterId);
+                weapon.DisplayImageUrl);
         }
 
         public async Task DeleteAsync(DeleteWeaponRequest request)
@@ -60,6 +58,7 @@ namespace DndCharacters.Application.Services
                 weapon.Properties,
                 weapon.Type,
                 weapon.ObtainedAt,
+                weapon.CreatedAt,
                 weapon.DisplayImageUrl,
                 weapon.CharacterId);
         }

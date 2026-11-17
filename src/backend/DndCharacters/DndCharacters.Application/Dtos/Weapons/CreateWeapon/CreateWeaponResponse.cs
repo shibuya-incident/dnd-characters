@@ -8,7 +8,6 @@ namespace DndCharacters.Application.Dtos.Weapons.CreateWeapon
         string Description,
         decimal Weight,
         string Properties,
-        WeaponType WeaponType,
-        string? DisplayImageUrl,
-        int? CharacterId);
+        WeaponType Type,
+        string? DisplayImageUrl);
 }

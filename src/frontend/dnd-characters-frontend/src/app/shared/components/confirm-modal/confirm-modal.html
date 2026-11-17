@@ -1,0 +1,25 @@
+<div class="modal-overlay" (click)="cancelled.emit()">
+    <div
+        class="confirm-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-message"
+        (click)="$event.stopPropagation()">
+
+        <h2 id="modal-title">{{ title }}</h2>
+
+        <p id="modal-message">{{ message }}</p>
+
+        <div class="modal-actions">
+            <button class="confirm-button" (click)="confirmed.emit()">
+                {{ confirmText }}
+            </button>
+            
+            <button class="cancel-button" (click)="cancelled.emit()">
+                {{ cancelText }}
+            </button>
+        </div>
+
+    </div>
+</div>

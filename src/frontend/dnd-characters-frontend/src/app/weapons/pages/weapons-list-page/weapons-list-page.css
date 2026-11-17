@@ -2,7 +2,7 @@
     font-family: var(--font-secondary);
     color: var(--primary-text-color);
     font-weight: bold;
-    font-size: 50px;
+    font-size: 45px;
     margin-top: 10px;
     margin-left: 20px;
 }
@@ -14,7 +14,7 @@
 
 .create-button-icon {
     width: auto;
-    height: auto;
+    height: 50%;
     margin-left: 10px;
     margin-top: 15px;
 }
@@ -33,6 +33,10 @@
     margin-right: 10px;
     padding-left: 120px;
     padding-right: 50px;
+    margin-top: -20px;
+    height: 50px;
+    align-items: center;
+    filter: drop-shadow(5px 5px rgb(221, 210, 189));
 }
 
 .id{
@@ -63,10 +67,10 @@
 }
 
 .sort-arrow-icon{
-    width: 25px;
-    height: 25px;
-    margin-left: 10px;
-    margin-top: 15px;
+    width: 22px;
+    height: 22px;
+    margin-top: 20px;
+    margin-left: -10px;
 }
 
 .weapon-image{
@@ -100,4 +104,50 @@
     padding-left: 10px;
     padding-right: 40px;
     margin-top: 20px;
+    height: 58px;
+    filter: drop-shadow(5px 5px rgb(221, 210, 189));
+}
+
+button{
+    background: none;
+    border: none;
+    font-family: var(--font-secondary);
+    color: var(--primary-text-color);
+    font-weight: bold;
+    font-size: large;
+    padding-bottom: 15px;
+}
+
+.pagination-section{
+    background-color: var(--background-color-secondary);
+    width: 20%;
+    font-family: var(--font-secondary);
+    color: var(--primary-text-color);
+    font-weight: bold;
+    font-size: large;
+    border-radius: 8px;
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 40px;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    margin-bottom: -10px;
+    filter: drop-shadow(5px 5px rgb(221, 210, 189));
+}
+
+.pagination-button{
+    background: none;
+    border: none;
+    background-color: var(--primary-color);
+    border-radius: 100px;
+    height: 30px;
+    width: 30px;
+    font-family: var(--font-secondary);
+    color: var(--primary-text-color);
+    font-weight: bold;
+    font-size: large;
 }
