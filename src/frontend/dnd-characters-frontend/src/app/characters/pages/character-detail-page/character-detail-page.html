@@ -1,1 +1,118 @@
-<p>character-detail-page works!</p>
+<div class="character-detail-page-container">
+    @if (isLoadingCharacter()) {
+            <app-loader message="Loading character…" />
+        } @else if (error(); as errorMessage) {
+            <p class="error" role="alert">{{ errorMessage }}</p>
+        } @else{
+            <img class="background-image" src="/logos/vine_background.svg" alt="Background Image">
+            <div class="name">
+                <p class="character-name">{{ character()?.name }}</p>
+                <img class="edit-character-icon" src="/logos/edit_detail_icon.svg" alt="Edit Character Icon">
+            </div>
+            <div class="pet-name">
+                <p>{{ character()?.pet.name }}</p>
+                <img class="edit-pet-icon" src="/logos/edit_detail_icon.svg" alt="Edit Pet Icon">
+            </div>
+            <div class="cards">
+                <div class="character-card">
+                    <div class="character-info">
+                        <img class="character-image" src="/logos/placeholder_image.png" alt="Character Image">
+                        <div class="attributes">
+                            <div class="upper-section">
+                                <div class="section">
+                                    <p class="property">Race</p>
+                                    <p class="property-value">{{ character()?.race }}</p>
+                                </div>
+                                <div class="section">
+                                    <p class="property">Gender</p>
+                                    <p class="property-value">{{ character()?.gender }}</p>
+                                </div>
+                                <div class="section">
+                                    <p class="property">Age</p>
+                                    <p class="property-value">{{ character()?.age }}</p>
+                                </div>
+                            </div>
+
+                            <div class="middle-section">
+                                <div class="section">
+                                    <p class="property">Class</p>
+                                    <p class="property-value">{{ character()?.class }}</p>
+                                </div>
+                                <div class="section">
+                                    <p class="property">Height</p>
+                                    <p class="property-value">{{ character()?.height }} cm</p>
+                                </div>
+                                <div class="section">
+                                    <p class="property">Birthday</p>
+                                    <p class="property-value">{{ character()?.birthday | date:'shortDate' }}</p>
+                                </div>
+                            </div>
+
+                            <div class="lower-section">
+                                <div class="section">
+                                    <p class="property">Lore</p>
+                                    <p class="description-value">{{ character()?.lore }}</p>
+                                </div>
+                            </div>  
+                        </div>   
+                    </div>       
+                    <span class="upload-image">Upload image</span>
+                </div>
+
+                <div class="pet-card">
+                    <div class="pet-info">
+                        <img class="pet-image" src="/logos/placeholder_image.png" alt="Pet Image">
+                        <div class="attributes">
+                            <div class="section">
+                                <p class="property">Species</p>
+                                <p class="property-value">{{ character()?.pet.species }}</p>
+                            </div>
+                            <div class="section">
+                                <p class="property">Lore</p>
+                                <p class="pet-description-value">{{ character()?.pet.lore }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="upload-image">Upload image</span>
+                </div>
+            </div>
+            <div class="weapons-section">
+                <p class="title">Weapons</p>
+                @if (isLoadingWeapons()) {
+                    <app-loader message="Loading weapons…" />
+                } @else if (error(); as errorMessage) {
+                    <p class="error" role="alert">{{ errorMessage }}</p>
+                } @else {
+                    <div class="weapons-list">
+                        @for (weapon of weapons()?.items; track weapon.id) {
+                            <a routerLink='/weapons/{{ weapon.id }}' class="weapon-card">
+                                <div class="weapon-info">
+                                    <img class="weapon-image" src="logos/placeholder_image.png" alt="Weapon Image">
+                                    <span class="weapon-value">{{ weapon.name }}</span>
+                                    <span class="weapon-value">{{ weapon.weaponType}}</span>
+                                    <div class="delete-section">
+                                        <span class="weapon-value">{{ weapon.obtainedAt | date:'shortDate'}}</span>
+                                        <a>    
+                                            <img class="delete-icon" src="logos/delete_icon.svg" alt="Delete Icon">
+                                        </a>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        @if(weaponCount() < 5){
+                            <div class="add-weapon-card">
+                                <div class="add-weapon">
+                                    <a>
+                                        <img class="add-weapon-icon" src="/logos/add_logo.svg" alt="Add Weapon Icon">
+                                    </a>
+                                    <span class="weapon-value">Add a weapon</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <span class="save">Save</span>
+                }
+            </div>
+            
+        }
+</div>

@@ -1,0 +1,291 @@
+.name{
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    font-size: 35px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+    margin-top: -20px;
+}
+
+.pet-name{
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    font-size: 35px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 910px;
+    margin-top: -110px;
+    position: absolute;
+}
+
+.character-name{
+    margin-top: 10px;
+}
+
+.title{
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    font-size: 30px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.edit-character-icon{
+    padding-left: 20px;
+    height: 30px;
+    width: auto;
+    margin-top: 15px;
+}
+
+.edit-pet-icon{
+    padding-left: 20px;
+    height: 30px;
+    width: auto;
+    margin-top: 40px;
+}
+
+.background-image{
+    position: absolute;
+    margin-left: 1042px;
+    opacity: 35%;
+    border-radius: 8px;
+    width: auto;
+    height: 67.5%;
+}
+
+.character-card{
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    width: 60%;
+    padding-bottom: 17px;
+    margin-left: 20px;
+    margin-top: -15px;
+    filter: drop-shadow(5px 5px rgb(190, 129, 15));
+}
+
+.pet-card{
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    width: auto;
+    padding-bottom: 17px;
+    margin-left: 20px;
+    padding-right: 20px;
+    margin-top: -15px;
+    filter: drop-shadow(5px 5px rgb(190, 129, 15));
+}
+
+.cards{
+    display: flex;
+    flex-direction: row;
+    margin-top: -15px;
+}
+
+.character-image{
+    width: auto;
+    height: 250px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    filter: drop-shadow(5px 5px rgb(190, 129, 15));
+}
+
+.pet-image{
+    width: auto;
+    height: 250px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    filter: drop-shadow(5px 5px rgb(190, 129, 15));
+}
+
+.section{
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+.property{
+    margin-bottom: 5px;
+}
+
+.property-value{
+    background-color: var(--background-color-secondary);
+}
+
+.description-value{
+    background-color: var(--background-color-secondary);
+}
+
+.pet-description-value{
+    background-color: var(--background-color-secondary);
+}
+
+.upper-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.middle-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: -18px;
+}
+
+.lower-section{
+    display: flex;
+    flex-direction: row;
+    margin-top: -18px;
+}
+
+.property-value{
+    background-color: var(--background-color-secondary);
+    width: 150px;
+    height: 30px;
+    border-radius: 2px;
+    padding-left: 10px;
+    padding-top: 5px;
+    margin-top: 2px;
+    filter: drop-shadow(5px 5px rgb(190, 129, 15));
+}
+
+.description-value{
+    background-color: var(--background-color-secondary);
+    border-radius: 2px;
+    padding-left: 10px;
+    padding-top: 5px;
+    height: 90px;
+    width: 600px;
+    margin-top: 2px;
+    padding-right: 10px;
+    filter: drop-shadow(5px 5px rgb(190, 129, 15));
+}
+
+.pet-description-value{
+    background-color: var(--background-color-secondary);
+    border-radius: 2px;
+    padding-left: 10px;
+    padding-top: 5px;
+    height: 138px;
+    width: 150px;
+    margin-top: 2px;
+    padding-right: 10px;
+    filter: drop-shadow(5px 5px rgb(190, 129, 15));
+}
+
+.character-info{
+    display: flex;
+    flex-direction: row;
+}
+
+.pet-info{
+    display: flex;
+    flex-direction: row;
+}
+
+.upload-image{
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    margin-left: 10px;
+    font-family: var(--font-secondary);
+    color: var(--secondary-text-color);
+    font-weight: bold;
+    padding: 7px;
+    filter: drop-shadow(3px 3px rgb(190, 129, 15));
+}
+
+.weapon-card{
+    background-color: var(--background-color-secondary);
+    border-radius: 10px;
+    padding: 10px;
+    filter: drop-shadow(5px 5px rgb(214, 203, 183));
+    justify-content: center;
+    margin-top: -60px;
+    width: 135px;
+    height: 220px;
+    margin-bottom: -8px;
+}
+
+.weapon-image{
+    width: auto;
+    height: 120px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.weapon-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weapon-value{
+    font-family: var(--font-secondary);
+    font-weight: bold;
+}
+
+.weapons-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
+    margin-left: -100px;
+}
+
+.delete-section{
+    display: flex;
+    flex-direction: row;
+    margin-right: -40px;
+}
+
+.delete-icon{
+    height: 15px;
+    margin-left: 20px; 
+}
+
+.add-weapon{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.add-weapon-icon{
+    padding-bottom: 15px;
+}
+
+.add-weapon-card{
+    background-color: var(--background-color-secondary);
+    border-radius: 10px;
+    padding: 10px;
+    filter: drop-shadow(5px 5px rgb(214, 203, 183));
+    justify-content: center;
+    margin-top: -60px;
+    width: 135px;
+    height: 220px;
+    margin-bottom: -8px;
+    opacity: 70%;
+}
+
+.save{
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    margin-left: 1220px;
+    margin-top: -25px;
+    font-family: var(--font-secondary);
+    color: var(--secondary-text-color);
+    font-weight: bold;
+    padding: 7px;
+    width: 100px;
+    text-align: center;
+    position: absolute;
+    filter: drop-shadow(5px 5px rgb(214, 203, 183));
+}

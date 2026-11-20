@@ -8,29 +8,69 @@
         </div>
         <div class="fields">
             <div class="id">
-                <p>Id</p>
-                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
-                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                <button>
+                    <span>Id</span>
+                    <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                </button>
+                <button (click)="changeSort(GetCharactersSortBy.Id)">
+                    @if(request().sortDirection === SortDirection.Descending && request().sortBy === GetCharactersSortBy.Id) {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_descending.svg" alt="Sorting Arrow">
+                    } @else {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                    }
+                </button>
             </div>
             <div class="name">
-                <p>Name</p>
-                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
-                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                <button>
+                    <span>Name</span>
+                    <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                </button>
+                <button (click)="changeSort(GetCharactersSortBy.Name)">
+                    @if(request().sortDirection === SortDirection.Descending && request().sortBy === GetCharactersSortBy.Name) {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_descending.svg" alt="Sorting Arrow">
+                    } @else {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                    }
+                </button>
             </div>
             <div class="race">
-                <p>Race</p>
-                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
-                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                <button>
+                    <span>Race</span>
+                    <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                </button>
+                <button (click)="changeSort(GetCharactersSortBy.Race)">
+                    @if(request().sortDirection === SortDirection.Descending && request().sortBy === GetCharactersSortBy.Race) {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_descending.svg" alt="Sorting Arrow">
+                    } @else {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                    }
+                </button>
             </div>
             <div class="class">
-                <p>Class</p>
-                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
-                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                <button>
+                    <span>Class</span>
+                    <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                </button>
+                <button (click)="changeSort(GetCharactersSortBy.Class)">
+                    @if(request().sortDirection === SortDirection.Descending && request().sortBy === GetCharactersSortBy.Class) {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_descending.svg" alt="Sorting Arrow">
+                    } @else {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                    }
+                </button>
             </div>
             <div class="updated-at">
-                <p>Updated At</p>
-                <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
-                <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                <button>
+                    <span>Updated At</span>
+                    <img class="sorting-icon" src="/logos/sorting_logo.svg" alt="Sorting Logo">
+                </button>
+                <button (click)="changeSort(GetCharactersSortBy.UpdatedAt)">
+                    @if(request().sortDirection === SortDirection.Descending && request().sortBy === GetCharactersSortBy.UpdatedAt) {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_descending.svg" alt="Sorting Arrow">
+                    } @else {
+                        <img class="sort-arrow-icon" src="/logos/sort_arrow_logo_ascending.svg" alt="Sorting Arrow">
+                    }
+                </button>
             </div>
             <div class="actions">
                 <p>Actions</p>
@@ -57,28 +97,40 @@
                             <a routerLink="/characters/put">
                                 <img class="edit-icon" src="logos/edit_icon.svg" alt="Edit Icon">
                             </a>
-                            <a routerLink="/characters/delete">    
+                            <button (click)="confirmDelete(character.id); $event.stopPropagation(); $event.preventDefault();">
                                 <img class="delete-icon" src="logos/delete_icon.svg" alt="Delete Icon">
-                            </a>
+                            </button>
                         </div>
                     </a>
+                }
+                @if (showDeleteModal()) {
+                    <app-confirm-modal
+                        title="Delete character?"
+                        message="Are you sure you want to delete this character? This action cannot be undone."
+                        confirmText="Delete"
+                        cancelText="Cancel"
+                        (confirmed)="executeDelete()"
+                        (cancelled)="cancelDelete()"
+                    />
                 }
             </div>
         }   
     </div>
 
     <div class="pagination-section">
-        
+        @if (totalPages() > 0) {
+            <button type="button" class="pagination-button" [disabled]="isLoading() || request().page <= 1" (click)="goToPage(1)"> << </button>
+
+            <button type="button" class="pagination-button" [disabled]="isLoading() || request().page <= 1" (click)="goToPage(request().page - 1)"> < </button>
+
+            <span>Page {{ request().page }} of {{ totalPages() }}</span>
+
+            <button type="button" class="pagination-button" [disabled]="isLoading() || request().page >= totalPages()" (click)="goToPage(request().page + 1)"> > </button>
+
+            <button type="button" class="pagination-button" [disabled]="isLoading() || request().page >= totalPages()" (click)="goToPage(totalPages())"> >> </button>
+        }
     </div>
 
-<!-- Pagination Section 
-    <div class="pagination-section">
-        @if (pagination().totalPages > 1) {
-            <button class="pagination-button" disabled={pagination().currentPage === 1} onClick={() => goToPage(pagination().currentPage - 1)}>Previous</button>
-            <span>Page {{ pagination().currentPage }} of {{ pagination().totalPages }}</span>
-            <button class="pagination-button" disabled={pagination().currentPage === pagination().totalPages} onClick={() => goToPage(pagination().currentPage + 1)}>Next</button>
-        }
-    </div> 
--->       
+   
 </div>    
 

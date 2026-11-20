@@ -7,7 +7,7 @@ import { PagedListResponse } from '../shared/models/pagination/paged-list-respon
 import { GetWeaponsRequest } from './models/get-weapons/get-weapons-request.model';
 import { GetWeaponByIdRequest } from './models/get-weapon-by-id/get-weapon-by-id-request.model';
 import { GetWeaponByIdResponse } from './models/get-weapon-by-id/get-weapon-by-id-response.model';
-import { DeleteWeaponRequest } from './models/delete-weapon/delete-weapon.model';
+import { DeleteWeaponRequest } from './models/delete-weapon/delete-weapon-request.model';
 import { CreateWeaponResponse } from './models/create-weapon/create-weapon-response.model';
 import { CreateWeaponRequest } from './models/create-weapon/create-weapon-request.model';
 import { UpdateWeaponResponse } from './models/update-weapon/update-weapon-response.model';

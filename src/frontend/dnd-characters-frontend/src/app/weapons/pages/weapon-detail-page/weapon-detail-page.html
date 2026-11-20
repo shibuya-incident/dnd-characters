@@ -1,6 +1,6 @@
 <div class="weapon-detail-page-container">
     @if (isLoading()) {
-            <app-loader message="Loading weapons…" />
+            <app-loader message="Loading weapon…" />
         } @else if (error(); as errorMessage) {
             <p class="error" role="alert">{{ errorMessage }}</p>
         } @else{

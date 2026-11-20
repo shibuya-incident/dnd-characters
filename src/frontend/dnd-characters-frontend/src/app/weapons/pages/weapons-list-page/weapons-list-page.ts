@@ -120,8 +120,8 @@ export class WeaponsListPage {
   }
 
   confirmDelete(weaponId: number): void {
-  this.selectedWeaponId.set(weaponId);
-  this.showDeleteModal.set(true);
+    this.selectedWeaponId.set(weaponId);
+    this.showDeleteModal.set(true);
   }
 
   cancelDelete(): void {
